@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CIIADHEL_CR.CustomRenderer"
+             x:Class="CIIADHEL_CR.pages.LoginPage">
+
+    <StackLayout BackgroundColor="#e6e6e6">
+        <ScrollView>
+            <Grid>
+            <StackLayout Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
+                <Frame HeightRequest="200" BackgroundColor="#4486FF" Padding="0" Margin="0">
+                    <Image Source="avion_img.png" Aspect="AspectFill" Margin="0"/>
+                </Frame>
+            </StackLayout>
+            <StackLayout Padding="0" Margin="10,180,10,0" HorizontalOptions="FillAndExpand">
+                <Frame  BackgroundColor="White" HeightRequest="500" HasShadow="True" Padding="0" Margin="0">
+
+                    <StackLayout>
+                        <Frame BackgroundColor="White" HeightRequest="160" WidthRequest="150" CornerRadius="45" HasShadow="False" Margin="5" HorizontalOptions="Center" Padding="10">
+                            <Image Source="splash_logo.png" Aspect="AspectFill" Margin="0"/>
+                        </Frame>
+                        <StackLayout Margin="15">
+                            <Label Text="Iniciar Sesión" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"/>
+
+                        </StackLayout>
+
+                        <StackLayout Padding="0" Margin="15,10">
+
+                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                    </Frame>
+
+                                        <local:CustomEntry Placeholder="Identificación" MaxLength="50" x:Name="txtID" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Margin="0,15,0,0" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                        <Image Source="locked.png" Aspect="AspectFill" Margin="0"/>
+                                    </Frame>
+
+                                        <local:CustomEntry Placeholder="Contraseña" MaxLength="50" x:Name="txtPassword" IsPassword="True" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                </StackLayout>
+                            </Frame>
+                            <Label x:Name="lblResultado" Text="" HorizontalTextAlignment="Center" TextColor="Red" />
+                            <StackLayout  Orientation="Horizontal"></StackLayout>
+
+                            <Button Text="INGRESAR" x:Name="btnLogin" Clicked="btnLogin_Clicked" BackgroundColor="#4486FF" TextColor="White" CornerRadius="30" />
+                        </StackLayout>
+
+                    </StackLayout>
+
+                </Frame>
+            </StackLayout>
+        </Grid>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

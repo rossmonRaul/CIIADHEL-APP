@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CIIADHEL_CR.pages.PhonePage">
+
+    <StackLayout >
+        <ScrollView>
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="20" Padding="20,0,20,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+
+
+                </Grid.RowDefinitions>
+                <Path Grid.Row="0" Margin="-23,0" Data="m132.34,154.23002l209.00002,0l0,0.66666c-66.50001,28 -156.50001,72.87853 -209.00002,96.76573l0,-97.43239z"
+                          Stroke="#2396f2" Fill="#2396f2" HeightRequest="220" Aspect="Fill">
+                </Path>
+
+                <Label Grid.Row="1"  Text="Bienvenido(a)" Margin="0,-55,0,0" FontSize="28" FontAttributes="Bold" TextColor="Black" HorizontalOptions="CenterAndExpand"></Label>
+                <Label Grid.Row="2" Text="Estas a un paso de utilizar la aplicación" FontSize="18" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"></Label>
+
+                <StackLayout Grid.Row="0" HeightRequest="250" Margin="-20,0" Padding="20" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Image Source="ciiadhel.png" Aspect="AspectFit" HeightRequest="180" WidthRequest="80" VerticalOptions="CenterAndExpand"></Image>
+                </StackLayout>
+
+                <Frame Grid.Row="3" BorderColor="Black" Margin="20,30" Padding="0" HorizontalOptions="Fill" CornerRadius="7">
+                    <StackLayout Orientation="Horizontal">
+                        <Frame  BackgroundColor=" Transparent" HeightRequest="20" WidthRequest="30"  Padding="5">
+                            <Image Source="costarica.png" ></Image>
+
+                        </Frame>
+                        <Frame  BackgroundColor=" Transparent"  Margin="-7,0,0,0"  Padding="1">
+                            <Label Text="+506  |" TextColor="Black" FontAttributes="None" FontSize="18" Margin="3,12"></Label>
+
+                        </Frame>
+
+                        <Entry  x:Name="txtPhone" Keyboard="Numeric" Placeholder="6290-4523" MaxLength="8" HorizontalOptions="FillAndExpand" TextColor="black" FontAttributes="Bold"  Margin="0,0,20,0"/>
+                    </StackLayout>
+                </Frame>
+
+                <Label x:Name="lblError" Grid.Row="4" Margin="20,-30" Text="" TextColor="Red" FontSize="15" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"></Label>
+
+                <Label Grid.Row="5"  HorizontalOptions="End"
+                        VerticalOptions="EndAndExpand" Text="Iniciar" Padding="2,2,2,10"  Margin="90,10" FontSize="24" FontAttributes="Bold" TextColor="#1C375C" >
+                    
+                </Label>
+
+                <ImageButton x:Name="Phone" BackgroundColor="Transparent" Grid.Row="5" Padding="2,2,2,10"  Margin="20,0" Source="log.png"
+                        HorizontalOptions="End"
+                        VerticalOptions="EndAndExpand" Clicked="Phone_Clicked"/>
+
+            </Grid>
+        </ScrollView>
+    </StackLayout>
+
+</ContentPage>

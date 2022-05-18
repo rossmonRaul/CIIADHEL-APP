@@ -1,0 +1,771 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CIIADHEL_CR.CustomRenderer"
+             x:Class="CIIADHEL_CR.pages.UpdateAirportPage" BackgroundColor="White">
+    <ScrollView>
+        <StackLayout BackgroundColor="#e6e6e6">
+            <Grid>
+                <StackLayout Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
+                    <Frame HeightRequest="200" BackgroundColor="#4486FF" Padding="0" Margin="0">
+                        <Image Source="avion_img.png" Aspect="AspectFill" Margin="0"/>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Padding="0" Margin="10,180,10,0" HorizontalOptions="FillAndExpand">
+                    <!--AQUI INICIA EL RECUADRO AEROPUERTO-->
+                    <Frame  BackgroundColor="White" HeightRequest="300" HasShadow="True" Padding="0" Margin="0">
+
+                        <StackLayout>
+
+                            <StackLayout Margin="15">
+                                <Label Text="Aeropuerto" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"/>
+
+                            </StackLayout>
+
+                            <StackLayout Padding="0" Margin="15,10">
+                                <StackLayout>
+                                    <Label Text="Nombre" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="Azure" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="plane2.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtNombre_aeropuerto" Placeholder="Nombre Aeropuerto" Keyboard="Text" IsReadOnly="true"
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout>
+
+                                    <Grid ColumnSpacing="16">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Spacing="8" Grid.Column="0">
+                                            <Label Text="OACI" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                                    </Frame>-->
+                                                    <local:CustomEntry x:Name="txtNombre_OACI" Placeholder="Nombre OACI" Keyboard="Text" IsReadOnly="true"
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+
+                                        <StackLayout Spacing="8" Grid.Column="1">
+                                            <Label Text="ICAO" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                                    </Frame>-->
+                                                    <local:CustomEntry x:Name="txtNombre_ICAO" Placeholder="Nombre ICAO" Keyboard="Text" IsReadOnly="true"
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+
+                            </StackLayout>
+
+                        </StackLayout>
+
+
+                    </Frame>
+
+                </StackLayout>
+
+                <StackLayout Padding="0" Margin="10,500,10,0" HorizontalOptions="FillAndExpand">
+                    <!--AQUI INICIA EL RECUADRO ACTUALIZAR AEROPUERTO-->
+                    <Frame  BackgroundColor="White" HeightRequest="560" HasShadow="True" Padding="0" Margin="0">
+
+                        <StackLayout>
+
+                            <StackLayout Margin="15">
+                                <Label Text="Actualizar Aeropuerto" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"/>
+
+                            </StackLayout>
+
+                            <StackLayout Padding="0" Margin="15,10">
+
+                                <StackLayout>
+
+                                    <Grid ColumnSpacing="16">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Spacing="8" Grid.Column="0">
+                                            <Label Text="Público" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Picker Title="Selecciona" x:Name="pickerPublic" TextColor="Black" FontSize="Subtitle" HorizontalOptions="FillAndExpand" Margin="20,0,0,0"
+                                                        ItemDisplayBinding="{Binding NameP}">
+                                                    </Picker>
+                                                    <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="down_arrow.png" Aspect="AspectFill" Margin="0">
+                                                            <Image.GestureRecognizers>
+                                                                <TapGestureRecognizer
+                                                                    Tapped="OnTapGestureRecognizerTappedPublic"
+                                                                    NumberOfTapsRequired="1" />
+                                                            </Image.GestureRecognizers>
+                                                        </Image>
+                                                    </Frame>
+                                                    
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+
+                                        <StackLayout Spacing="8" Grid.Column="1">
+                                            <Label Text="Controlado" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Picker Title="Selecciona" x:Name="pickerControl" TextColor="Black" FontSize="Subtitle" HorizontalOptions="FillAndExpand" Margin="20,0,0,0"
+                                                        ItemDisplayBinding="{Binding NameC}">
+                                                    </Picker>
+                                                    <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="down_arrow.png" Aspect="AspectFill" Margin="0">
+                                                            <Image.GestureRecognizers>
+                                                                <TapGestureRecognizer
+                                                                    Tapped="OnTapGestureRecognizerTappedControl"
+                                                                    NumberOfTapsRequired="1" />
+                                                            </Image.GestureRecognizers>
+                                                        </Image>
+                                                    </Frame>
+                                                    
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+
+                                <StackLayout>
+                                    <Label Text="Pistas" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="Track.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtPistas" Placeholder="Pistas" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout>
+                                    <Label Text="Coordenadas" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="coordinates.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtCoordenadas" Placeholder="Coordenadas" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout>
+                                    <Label Text="Ubicación" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="Address.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtUbicacion" Placeholder="Ubicación" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout>
+                                    <Label Text="Elevación" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="elevation.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtElevación" Placeholder="Elevación" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                            </StackLayout>
+
+                        </StackLayout>
+
+
+                    </Frame>
+
+                </StackLayout>
+
+                <StackLayout Padding="0" Margin="10,1080,10,0" HorizontalOptions="FillAndExpand">
+                    <!--AQUI INICIA EL RECUADRO RUNWAYS-->
+                    <Frame  BackgroundColor="White" HeightRequest="480" HasShadow="True" Padding="0" Margin="0">
+
+                        <StackLayout>
+
+                            <StackLayout Margin="15">
+                                <Label Text="Runways" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"/>
+
+                            </StackLayout>
+
+                            <StackLayout Padding="0" Margin="15,10">
+                                <StackLayout>
+
+                                    <Grid ColumnSpacing="16">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Spacing="8" Grid.Column="0">
+                                            <Label Text="ASDA RWAY 1" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                                    </Frame>-->
+                                                    <local:CustomEntry x:Name="txtASDA_RWAY_1" Placeholder="ASDA RWAY 1" Keyboard="Numeric" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+
+                                        <StackLayout Spacing="8" Grid.Column="1">
+                                            <Label Text="ASDA RWAY 2" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                                    </Frame>-->
+                                                    <local:CustomEntry x:Name="txtASDA_RWAY_2" Placeholder="ASDA RWAY 2" Keyboard="Numeric" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+
+                                <StackLayout>
+
+                                    <Grid ColumnSpacing="16">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Spacing="8" Grid.Column="0">
+                                            <Label Text="TODA RWAY 1" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                                    </Frame>-->
+                                                    <local:CustomEntry x:Name="txtTODA_RWAY_1" Placeholder="TODA RWAY 1" Keyboard="Numeric" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+
+                                        <StackLayout Spacing="8" Grid.Column="1">
+                                            <Label Text="TODA RWAY 2" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                                    </Frame>-->
+                                                    <local:CustomEntry x:Name="txtTODA_RWAY_2" Placeholder="TODA RWAY 2" Keyboard="Numeric" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+
+                                <StackLayout>
+
+                                    <Grid ColumnSpacing="16">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Spacing="8" Grid.Column="0">
+                                            <Label Text="TORA RWAY 1" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                                    </Frame>-->
+                                                    <local:CustomEntry x:Name="txtTORA_RWAY_1" Placeholder="TORA RWAY 1" Keyboard="Numeric"
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+
+                                        <StackLayout Spacing="8" Grid.Column="1">
+                                            <Label Text="TORA RWAY 2" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                                    </Frame>-->
+                                                    <local:CustomEntry x:Name="txtTORA_RWAY_2" Placeholder="TORA RWAY 2" Keyboard="Numeric" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+
+                                <StackLayout>
+
+                                    <Grid ColumnSpacing="16">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Spacing="8" Grid.Column="0">
+                                            <Label Text="LDA RWAY 1" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                                    </Frame>-->
+                                                    <local:CustomEntry x:Name="txtLDA_RWAY_1" Placeholder="LDA RWAY 1" Keyboard="Numeric"
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+
+                                        <StackLayout Spacing="8" Grid.Column="1">
+                                            <Label Text="LDA RWAY 2" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                                    </Frame>-->
+                                                    <local:CustomEntry x:Name="txtLDA_RWAY_2" Placeholder="LDA RWAY 2" Keyboard="Numeric"
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+
+                            </StackLayout>
+
+                        </StackLayout>
+
+
+                    </Frame>
+
+                </StackLayout>
+
+                <StackLayout Padding="0" Margin="10,1580,10,0" HorizontalOptions="FillAndExpand">
+                    <!--AQUI INICIA EL RECUADRO INFOS-->
+                    <Frame  BackgroundColor="White" HeightRequest="300" HasShadow="True" Padding="0" Margin="0">
+
+                        <StackLayout>
+
+                            <StackLayout Margin="15">
+                                <Label Text="Información" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"/>
+
+                            </StackLayout>
+
+                            <StackLayout Padding="0" Margin="15,10">
+
+                                <StackLayout>
+                                    <Label Text="Información Torre" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="control_tower.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtinfo_torre" Placeholder="Información Torre" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout>
+                                    <Label Text="Información General" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="document.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtinfo_general" Placeholder="Información General" Keyboard="Text"
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                            </StackLayout>
+
+                        </StackLayout>
+
+
+                    </Frame>
+
+                </StackLayout>
+
+                <StackLayout Padding="0" Margin="10,1900,10,0" HorizontalOptions="FillAndExpand">
+                    <!--AQUI INICIA EL RECUADRO FRECUENCIAS-->
+                    <Frame  BackgroundColor="White" HeightRequest="380" HasShadow="True" Padding="0" Margin="0">
+
+                        <StackLayout>
+
+                            <StackLayout Margin="15">
+                                <Label Text="Frecuencias" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"/>
+
+                            </StackLayout>
+
+                            <StackLayout Padding="0" Margin="15,10">
+                                <StackLayout>
+
+                                    <Grid ColumnSpacing="16">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Spacing="8" Grid.Column="0">
+                                            <Label Text="Frecuencia TWR" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                                    </Frame>-->
+                                                    <local:CustomEntry x:Name="txtfrecuencia_TWR" Placeholder="TWR" Keyboard="Numeric"
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+
+                                        <StackLayout Spacing="8" Grid.Column="1">
+                                            <Label Text="Frecuencia ATIS" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                                    </Frame>-->
+                                                    <local:CustomEntry x:Name="txtfrecuencia_ATIS" Placeholder="ATIS" Keyboard="Numeric"
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+
+                                <StackLayout>
+
+                                    <Grid ColumnSpacing="16">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Spacing="8" Grid.Column="0">
+                                            <Label Text="Frecuencia GRND" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                                    </Frame>-->
+                                                    <local:CustomEntry x:Name="txtfrecuencia_GRND" Placeholder="GRND" Keyboard="Numeric"
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+
+                                        <StackLayout Spacing="8" Grid.Column="1">
+                                            <Label Text="Frc EMERGENCY" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                                    </Frame>-->
+                                                    <local:CustomEntry x:Name="txtfrecuencia_EMERGENCY" Placeholder="Emergency" Keyboard="Numeric"
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+
+                                <StackLayout>
+                                    <Label Text="Frecuencia Otras" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                        <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
+                                                    </Frame>-->
+
+                                        <local:CustomEntry x:Name="txtfrecuencia_Otras" Placeholder="Otras" Keyboard="Numeric"
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+                                
+                            </StackLayout>
+
+                        </StackLayout>
+
+
+                    </Frame>
+
+                </StackLayout>
+
+                <StackLayout Padding="0" Margin="10,2300,10,0" HorizontalOptions="FillAndExpand">
+                    <!--AQUI INICIA EL RECUADRO TELEFONOS-->
+                    <Frame  BackgroundColor="White" HeightRequest="295" HasShadow="True" Padding="0" Margin="0">
+
+                        <StackLayout>
+
+                            <StackLayout Margin="15">
+                                <Label Text="Teléfonos" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"/>
+
+                            </StackLayout>
+
+                            <StackLayout Padding="0" Margin="15,10">
+
+                                <StackLayout>
+                                    <Label Text="Teléfono 1" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="phone.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtTelefono1" Placeholder="Telefono 1" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout>
+                                    <Label Text="Teléfono 2" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="phone.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtTelefono2" Placeholder="Telefono 2" Keyboard="Text"
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                            </StackLayout>
+
+                        </StackLayout>
+
+                    </Frame>
+
+                </StackLayout>
+
+                <StackLayout Padding="0" Margin="10,2620,10,0" HorizontalOptions="FillAndExpand">
+                    <!--AQUI INICIA EL RECUADRO OTROS-->
+                    <Frame  BackgroundColor="White" HeightRequest="870" HasShadow="True" Padding="0" Margin="0">
+
+                        <StackLayout>
+
+                            <StackLayout Margin="15">
+                                <Label Text="Otros" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"/>
+
+                            </StackLayout>
+
+                            <StackLayout Padding="0" Margin="15,10">
+                                <StackLayout>
+                                    <Label Text="Horario" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="schedule.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtHorario" Placeholder="Horario" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout>
+                                    <Label Text="Normas Generales" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="document.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtNormas_Generales" Placeholder="Normas Generales" Keyboard="Text"
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout>
+                                    <Label Text="Normas Particulares" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="document.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtNormas_Particulares" Placeholder="Normas Particulares" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout>
+                                    <Label Text="Espacio Aéreo" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="space.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtEspacio_Aereo" Placeholder="Espacio Aereo" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout>
+                                    <Label Text="Combustible" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="fuel_pump.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtCombustible" Placeholder="Combustible" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout>
+                                    <Label Text="NOTAMS" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="check.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtNOTAMS" Placeholder="NOTAMS" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout>
+                                    <Label Text="Superficie Pista" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="Track.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtSuperficie_Pista" Placeholder="Superficie Pista" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout>
+                                    <Label Text="Estado Aeropuerto" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                            <Image Source="open_door.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+
+                                        <local:CustomEntry x:Name="txtEstado_Aeropuerto" Placeholder="Estado Aeropuerto" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                    </StackLayout>
+                                </Frame>
+                                <StackLayout  Orientation="Horizontal"></StackLayout>
+
+                                <Button x:Name="btnGuardar" Text="Modificar" TextColor="White" FontSize="15" BackgroundColor="#4486FF" HeightRequest="40" WidthRequest="300"
+                                    Margin="20" HorizontalOptions="Center" CornerRadius="30"/>
+                                <Label/>
+
+                            </StackLayout>
+
+                        </StackLayout>
+
+                    </Frame>
+
+                </StackLayout>
+
+            </Grid>
+            <Button x:Name="btnlogout" Text="Cerrar Sesión" TextColor="White" FontSize="15" BackgroundColor="#4486FF" Clicked="btnlogout_Clicked"/>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
