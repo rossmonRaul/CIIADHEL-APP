@@ -9,7 +9,7 @@ namespace CIIADHEL_CR.services
 {
     public class NotificationsServices
     {
-        private static string _url = @"https://ciiadhel-api-rest.herokuapp.com/api/notifications"; //url on heroku
+        private static string _url = @"https://ciiadhelapi.herokuapp.com/api/notifications"; //url on heroku
         #region Guardar el token -->saveToken(string identifier, string token)
         public async static Task<bool> saveToken(string identifier, string token)
         {
