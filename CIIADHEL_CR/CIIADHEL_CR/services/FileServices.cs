@@ -12,7 +12,7 @@ namespace CIIADHEL_CR.services
     //changes made by Olman Sanchez Zuniga
     public class FileServices
     {
-        public static string url = "https://ciiadhel-api-rest.herokuapp.com/api/files";//url on heroku
+        public static string url = "https://ciiadhelapi.herokuapp.com/api/files";//url on heroku
         #region Get File Service
         public string[] GetFileAsync(string  Airportname)
         {
