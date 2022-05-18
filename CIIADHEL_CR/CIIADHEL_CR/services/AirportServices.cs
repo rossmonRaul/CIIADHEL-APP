@@ -15,7 +15,7 @@ namespace CIIADHEL_CR.services
 
         DialogService dialog = new DialogService();
         // Official  Endpoint
-        private static string _url = @"https://ciiadhel-api-rest.herokuapp.com/api/airports";
+        private static string _url = @"https://ciiadhelapi.herokuapp.com/api/airports";
         // changes made by andreyszcr@gmail.com
         private static string urlfind = "http://localhost:3033/api/airports/search";
         #region obtiene el identificador -->getFavoritebyIdentificador(string Identificador)
