@@ -12,12 +12,11 @@ namespace CIIADHEL_CR.services
 {
     public class AirportServices
     {
-
         DialogService dialog = new DialogService();
         // Official  Endpoint
-        private static string _url = @"https://ciiadhelapi.herokuapp.com/api/airports";
+        private static string _url = @"https://nuvian-api.herokuapp.com/api/airports";
         // changes made by andreyszcr@gmail.com
-        private static string urlfind = "http://localhost:3033/api/airports/search";
+        private static string urlfind = "https://nuvian-api.herokuapp.com/api/airports/search";
         #region obtiene el identificador -->getFavoritebyIdentificador(string Identificador)
         public async static Task<List<Airport_Favorite>> getFavoritebyIdentificador(string Identificador)
         {
@@ -59,7 +58,7 @@ namespace CIIADHEL_CR.services
                 // Call a end-point 
                 HttpClient client = new HttpClient();
                 HttpResponseMessage response = await client.PostAsync(_url + "/favorito/", new StringContent(json, Encoding.UTF8, "application/json"));
-                if (response.StatusCode == HttpStatusCode.OK)
+                if (response.StatusCode == HttpStatusCode.Created)
                 {
                     return true;
                 }
@@ -298,7 +297,7 @@ namespace CIIADHEL_CR.services
                 }
             }
             catch (Exception ex)
-            {     
+            {
                 Console.WriteLine(ex);//error on console
                 throw new Exception("Error al cargar el aeropuerto");
             }

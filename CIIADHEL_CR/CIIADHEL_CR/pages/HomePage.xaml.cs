@@ -82,7 +82,7 @@ namespace CIIADHEL_CR.pages
             catch (Exception ex)
             {
                 Console.WriteLine(ex);//display error on console
-                await DialogService.ShowErrorAsync("Error", ex.Message, "OK");//show error on screen
+                //await DialogService.ShowErrorAsync("Error", ex.Message, "OK");//show error on screen
             }
         }
         //*******************************************************************************************************

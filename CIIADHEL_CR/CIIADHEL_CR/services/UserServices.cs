@@ -10,7 +10,7 @@ namespace CIIADHEL_CR.services
     public class UserServices
     {
         //Url on Heroku
-        private static string UrlLog = "https://ciiadhelapi.herokuapp.com/api/users/login";
+        private static string UrlLog = "https://nuvian-api.herokuapp.com/api/users/login";
         //Url used on apui rest on node.js
         //private static string UrlLog = "http://localhost:3033/api/users/login/";
         /// made by andreyszcr@gmail.com 
