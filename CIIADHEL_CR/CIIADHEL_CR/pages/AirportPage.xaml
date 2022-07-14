@@ -246,7 +246,28 @@
                         </StackLayout>
                     </Frame>
                 </Grid>
-               <!-- Changes made by Olman-->
+
+                <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#2396f2">
+                    <Label TextColor="White" FontSize="17" FontAttributes="Bold" Text="Meteorología"></Label>
+                </Frame>
+
+                <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition  Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
+                        <StackLayout>
+                            <WebView x:Name="frame" VerticalOptions="FillAndExpand" HeightRequest="600"></WebView>
+                            <Image x:Name="no_internet" Source="nointernet.png" />
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+
+                <!-- Changes made by Olman-->
                 <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#2396f2">
                     <Label TextColor="White" FontSize="17" FontAttributes="Bold" Text="Documento"></Label>
                 </Frame>

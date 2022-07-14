@@ -92,6 +92,17 @@ namespace CIIADHEL_CR
                         lblToraRwy2.Text = airportId.Pistas.ToraRwy2.ToString();
                         lblLdaRwy1.Text = airportId.Pistas.LdaRwy1.ToString();
                         lblLdaRwy2.Text = airportId.Pistas.LdaRwy2.ToString();
+                        NetworkAccess currentNetwork = Connectivity.NetworkAccess;
+                        if (currentNetwork == NetworkAccess.Internet)//if you have internet
+                        {
+                            frame.Source = "https://metar-taf.com/es/embed/" + airportId.Aeropuerto.NombreOaci + "?bg_color=0057a3&station_id=" + airportId.Aeropuerto.NombreOaci + "&layout=landscap";
+                            no_internet.SetValue(IsVisibleProperty, false);
+
+                        }
+                        else
+                        {
+                            frame.SetValue(IsVisibleProperty, false);
+                        }
                         #endregion
                         #region Frecuencias del aeropuerto ->Airport_Frequencie
                         foreach (Airport_Frequencies fre in airportId.Frecuencias)
