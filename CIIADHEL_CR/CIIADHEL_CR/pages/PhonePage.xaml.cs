@@ -80,7 +80,7 @@ namespace CIIADHEL_CR.pages
                             };
                             await App.SQLiteDBIdentifier.SaveIdentifierAsync(phone);
 
-                            //await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
+                            await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
 
                             Application.Current.MainPage = new MainPage();
 
@@ -103,7 +103,7 @@ namespace CIIADHEL_CR.pages
                         };
                         await App.SQLiteDBIdentifier.SaveIdentifierAsync(phone);
 
-                        //await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
+                        await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
 
                         btn.IsEnabled = false;
 
