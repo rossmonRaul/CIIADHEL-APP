@@ -629,7 +629,7 @@ namespace CIIADHEL_CR.pages
                             #endregion
                             if (await AirportServices.PutAirportAsync(string.Join("", Ejecutables), airportX.ID_Aeropuerto, airportX) == 1)
                             {
-                                //NotificationsServices.sendNotification(Convert.ToInt32(airportId.Aeropuerto.IdAeropuerto), airportId.Aeropuerto.Nombre);
+                                NotificationsServices.sendNotification(Convert.ToInt32(airportId.Aeropuerto.IdAeropuerto), airportId.Aeropuerto.Nombre);
                                 await DisplayAlert("Notificación", "Los datos se han modificado con éxito", "OK");
                                 Application.Current.MainPage = new MainPage();
                             }
