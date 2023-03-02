@@ -62,54 +62,54 @@ namespace CIIADHEL_CR.pages
                 else
                 {
 
-                    bool ValidateIdentifier = await NotificationsServices.existsIdentifier(identifier);
+                    //bool ValidateIdentifier = await NotificationsServices.existsIdentifier(identifier);
 
-                    if (ValidateIdentifier)
-                    {
-                        lblError.Text = "";
-                        btn.Source = "loadingPhone.png";
-                        btn.IsEnabled = true;
+                    //if (ValidateIdentifier)
+                    //{
+                    //    lblError.Text = "";
+                    //    btn.Source = "loadingPhone.png";
+                    //    btn.IsEnabled = true;
 
-                        var action = await DisplayAlert("Alerta", "Este numero de telefono ya ha sido registrado, los favoritos seran cargados automaticamente, ¿desea continuar?", "Si", "No");
+                    //    var action = await DisplayAlert("Alerta", "Este numero de telefono ya ha sido registrado, los favoritos seran cargados automaticamente, ¿desea continuar?", "Si", "No");
 
-                        if (action)
-                        {
-                            Identifier phone = new Identifier
-                            {
-                                Telephone_Number = txtPhone.Text,
-                            };
-                            await App.SQLiteDBIdentifier.SaveIdentifierAsync(phone);
+                    //    if (action)
+                    //    {
+                    //        Identifier phone = new Identifier
+                    //        {
+                    //            Telephone_Number = txtPhone.Text,
+                    //        };
+                    //        await App.SQLiteDBIdentifier.SaveIdentifierAsync(phone);
 
-                            await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
+                    //        await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
 
-                            Application.Current.MainPage = new MainPage();
+                    //        Application.Current.MainPage = new MainPage();
 
-                            btn.IsEnabled = false;
-                        }
+                    //        btn.IsEnabled = false;
+                    //    }
 
-                        lblError.Text = "";
-                        btn.Source = "log.png";
+                    //    lblError.Text = "";
+                    //    btn.Source = "log.png";
 
-                    }
-                    else
-                    {
-                        btn.Source = "loadingPhone.png";
-                        btn.IsEnabled = true;
+                    //}
+                    //else
+                    //{
+                    //    btn.Source = "loadingPhone.png";
+                    //    btn.IsEnabled = true;
 
-                        Identifier phone = new Identifier
-                        {
-                            Telephone_Number = txtPhone.Text,
+                    //    Identifier phone = new Identifier
+                    //    {
+                    //        Telephone_Number = txtPhone.Text,
 
-                        };
-                        await App.SQLiteDBIdentifier.SaveIdentifierAsync(phone);
+                    //    };
+                    //    await App.SQLiteDBIdentifier.SaveIdentifierAsync(phone);
 
-                        await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
+                    //    await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
 
-                        btn.IsEnabled = false;
+                    btn.IsEnabled = false;
 
-                        Application.Current.MainPage = new MainPage();
+                    Application.Current.MainPage = new MainPage();
 
-                    }
+                    //}
                 }
             }
             catch (Exception ex)

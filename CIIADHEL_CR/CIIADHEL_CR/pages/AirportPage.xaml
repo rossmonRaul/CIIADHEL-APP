@@ -246,7 +246,7 @@
                         </StackLayout>
                     </Frame>
                 </Grid>
-
+                <!-- 
                 <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#2396f2">
                     <Label TextColor="White" FontSize="17" FontAttributes="Bold" Text="Meteorología"></Label>
                 </Frame>
@@ -266,7 +266,7 @@
                         </StackLayout>
                     </Frame>
                 </Grid>
-
+                -->
                 <!-- Changes made by Olman-->
                 <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#2396f2">
                     <Label TextColor="White" FontSize="17" FontAttributes="Bold" Text="Documento"></Label>
