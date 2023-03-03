@@ -16,9 +16,9 @@ namespace CIIADHEL_CR.services
     {
         DialogService dialog = new DialogService();
         // Official  Endpoint
-        private static string _url = @"https://nuvian-api.herokuapp.com/api/airports";
+        private static string _url = @"https://site--nuvian-api--lzg9n5zsl8j8.code.run/api/airports";
         // changes made by andreyszcr@gmail.com
-        private static string urlfind = "https://nuvian-api.herokuapp.com/api/airports/search";
+        private static string urlfind = "https://site--nuvian-api--lzg9n5zsl8j8.code.run/api/airports/search";
         #region obtiene el identificador -->getFavoritebyIdentificador(string Identificador)
         public async static Task<List<Airport_Favorite>> getFavoritebyIdentificador(string Identificador)
         {

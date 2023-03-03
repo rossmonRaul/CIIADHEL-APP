@@ -43,18 +43,18 @@ namespace CIIADHEL_CR.pages
                     }
                     AirportServices airportServices = new AirportServices();
                     List<Airport_Principal> airport_Principals = await App.SQLiteDB.GetAllAirportAsync();//method to get whole airports
-                    List<Identifier> identifiers = await App.SQLiteDBIdentifier.getIdentifier();// mehtod to get Identifier code
-                    string id = identifiers[0].Telephone_Number;
-                    List<Airport_Favorite> Recuperados = await AirportServices.getFavoritebyIdentificador(id);
-                    foreach (var airport in Recuperados)
-                    {
-                        Airport_Principal aux = airport_Principals.Where(a => a.ID_Aeropuerto == airport.ID_Aeropuerto).FirstOrDefault();
-                        if (aux != null)
-                        {
-                            aux.Favorito = true;
-                            await App.SQLiteDB.UpdateAirportAsync(aux);
-                        }
-                    }
+                    //List<Identifier> identifiers = await App.SQLiteDBIdentifier.getIdentifier();// mehtod to get Identifier code
+                    //string id = identifiers[0].Telephone_Number;
+                    //List<Airport_Favorite> Recuperados = await AirportServices.getFavoritebyIdentificador(id);
+                    //foreach (var airport in Recuperados)
+                    //{
+                    //    Airport_Principal aux = airport_Principals.Where(a => a.ID_Aeropuerto == airport.ID_Aeropuerto).FirstOrDefault();
+                    //    if (aux != null)
+                    //    {
+                    //        aux.Favorito = true;
+                    //        await App.SQLiteDB.UpdateAirportAsync(aux);
+                    //    }
+                    //}
                     if (airport_Principals.Count == 0)
                     {
                         // Show message error in screen

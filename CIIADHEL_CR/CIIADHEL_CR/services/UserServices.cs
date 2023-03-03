@@ -10,9 +10,9 @@ namespace CIIADHEL_CR.services
     public class UserServices
     {
         //Url on Heroku
-        private static string UrlLog = "https://nuvian-api.herokuapp.com/api/users/login";
+        private static string UrlLog = "https://site--nuvian-api--lzg9n5zsl8j8.code.run/api/users/login";
         //Url used on apui rest on node.js
-        //private static string UrlLog = "http://localhost:3033/api/users/login/";
+        //private static string UrlLog = "https://site--nuvian-api--lzg9n5zsl8j8.code.run/api/users/login/";
         /// made by andreyszcr@gmail.com 
         #region Var to Log in 
         ///local var to connect with textbox.
@@ -27,7 +27,7 @@ namespace CIIADHEL_CR.services
             string json = login.toJsonString();// var connected by class User
             using (var client = new System.Net.Http.HttpClient())
             {
-                var task = Task.Run(async () =>{
+                var task = Task.Run(async () => {
                     return await client.PostAsync(UrlLog + "/" + login.Cedula + "/" + login.Contrasena,
                     new StringContent(json, Encoding.UTF8, "application/json"));//paramereters Post , to login. 
                 });
@@ -36,7 +36,7 @@ namespace CIIADHEL_CR.services
                 if (msj.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     //as soon as the post is correct
-                    var task2 = Task<string>.Run(async () =>{
+                    var task2 = Task<string>.Run(async () => {
                         return await msj.Content.ReadAsStringAsync();// get back the content  
                     });
                     string resultstr = task2.Result;
@@ -67,7 +67,7 @@ namespace CIIADHEL_CR.services
             string json = login.toJsonString();// data to get data from class login 
             using (var client = new System.Net.Http.HttpClient())
             {
-                var task = Task.Run(async () =>{
+                var task = Task.Run(async () => {
                     //paramereters Post , to login.   
                     return await client.PostAsync(UrlLog + "/" + login.Cedula + "/" + login.Contrasena,
                     new StringContent(json, Encoding.UTF8, "application/json"));
@@ -76,8 +76,8 @@ namespace CIIADHEL_CR.services
                 // in case username and password is correctly 
                 if (msj.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    var task2 = Task<string>.Run(async () =>{
-                       return await msj.Content.ReadAsStringAsync();
+                    var task2 = Task<string>.Run(async () => {
+                        return await msj.Content.ReadAsStringAsync();
                     });
                     string resultstr = task2.Result;//result of api 
                     JObject parseResponse = JObject.Parse(resultstr);
@@ -93,7 +93,7 @@ namespace CIIADHEL_CR.services
                     }
                 }
                 else
-                {return false;}
+                { return false; }
             }
         }
         #endregion
