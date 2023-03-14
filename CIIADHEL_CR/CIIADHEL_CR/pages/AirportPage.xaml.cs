@@ -15,6 +15,7 @@ using System.IO;
 using Plugin.XamarinFormsSaveOpenPDFPackage;
 using System.Net.Http;
 
+
 namespace CIIADHEL_CR
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -93,16 +94,22 @@ namespace CIIADHEL_CR
                         lblLdaRwy1.Text = airportId.Pistas.LdaRwy1.ToString();
                         lblLdaRwy2.Text = airportId.Pistas.LdaRwy2.ToString();
                         NetworkAccess currentNetwork = Connectivity.NetworkAccess;
-                        //if (currentNetwork == NetworkAccess.Internet)//if you have internet
-                        //{
-                        //    frame.Source = "https://metar-taf.com/es/embed/" + airportId.Aeropuerto.NombreOaci + "?bg_color=0057a3&station_id=" + airportId.Aeropuerto.NombreOaci + "&layout=landscap";
-                        //    no_internet.SetValue(IsVisibleProperty, false);
+                        if (currentNetwork == NetworkAccess.Internet)//if you have internet
+                        {
+                           
+                            var metar = new HtmlWebViewSource();
+                            var ruta = "'https://metar-taf.com/es/embed-js/" + airportId.Aeropuerto.NombreOaci + "?target=TItlKBUP'";
+                            metar.Html = @"<html><head></head><body><div class='row justify-content-center align-items-center'><a id='metartaf-TItlKBUP' style='font-size:18px; font-weight:500; color:#000; width:300px; height:435px; display:block'>METAR </a></div>
+                                  <script async defer crossorigin='anonymous' src=" + ruta + "></script></body></html>";
+                            frame.Source = metar;
+                            no_internet.SetValue(IsVisibleProperty, false);
 
-                        //}
-                        //else
-                        //{
-                        //    frame.SetValue(IsVisibleProperty, false);
-                        //}
+                       
+                        }
+                        else
+                        {
+                            frame.SetValue(IsVisibleProperty, false);
+                        }
                         #endregion
                         #region Frecuencias del aeropuerto ->Airport_Frequencie
                         foreach (Airport_Frequencies fre in airportId.Frecuencias)
