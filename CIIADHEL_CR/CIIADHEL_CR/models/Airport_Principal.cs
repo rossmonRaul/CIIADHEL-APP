@@ -24,7 +24,7 @@ namespace CIIADHEL_CR.models
         {
             get
             {
-                return Descargado ? "update.png" : "download.png";
+                return Descargado ? "update4.png" : "download4.png";
             }
         }
 
@@ -37,7 +37,7 @@ namespace CIIADHEL_CR.models
         {
             get
             {
-                return Favorito ? "favorite_ok.png" : "favorite.png";
+                return Favorito ? "favorite_ok3.png" : "favorite3.png";
             }
         }
 

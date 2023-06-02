@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<StackLayout
+    Orientation="Horizontal"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    x:Class="CIIADHEL_CR.Controls.CountryControl">
+
+    <Frame  BackgroundColor=" Transparent" HeightRequest="20" WidthRequest="30"  Padding="5">
+        <Image x:Name="FlagImage" ></Image>
+    </Frame>
+    <Label x:Name="CountryNameLabel"
+           Margin="12,0"
+           FontSize="16"
+           TextColor="Black"
+           VerticalOptions="FillAndExpand"
+           HorizontalOptions="FillAndExpand"/>
+    <Label x:Name="CountryCodeLabel"
+           FontSize="16"
+           TextColor="Black"
+           VerticalOptions="Start"
+           HorizontalTextAlignment="End"
+           />
+</StackLayout>

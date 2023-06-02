@@ -5,16 +5,16 @@
              xmlns:models="clr-namespace:CIIADHEL_CR.models"
              xmlns:pages="clr-namespace:CIIADHEL_CR.pages"
              Title="FlyoutMenu" 
-             BackgroundColor="White">
+             BackgroundColor="#424242">
 
-    <StackLayout Margin="10,0" BackgroundColor="White">
+    <StackLayout Margin="10,0" BackgroundColor="Transparent">
 
         <ListView Margin="0,25,0,0" x:Name="listview" x:FieldModifier="public">
             <ListView.ItemsSource>
                 <x:Array Type="{x:Type models:FlyoutItem}">
-                    <models:FlyoutItem Title="Inicio" IconSource="home.png" TargetPage="{x:Type pages:HomePage}" />
-                    <models:FlyoutItem Title="Iniciar Sesión" IconSource="login.png" TargetPage="{x:Type pages:LoginPage}" />
-                    <models:FlyoutItem Title="Acerca de" IconSource="about.png" TargetPage="{x:Type pages:AboutPage}" />
+                    <models:FlyoutItem Title="Inicio" IconSource="home3.png" TargetPage="{x:Type pages:HomePage}" />
+                    <models:FlyoutItem Title="Iniciar Sesión" IconSource="login2.png" TargetPage="{x:Type pages:LoginPage}" />
+                    <models:FlyoutItem Title="Acerca de" IconSource="about2.png" TargetPage="{x:Type pages:AboutPage}" />
                 </x:Array>
             </ListView.ItemsSource>
 
@@ -29,15 +29,15 @@
                             <Image Source="{Binding IconSource}" />
                             <Label Grid.Column="1" Text="{Binding Title}"
                                    VerticalOptions="Center"
-                                   TextColor="Black" Margin="10,0,0,0" FontSize="Large"/>
+                                   TextColor="White" Margin="10,0,0,0" FontSize="Large"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Frame BackgroundColor="White" HeightRequest="450" WidthRequest="170" HasShadow="False"  HorizontalOptions="Center" Padding="10">
-            <Image Source="splash_logo.png" Aspect="AspectFit" />
+        <Frame BackgroundColor="#424242" HeightRequest="350" WidthRequest="170" HasShadow="False"  HorizontalOptions="Center" Padding="10">
+            <Image Source="ciiadhel.png" Aspect="AspectFit" />
         </Frame>
 
     </StackLayout>

@@ -7,18 +7,66 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Windows.Input;
+using CIIADHEL_CR.Popups;
+using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 
 namespace CIIADHEL_CR.pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PhonePage : ContentPage
     {
+       
+        private Country selectedCountry;
+
         public PhonePage()
         {
+            SelectedCountry = new Country("Costa Rica", "506", "XXXX-XXXX", "cr.png", "8312-3456");
+            ShowPopupCommand = new Command(async _ => await ExecuteShowPopupCommand());
+            CountrySelectedCommand = new Command(country => ExecuteCountrySelectedCommand(country as Country));
+            BindingContext = this;
             InitializeComponent();
+
+        }
+
+        public Country SelectedCountry
+        {
+            get => selectedCountry;
+           set => SetProperty(ref selectedCountry, value);
+        }
+
+        protected bool SetProperty<T>(ref T backingStore, T value,
+           [CallerMemberName] string propertyName = "",
+           Action onChanged = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(backingStore, value))
+                return false;
+
+            backingStore = value;
+            onChanged?.Invoke();
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+        private void ExecuteCountrySelectedCommand(Country country)
+        {
+            SelectedCountry = country;
+        }
+
+        public ICommand ShowPopupCommand { get; }
+        public ICommand CountrySelectedCommand { get; }
+
+        private Task ExecuteShowPopupCommand()
+        {
+            txtPhone.Text = "";
+
+            var popup = new ChooseCountryPopup(SelectedCountry)
+            {
+                CountrySelectedCommand = CountrySelectedCommand
+            };
+            return Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(popup);
         }
 
         private async void Phone_Clicked(object sender, EventArgs e)
@@ -40,76 +88,83 @@ namespace CIIADHEL_CR.pages
                     btn.Source = "log.png";
 
                 }
-                else if (identifier.Length < 8)
-                {
-
-                    btn.Source = "loadingPhoneCancel.png";
-                    lblError.Text = "Debe contener al menos 8 caracteres";
-                    await Task.Delay(500);
-                    btn.Source = "log.png";
-
-
-                }
-                else if (!identifier.ToCharArray().All(Char.IsDigit))
-                {
-
-                    btn.Source = "loadingPhoneCancel.png";
-                    lblError.Text = "El teléfono debe ser numérico";
-                    await Task.Delay(500);
-                    btn.Source = "log.png";
-
-                }
                 else
                 {
+                    string mask = SelectedCountry.CountryMask;
+                    string pattern = mask
+                        .Replace("(", "\\(")
+                        .Replace(")", "\\)")
+                        .Replace(" ", "\\s")
+                        .Replace("X", "\\d");
 
-                    //bool ValidateIdentifier = await NotificationsServices.existsIdentifier(identifier);
-
-                    //if (ValidateIdentifier)
+                    if (!Regex.IsMatch(identifier, pattern))
+                    {
+                        btn.Source = "loadingPhoneCancel.png";
+                        lblError.Text = "El número proporcionado no es válido";
+                        await Task.Delay(500);
+                        btn.Source = "log.png";
+                    }                
+                    //else if (!identifier.ToCharArray().All(Char.IsDigit))
                     //{
-                    //    lblError.Text = "";
-                    //    btn.Source = "loadingPhone.png";
-                    //    btn.IsEnabled = true;
 
-                    //    var action = await DisplayAlert("Alerta", "Este numero de telefono ya ha sido registrado, los favoritos seran cargados automaticamente, ¿desea continuar?", "Si", "No");
-
-                    //    if (action)
-                    //    {
-                    //        Identifier phone = new Identifier
-                    //        {
-                    //            Telephone_Number = txtPhone.Text,
-                    //        };
-                    //        await App.SQLiteDBIdentifier.SaveIdentifierAsync(phone);
-
-                    //        await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
-
-                    //        Application.Current.MainPage = new MainPage();
-
-                    //        btn.IsEnabled = false;
-                    //    }
-
-                    //    lblError.Text = "";
+                    //    btn.Source = "loadingPhoneCancel.png";
+                    //    lblError.Text = "El teléfono debe ser numérico";
+                    //    await Task.Delay(500);
                     //    btn.Source = "log.png";
 
                     //}
-                    //else
-                    //{
-                    //    btn.Source = "loadingPhone.png";
-                    //    btn.IsEnabled = true;
+                    else
+                    {
 
-                    //    Identifier phone = new Identifier
-                    //    {
-                    //        Telephone_Number = txtPhone.Text,
+                        //bool ValidateIdentifier = await NotificationsServices.existsIdentifier(identifier);
 
-                    //    };
-                    //    await App.SQLiteDBIdentifier.SaveIdentifierAsync(phone);
+                        //if (ValidateIdentifier)
+                        //{
+                        //    lblError.Text = "";
+                        //    btn.Source = "loadingPhone.png";
+                        //    btn.IsEnabled = true;
 
-                    //    await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
+                        //    var action = await DisplayAlert("Alerta", "Este numero de telefono ya ha sido registrado, los favoritos seran cargados automaticamente, ¿desea continuar?", "Si", "No");
 
-                    btn.IsEnabled = false;
+                        //    if (action)
+                        //    {
+                        //        Identifier phone = new Identifier
+                        //        {
+                        //            Telephone_Number = txtPhone.Text,
+                        //        };
+                        //        await App.SQLiteDBIdentifier.SaveIdentifierAsync(phone);
 
-                    Application.Current.MainPage = new MainPage();
+                        //        await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
 
-                    //}
+                        //        Application.Current.MainPage = new MainPage();
+
+                        //        btn.IsEnabled = false;
+                        //    }
+
+                        //    lblError.Text = "";
+                        //    btn.Source = "log.png";
+
+                        //}
+                        //else
+                        //{
+                        //    btn.Source = "loadingPhone.png";
+                        //    btn.IsEnabled = true;
+
+                        //    Identifier phone = new Identifier
+                        //    {
+                        //        Telephone_Number = txtPhone.Text,
+
+                        //    };
+                        //    await App.SQLiteDBIdentifier.SaveIdentifierAsync(phone);
+
+                        //    await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
+
+                        btn.IsEnabled = false;
+
+                        Application.Current.MainPage = new MainPage();
+
+                        //}
+                    }
                 }
             }
             catch (Exception ex)
@@ -118,5 +173,6 @@ namespace CIIADHEL_CR.pages
                 throw ex;
             }
         }
+        
     }
 }

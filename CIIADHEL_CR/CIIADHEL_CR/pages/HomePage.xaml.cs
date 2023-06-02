@@ -36,8 +36,10 @@ namespace CIIADHEL_CR.pages
                 NetworkAccess currentNetwork = Connectivity.NetworkAccess;
                 if (currentNetwork == NetworkAccess.Internet)//if you have internet
                 {
-                    //changes made by Olman Sanchez Zuniga
-                    if (await updateAirports() != false)
+                    using (UserDialogs.Instance.Loading("Cargando", null, null, true, MaskType.Black))
+                    {
+                        //changes made by Olman Sanchez Zuniga
+                        if (await updateAirports() != false)
                     {
                         lstAirposts.ItemsSource = null;
                     }
@@ -67,7 +69,7 @@ namespace CIIADHEL_CR.pages
                         GNotifications.isOpenNotification = false;
                         await Application.Current.MainPage.Navigation.PushModalAsync(new AirportPage(GNotifications.airportNotification));
                     }
-
+                    }
                 }
                 else
                 {
@@ -133,7 +135,7 @@ namespace CIIADHEL_CR.pages
                     if (downloadOK)// Valid if download is true
                     {
                         ImageButton btn = (ImageButton)sender;
-                        btn.Source = "downloading"; //load with source downloading 
+                        btn.Source = "downloading2"; //load with source downloading 
                         btn.IsEnabled = true;
                         #region Clase Aeropuerto -->Airport_Principal airport = new Airport_Principal()
                         Airport_Principal airport = new Airport_Principal()

@@ -1,0 +1,191 @@
+[
+  {
+    "nombre": "Argentina",
+    "codigo": "54",
+    "mascara": "XX XXXX-XXXX",
+    "bandera": "ar.png",
+    "sampleNumber": "11 1234-5678"
+  },
+  {
+    "nombre": "Bolivia",
+    "codigo": "591",
+    "mascara": "XXXX-XXXX",
+    "bandera": "bo.png",
+    "sampleNumber": "7123-4567"
+  },
+  {
+    "nombre": "Brazil",
+    "codigo": "55",
+    "mascara": "(XX) XXXXX-XXXX",
+    "bandera": "br.png",
+    "sampleNumber": "(11) 91234-5678"
+  },
+  {
+    "nombre": "Chile",
+    "codigo": "56",
+    "mascara": "X XXXX-XXXX",
+    "bandera": "cl.png",
+    "sampleNumber": "9 1234-5678"
+  },
+  {
+    "nombre": "Colombia",
+    "codigo": "57",
+    "mascara": "XXX XXX-XXXX",
+    "bandera": "co.png",
+    "sampleNumber": "321 123-4567"
+  },
+  {
+    "nombre": "Costa Rica",
+    "codigo": "506",
+    "mascara": "XXXX-XXXX",
+    "bandera": "cr.png",
+    "sampleNumber": "1234-5678"
+  },
+  {
+    "nombre": "Ecuador",
+    "codigo": "593",
+    "mascara": "XXX-XXXX",
+    "bandera": "ec.png",
+    "sampleNumber": "123-4567"
+  },
+  {
+    "nombre": "El Salvador",
+    "codigo": "503",
+    "mascara": "XXXX-XXXX",
+    "bandera": "sv.png",
+    "sampleNumber": "1234-5678"
+  },
+  {
+    "nombre": "Grenada",
+    "codigo": "1473",
+    "mascara": "XXX-XXXX",
+    "bandera": "gd.png",
+    "sampleNumber": "473-1234"
+  },
+  {
+    "nombre": "Guatemala",
+    "codigo": "502",
+    "mascara": "XXXX-XXXX",
+    "bandera": "gt.png",
+    "sampleNumber": "1234-5678"
+  },
+  {
+    "nombre": "Guyana",
+    "codigo": "592",
+    "mascara": "XXX-XXXX",
+    "bandera": "gy.png",
+    "sampleNumber": "123-4567"
+  },
+  {
+    "nombre": "Haiti",
+    "codigo": "509",
+    "mascara": "XX XX-XXXX",
+    "bandera": "ht.png",
+    "sampleNumber": "12 34-5678"
+  },
+  {
+    "nombre": "Honduras",
+    "codigo": "504",
+    "mascara": "XXXX-XXXX",
+    "bandera": "hn.png",
+    "sampleNumber": "1234-5678"
+  },
+  {
+    "nombre": "Jamaica",
+    "codigo": "1876",
+    "mascara": "XXX-XXXX",
+    "bandera": "jm.png",
+    "sampleNumber": "876-1234"
+  },
+  {
+    "nombre": "Mexico",
+    "codigo": "52",
+    "mascara": "XX XXXX-XXXX",
+    "bandera": "mx.png",
+    "sampleNumber": "91 2345-6789"
+  },
+  {
+    "nombre": "Nicaragua",
+    "codigo": "505",
+    "mascara": "XXXX-XXXX",
+    "bandera": "ni.png",
+    "sampleNumber": "1234-5678"
+  },
+  {
+    "nombre": "Panama",
+    "codigo": "507",
+    "mascara": "XXX-XXXX",
+    "bandera": "pa.png",
+    "sampleNumber": "6123-4567"
+  },
+  {
+    "nombre": "Paraguay",
+    "codigo": "595",
+    "mascara": "XXX-XXXX",
+    "bandera": "py.png",
+    "sampleNumber": "123-4567"
+  },
+  {
+    "nombre": "Peru",
+    "codigo": "51",
+    "mascara": "XX XXXX-XXXX",
+    "bandera": "pe.png",
+    "sampleNumber": "91 2345-6789"
+  },
+  {
+    "nombre": "Saint Kitts and Nevis",
+    "codigo": "1869",
+    "mascara": "XXX-XXXX",
+    "bandera": "kn.png",
+    "sampleNumber": "8693-1234"
+  },
+  {
+    "nombre": "Saint Lucia",
+    "codigo": "1758",
+    "mascara": "XXXX-XXXX",
+    "bandera": "lc.png",
+    "sampleNumber": "7583-1234"
+  },
+  {
+    "nombre": "Saint Vincent and the Grenadines",
+    "codigo": "1784",
+    "mascara": "XXX-XXXX",
+    "bandera": "vc.png",
+    "sampleNumber": "7844-1234"
+  },
+  {
+    "nombre": "Suriname",
+    "codigo": "597",
+    "mascara": "XXXX-XXX",
+    "bandera": "sr.png",
+    "sampleNumber": "1234-567"
+  },
+  {
+    "nombre": "Trinidad and Tobago",
+    "codigo": "1868",
+    "mascara": "XXX-XXXX",
+    "bandera": "tt.png",
+    "sampleNumber": "8682-1234"
+  },
+  {
+    "nombre": "United States",
+    "codigo": "1",
+    "mascara": "(XXX) XXX-XXXX",
+    "bandera": "us.png",
+    "sampleNumber": "(555) 123-4567"
+  },
+  {
+    "nombre": "Uruguay",
+    "codigo": "598",
+    "mascara": "XXX-XXXX",
+    "bandera": "uy.png",
+    "sampleNumber": "123-4567"
+  },
+  {
+    "nombre": "Venezuela",
+    "codigo": "58",
+    "mascara": "XXXX-XXXX",
+    "bandera": "ve.png",
+    "sampleNumber": "1234-5678"
+  }
+]

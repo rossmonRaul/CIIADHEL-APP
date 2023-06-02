@@ -1,293 +1,337 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CIIADHEL_CR.AirportPage">
+             x:Class="CIIADHEL_CR.AirportPage"
+             xmlns:controls="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit">
 
-    <StackLayout Background="White">
-        <ScrollView  >
+    <StackLayout BackgroundColor="#424242">
+        <ScrollView>
             <StackLayout >
-                <Frame Margin="0,0.5" CornerRadius="0" BackgroundColor="#2396f2">
-                    <Label TextColor="White" FontSize="17" FontAttributes="Bold" Text="Detalle de aeropuerto"></Label>
-                </Frame>
+                <controls:Expander>
+                    <controls:Expander.Header>
+                        <Frame Margin="0,0.5" CornerRadius="0" BackgroundColor="#4159b7">
+                            <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Detalle de aeropuerto"></Label>
+                        </Frame>
+                    </controls:Expander.Header>
+                    <controls:Expander.Content>
+                        <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition  Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition  Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label  TextColor="Black" FontSize="16" FontAttributes="Bold">Aeropuerto</Label>
-                            <Label  TextColor="Black" FontSize="15" x:Name="lblName"/>
-                            <Label  TextColor="Black" FontSize="16" FontAttributes="Bold">ICAO</Label>
-                            <Label  TextColor="Black" FontSize="15" x:Name="lblName_ICAO"/>
-                        </StackLayout>
-                    </Frame>
+                            <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label  TextColor="white" FontSize="16" FontAttributes="Bold">Aeropuerto</Label>
+                                    <Label  TextColor="white" FontSize="15" x:Name="lblName"/>
+                                    <Label  TextColor="white" FontSize="16" FontAttributes="Bold">ICAO</Label>
+                                    <Label  TextColor="white" FontSize="15" x:Name="lblName_ICAO"/>
+                                </StackLayout>
+                            </Frame>
 
 
-                    <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">OACI</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblName_OACI"/>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Estado</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblState_Airport"/>
-                        </StackLayout>
-                    </Frame>
-                </Grid>
+                            <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">OACI</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblName_OACI"/>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Estado</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblState_Airport"/>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </controls:Expander.Content>
+                </controls:Expander>
 
-                <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#2396f2">
-                    <Label TextColor="White" FontSize="18" FontAttributes="Bold" Text="Detalle de pista"></Label>
-                </Frame>
+                <controls:Expander>
+                    <controls:Expander.Header>
+                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
+                            <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Detalle de pista"></Label>
+                        </Frame>
+                    </controls:Expander.Header>
+                    <controls:Expander.Content>
 
-                <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition  Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                        <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition  Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                    <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Pistas</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblLandingLanding"/>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Elevación</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblElevation"/>
-                        </StackLayout>
-                    </Frame>
+                            <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Pistas</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblLandingLanding"/>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Elevación</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblElevation"/>
+                                </StackLayout>
+                            </Frame>
 
-                    <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Superficie</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblSurface"/>
-                        </StackLayout>
-                    </Frame>
-                </Grid>
+                            <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Superficie</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblSurface"/>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </controls:Expander.Content>
+                </controls:Expander>
+                
+                <controls:Expander>
+                    <controls:Expander.Header>
+                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
+                            <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Distancia de pista"></Label>
+                        </Frame>
+                    </controls:Expander.Header>
+                    <controls:Expander.Content>
+                        <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition  Height="Auto" />
+                                <RowDefinition  Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#2396f2">
-                    <Label TextColor="White" FontSize="17" FontAttributes="Bold" Text="Distancia de pista"></Label>
-                </Frame>
+                            <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="White" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label  TextColor="white" FontSize="15" FontAttributes="Bold">Rwy</Label>
+                                    <Label  TextColor="white" FontSize="15" x:Name="lblLanding"/>
 
-                <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition  Height="Auto" />
-                        <RowDefinition  Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                                </StackLayout>
+                            </Frame>
 
-                    <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label  TextColor="Black" FontSize="15" FontAttributes="Bold">Rwy</Label>
-                            <Label  TextColor="Black" FontSize="15" x:Name="lblLanding"/>
+                            <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent"  BorderColor="White" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label TextColor="white" FontSize="14" FontAttributes="Bold">ASDA</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblAsdaRwy1"/>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblAsdaRwy2"/>
+                                </StackLayout>
+                            </Frame>
 
-                        </StackLayout>
-                    </Frame>
+                            <Frame Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent"  BorderColor="White" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label TextColor="white" FontSize="14" FontAttributes="Bold">TORA</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblToraRwy1"/>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblToraRwy2"/>
+                                </StackLayout>
+                            </Frame>
 
-                    <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label TextColor="Black" FontSize="14" FontAttributes="Bold">ASDA</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblAsdaRwy1"/>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblAsdaRwy2"/>
-                        </StackLayout>
-                    </Frame>
+                            <Frame Grid.Row="0" Grid.Column="3" BackgroundColor="Transparent"  BorderColor="White" VerticalOptions="FillAndExpand" >
+                                <StackLayout>
+                                    <Label TextColor="white" FontSize="14" FontAttributes="Bold">TODA</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblTodaRwy1"/>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblTodaRwy2"/>
+                                </StackLayout>
+                            </Frame>
 
-                    <Frame Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label TextColor="Black" FontSize="14" FontAttributes="Bold">TORA</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblToraRwy1"/>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblToraRwy2"/>
-                        </StackLayout>
-                    </Frame>
+                            <Frame Grid.Row="0" Grid.Column="4" BackgroundColor="Transparent"  BorderColor="White" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label TextColor="white" FontSize="14" FontAttributes="Bold">LDA</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblLdaRwy1"/>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblLdaRwy2"/>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </controls:Expander.Content>
+                </controls:Expander>
 
-                    <Frame Grid.Row="0" Grid.Column="3" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label TextColor="Black" FontSize="14" FontAttributes="Bold">TODA</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblTodaRwy1"/>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblTodaRwy2"/>
-                        </StackLayout>
-                    </Frame>
+                <controls:Expander>
+                    <controls:Expander.Header>
+                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
+                            <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Frecuencias"></Label>
+                        </Frame>
+                    </controls:Expander.Header>
+                    <controls:Expander.Content>
+                        <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition  Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                    <Frame Grid.Row="0" Grid.Column="4" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label TextColor="Black" FontSize="14" FontAttributes="Bold">LDA</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblLdaRwy1"/>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblLdaRwy2"/>
-                        </StackLayout>
-                    </Frame>
-                </Grid>
-
-                <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#2396f2">
-                    <Label TextColor="White" FontSize="17" FontAttributes="Bold" Text="Frecuencias"></Label>
-                </Frame>
-
-                <!--OTRO GRID POR AQUI-->
-
-                <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition  Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Frecuencia</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblFrequency"/>
-                        </StackLayout>
-                    </Frame>
-
-                    <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Tipo Frecuencia</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblFrequencyFrequency"/>
-                        </StackLayout>
-                    </Frame>
-                </Grid>
-
-                <!--OTRO GRID POR AQUI-->
-                <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#2396f2">
-                    <Label TextColor="White" FontSize="17" FontAttributes="Bold" Text="Aviso a navegantes"></Label>
-                </Frame>
-
-                <Grid  BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition  Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Notam</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblNotam"/>
+                            <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Frecuencia</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblFrequency"/>
+                                </StackLayout>
+                            </Frame>
                             
-                        </StackLayout>
-                    </Frame>
-                </Grid>
+                            <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Tipo Frecuencia</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblFrequencyFrequency"/>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </controls:Expander.Content>
+                </controls:Expander>
 
-                <!--OTRO GRID POR AQUI-->
-                <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#2396f2">
-                    <Label TextColor="White" FontSize="17" FontAttributes="Bold" Text="Contacto"></Label>
-                </Frame>
+                <controls:Expander>
+                    <controls:Expander.Header>
+                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
+                         
+                            <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Aviso a navegantes"></Label>
+                        </Frame>
+                    </controls:Expander.Header>
+                    <controls:Expander.Content>
+                        <Grid  BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition  Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition  Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                            <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Notam</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblNotam"/>
 
-                    <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Dirección Exacta</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblAddress"/>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Horario</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblSchedule"/>
-                        </StackLayout>
-                    </Frame>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </controls:Expander.Content>
+                </controls:Expander>
 
-                    <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Teléfono 1</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblPhoneF"/>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Teléfono 2</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblPhoneS"/>
-                        </StackLayout>
-                    </Frame>
+                <controls:Expander>
+                    <controls:Expander.Header>
+                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
+                            <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Contacto"></Label>
+                        </Frame>
+                    </controls:Expander.Header>
+                    <controls:Expander.Content>
+                        <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition  Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                </Grid>
+                            <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Dirección Exacta</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblAddress"/>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Horario</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblSchedule"/>
+                                </StackLayout>
+                            </Frame>
 
-                <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#2396f2">
-                    <Label TextColor="White" FontSize="17" FontAttributes="Bold" Text="Características especiales"></Label>
-                </Frame>
+                            <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Teléfono 1</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblPhoneF"/>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Teléfono 2</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblPhoneS"/>
+                                </StackLayout>
+                            </Frame>
 
-                <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition  Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                        </Grid>
+                    </controls:Expander.Content>
+                </controls:Expander>
 
-                    <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Público</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblPublic"/>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Controlado</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblControl"/>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Coordenadas</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblGeoCoordinates"/>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Información de torre</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblInfoTower"/>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Información General</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblInfoGeneral"/>
-                        </StackLayout>
-                    </Frame>
+                <controls:Expander>
+                    <controls:Expander.Header>
+                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
+                            <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Características especiales"></Label>
+                        </Frame>
+                    </controls:Expander.Header>
+                    <controls:Expander.Content>
+                        <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition  Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                    <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Espacio Aéreo</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblAirSpace"/>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Combustible</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblFuel"/>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Regla General</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblRuleGeneral"/>
-                            <Label TextColor="Black" FontSize="16" FontAttributes="Bold">Regla Particular</Label>
-                            <Label TextColor="Black" FontSize="15" x:Name="lblRuleParticular"/>
-                        </StackLayout>
-                    </Frame>
-                </Grid>
+                            <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Público</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblPublic"/>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Controlado</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblControl"/>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Coordenadas</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblGeoCoordinates"/>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Información de torre</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblInfoTower"/>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Información General</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblInfoGeneral"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Espacio Aéreo</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblAirSpace"/>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Combustible</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblFuel"/>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Regla General</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblRuleGeneral"/>
+                                    <Label TextColor="white" FontSize="16" FontAttributes="Bold">Regla Particular</Label>
+                                    <Label TextColor="white" FontSize="15" x:Name="lblRuleParticular"/>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </controls:Expander.Content>
+                </controls:Expander>
+
+                <controls:Expander>
+                    <controls:Expander.Header>
+                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
+                            <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Meteorología"></Label>
+                        </Frame>
+                    </controls:Expander.Header>
+                    <controls:Expander.Content>
+                        <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition  Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Frame Grid.Row="0" Grid.Column="0" Margin="10" Padding="0" CornerRadius="10" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <StackLayout Padding="0" >
+                                    <WebView x:Name="frame" HeightRequest="460" WidthRequest="315"></WebView>
+                                    <Image x:Name="no_internet" Source="nointernet.png" />
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </controls:Expander.Content>
+                </controls:Expander>
+
+                <controls:Expander>
+                    <controls:Expander.Header>
+                        <!-- Changes made by Olman-->
+                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
+                            <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Documento"></Label>
+                        </Frame>
+                    </controls:Expander.Header>
+                    <controls:Expander.Content>
+                        <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition  Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Button x:Name="txtDocumento" Text="Descargar"  Clicked="txtDocumento_Clicked" BackgroundColor="#blue" TextColor="White" FontFamily="LatoB" CornerRadius="30"></Button>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </controls:Expander.Content>
+                </controls:Expander>                       
                 
-                <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#2396f2">
-                    <Label TextColor="White" FontSize="17" FontAttributes="Bold" Text="Meteorología"></Label>
-                </Frame>
 
-                <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition  Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <WebView x:Name="frame" VerticalOptions="FillAndExpand" HeightRequest="600"></WebView>
-                            <Image x:Name="no_internet" Source="nointernet.png" />
-                        </StackLayout>
-                    </Frame>
-                </Grid>
-                
-                <!-- Changes made by Olman-->
-                <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#2396f2">
-                    <Label TextColor="White" FontSize="17" FontAttributes="Bold" Text="Documento"></Label>
-                </Frame>
-
-                <!--OTRO GRID POR AQUI-->
-
-                <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition  Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Button x:Name="txtDocumento" Text="Documento" Clicked="txtDocumento_Clicked" BackgroundColor="#4486FF" TextColor="White" CornerRadius="30"></Button>
-                        </StackLayout>
-                    </Frame>
-                </Grid>
             </StackLayout>
         </ScrollView>
     </StackLayout>

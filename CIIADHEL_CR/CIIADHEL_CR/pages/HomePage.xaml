@@ -2,18 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CIIADHEL_CR.pages.HomePage">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="LightGray" Offset="0"/>
+            <GradientStop Color="Gray" Offset="1"/>
+        </LinearGradientBrush>
+
+    </ContentPage.Background>
     
     <ContentPage.ToolbarItems>
         <ToolbarItem
                      Order="Primary"
                      Priority="0" />
     </ContentPage.ToolbarItems>
-
+    
     <StackLayout>
-
-        <Frame   CornerRadius="5" HasShadow="True" Padding="2,2,2,10"  Margin="20,10" IsClippedToBounds="True">
+        <Frame   CornerRadius="5" HasShadow="True" Padding="2,2,2,5"  Margin="7,5" IsClippedToBounds="True" BackgroundColor="white">
             <!-- changes made by Olman Sanchez Zuniga-->
-            <SearchBar x:Name="txtBuscar" TextChanged="txtBuscar_TextChanged"  BackgroundColor="Transparent" TextColor="Black" Placeholder="Buscar" PlaceholderColor="Gray" CancelButtonColor="Black" >
+            <SearchBar x:Name="txtBuscar" TextChanged="txtBuscar_TextChanged" FontFamily="Lato"  BackgroundColor="Transparent" TextColor="Black" Placeholder="Aeropuerto..." PlaceholderColor="Gray" CancelButtonColor="Black" >
                 <!-- Use keyup-->
             </SearchBar>
         </Frame>
@@ -22,18 +28,24 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame CornerRadius="13" HasShadow="True" Margin="5,5,5,5" >
-                            <Grid Padding="0">
+                        <Frame CornerRadius="10" HasShadow="True" Margin="15,5,15,5"  BackgroundColor="#424242" >
+
+                            <Grid Padding="0" BackgroundColor="Transparent">
+                                
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
-                                    
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
 
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                     <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -41,41 +53,57 @@
                                     <ColumnDefinition Width="Auto"></ColumnDefinition>
 
                                 </Grid.ColumnDefinitions>
-                                
-                                <Label Grid.Column="1" 
-                                       Grid.Row="0"
+
+                                <Label Grid.Column="0" 
+                                       Grid.Row="2"
                                        Text="{ Binding Nombre_OACI }" 
-                                       FontSize="18" FontAttributes="Bold"
-                                       TextColor="#052662" />
+                                       FontSize="16" FontFamily="LatoB"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="White"/>
                                 <Label Grid.Column="1" 
+                                       Grid.ColumnSpan="6"
+                                       Grid.Row="0" 
+                                       Text="{ Binding Nombre }"  
+                                       FontSize="15" FontFamily="LatoB"   TextColor="White"
+                                HorizontalTextAlignment="End"/>
+                                <Label Grid.Column="2" 
                                        Grid.Row="1" 
-                                       Text="{ Binding Nombre }"   />
-                                <Label Grid.Column="1" 
+                                       FontSize="13" FontFamily="LatoB"    TextColor="Gray" 
+                                       Text="DIRECCIÓN"   />
+                                <Label Grid.Column="2" 
                                        Grid.Row="2" 
-                                       Text="{ Binding Estado_Aeropuerto }"   />
-                                <Label Grid.Column="1" 
+                                       FontSize="12"
+                                       FontFamily="Lato" TextColor="White"  
+                                       Text="{Binding Direccion_Exacta }"   />
+                                <Label Grid.Column="2" 
                                        Grid.Row="3" 
-                                       Text="{ Binding Direccion_Exacta }"   />
+                                       FontSize="13" FontFamily="LatoB"  TextColor="Gray" 
+                                       Text="ESTADO"   />
+                                <Label Grid.Column="2" 
+                                       Grid.Row="4" 
+                                       FontSize="12"
+                                       FontFamily="Lato" TextColor="White"  
+                                       Text="{ Binding Estado_Aeropuerto}" />
 
                                 <ImageButton
                                              x:Name="BtnDescarga"
-                                             WidthRequest = "25"
-                                             HeightRequest = "25"
+                                             WidthRequest = "20"
+                                             HeightRequest = "20"
                                              BackgroundColor="Transparent"
                                              Source= "{ Binding Imagen } "
-                                             Grid.Column="2"
-                                             Grid.Row="0" 
+                                             Grid.Column="5"
+                                             Grid.Row="4" 
                                              CommandParameter="{Binding}"
                                              Clicked="Button_Clicked" />
 
                                 <ImageButton
                                              x:Name="Favorito"
-                                             WidthRequest = "25"
-                                             HeightRequest = "25"
+                                             WidthRequest = "20"
+                                             HeightRequest = "20"                                  
                                              BackgroundColor="Transparent"
                                              Source= "{ Binding ImagenFavorito } "
-                                             Grid.Column="3"
-                                             Grid.Row="0" 
+                                             Grid.Column="6"
+                                             Grid.Row="4" 
                                              CommandParameter="{Binding}"
                                              Clicked="Favorito_Clicked" />
                             </Grid>
@@ -84,5 +112,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
     </StackLayout>
 </ContentPage>

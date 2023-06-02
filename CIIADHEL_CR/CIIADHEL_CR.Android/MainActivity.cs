@@ -14,6 +14,7 @@ namespace CIIADHEL_CR.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            Rg.Plugins.Popup.Popup.Init(this);
             //changes made by Olman Sanchez Zuniga
             UserDialogs.Init(this);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
