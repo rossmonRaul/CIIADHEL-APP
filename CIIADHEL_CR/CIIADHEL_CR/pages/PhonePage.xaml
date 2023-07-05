@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CIIADHEL_CR.pages.PhonePage"      
-             xmlns:control="clr-namespace:Xamarin.Forms.MaskedEntry;assembly=Xamarin.Forms.MaskedEntry">
+             xmlns:control="clr-namespace:Xamarin.Forms.MaskedEntry;assembly=Xamarin.Forms.MaskedEntry" 
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
+             NavigationPage.HasNavigationBar="False">
 
-    <ContentPage.Background>
+    <!--<ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#2A2A2A" Offset="0"/>
             <GradientStop Color="#1C1C1C" Offset="0.2"/>
@@ -15,46 +19,56 @@
             <GradientStop Color="#A6D6F7" Offset="0.8"/>
             <GradientStop Color="#D7EBF8" Offset="1"/>
         </LinearGradientBrush>
-    </ContentPage.Background>
-
-    <StackLayout >
-        <ScrollView>
-            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="20" Padding="20,0,20,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-
-
-                </Grid.RowDefinitions>
-
-
-                <Label Grid.Row="1"  Text="Bienvenido(a)" Margin="0,-55,0,0" FontSize="28" FontFamily="LatoB" FontAttributes="Bold" TextColor="White" HorizontalOptions="CenterAndExpand"></Label>
-                <Label Grid.Row="2" Text="Ingresa un número de teléfono" FontFamily="Lato" FontSize="18" FontAttributes="Bold" TextColor="#D7EBF8" HorizontalOptions="CenterAndExpand"></Label>
-
-                <StackLayout Grid.Row="0" HeightRequest="250" Margin="-20,0" Padding="20" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <Image Source="ciiadhel.png" Aspect="AspectFit" HeightRequest="180" WidthRequest="80" VerticalOptions="CenterAndExpand"></Image>
-                </StackLayout>
-
-                <Frame Grid.Row="3" BorderColor="Transparent" Margin="5,30" Padding="3" HorizontalOptions="FillAndExpand" CornerRadius="7">
+    </ContentPage.Background>-->
+    <AbsoluteLayout >
+        <Image Source="avionfondo.jpg" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"  />
+        <BoxView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Opacity="0.65">
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     
-                    <StackLayout Orientation="Horizontal">
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShowPopupCommand}"/>
-                        </StackLayout.GestureRecognizers>
-                        <Image Source="{Binding SelectedCountry.CountryFlag}" Margin="10,0,5,0"></Image>
-                        <Label Text="{Binding SelectedCountry.CountryName}"
+                    <GradientStop Color="#775C8C" Offset="0" />
+                    <GradientStop Color="#53B4E3" Offset="1" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+        <StackLayout Margin="0,15,0,0">
+            <ScrollView>
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="20" Padding="20,0,20,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+
+
+                    </Grid.RowDefinitions>
+
+
+                    <Label Grid.Row="1"  Text="Bienvenido(a)" Margin="0,-55,0,0" FontSize="30" FontFamily="GroteskB" FontAttributes="Bold" TextColor="White" HorizontalOptions="CenterAndExpand"></Label>
+                    <Label Grid.Row="2" Text="Ingresa un número de teléfono" FontFamily="GroteskB" FontSize="20"  TextColor="#D7EBF8" HorizontalOptions="CenterAndExpand"></Label>
+
+                    <StackLayout Grid.Row="0" HeightRequest="250" Margin="-20,0" Padding="20" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Image Source="ciiadhel.png" Aspect="AspectFit" HeightRequest="180" WidthRequest="80" VerticalOptions="CenterAndExpand"></Image>
+                    </StackLayout>
+
+                    <Frame Grid.Row="3" BorderColor="Transparent" Margin="5,30" Padding="3" HorizontalOptions="FillAndExpand" CornerRadius="7" Opacity="0.80">
+
+                        <StackLayout Orientation="Horizontal"  >
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShowPopupCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="{Binding SelectedCountry.CountryFlag}" Margin="10,0,5,0"></Image>
+                            <Label Text="{Binding SelectedCountry.CountryName}"
                                VerticalTextAlignment="Start"
                                HorizontalTextAlignment="Start"
                                Margin="0,0,0,0"
                                HorizontalOptions="Start"
                                VerticalOptions="CenterAndExpand"
                                TextColor="Black"/>
-                        <Label Text="{Binding SelectedCountry.CountryCode, StringFormat='+{0}'}"
+                            <Label Text="{Binding SelectedCountry.CountryCode, StringFormat='+{0}'}"
                                VerticalTextAlignment="Center"
                                Margin="0,0,1,0"
                                HorizontalTextAlignment="Start"                   
@@ -62,29 +76,43 @@
                                FontAttributes="Bold"
                                TextColor="Black"/>
 
-                        <control:MaskedEntry  x:Name="txtPhone" Placeholder="{Binding SelectedCountry.CountrySampleNumber}" 
+                            <control:MaskedEntry  x:Name="txtPhone" Placeholder="{Binding SelectedCountry.CountrySampleNumber}" 
                                               Mask="{Binding SelectedCountry.CountryMask}" Keyboard="Numeric" PlaceholderColor="Gray"  
                                               HorizontalOptions="FillAndExpand" FontFamily="Lato" TextColor="black" 
-                                              FontAttributes="Bold"  Margin="0,0,0,0"  HorizontalTextAlignment="End">
-                        </control:MaskedEntry>
+                                              FontAttributes="Bold"  Margin="0,0,0,0"  HorizontalTextAlignment="End" TextChanged="txtPhone_TextChanged"
+                                                >
+                            </control:MaskedEntry>
 
-                    
+
+                        </StackLayout>
+                    </Frame>
+
+                    <Label x:Name="lblError" Grid.Row="4" Margin="20,-30" Text="" TextColor="#ff3333" FontFamily="GroteskB" FontSize="16"  FontAttributes="Bold" HorizontalOptions="CenterAndExpand"></Label>
+
+                   
+                    <Label Grid.Row="5"  HorizontalOptions="End"
+                        VerticalOptions="EndAndExpand" Text="Iniciar" Padding="2,2,2,10"  Margin="90,10" FontFamily="GroteskB" FontSize="24" FontAttributes="Bold" TextColor="White" >
+
+                    </Label>
+<StackLayout Grid.Row="5">
+                        <lottie:AnimationView x:Name="lottie"
+                                  Animation="Error2.json"
+                                  AutoPlay="True"
+                                  WidthRequest="50"
+                                  HeightRequest="50"
+                                  VerticalOptions="Center"
+                                  HorizontalOptions="End"
+                                  Margin="0,5,15,0"/>
                     </StackLayout>
-                </Frame>
-
-                <Label x:Name="lblError" Grid.Row="4" Margin="20,-30" Text="" TextColor="Red" FontFamily="Lato" FontSize="15" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"></Label>
-
-                <Label Grid.Row="5"  HorizontalOptions="End"
-                        VerticalOptions="EndAndExpand" Text="Iniciar" Padding="2,2,2,10"  Margin="90,10" FontFamily="LatoB" FontSize="24" FontAttributes="Bold" TextColor="#121212" >
-                    
-                </Label>
-
-                <ImageButton x:Name="Phone" BackgroundColor="Transparent" Grid.Row="5" Padding="2,2,2,10"  Margin="20,0" Source="log.png"
+                    <ImageButton x:Name="Phone" BackgroundColor="Transparent" Grid.Row="5" Padding="2,2,2,10"  Margin="20,0" Source="log.png"
                         HorizontalOptions="End"
                         VerticalOptions="EndAndExpand" Clicked="Phone_Clicked"/>
 
-            </Grid>
-        </ScrollView>
-    </StackLayout>
+
+                    
+                </Grid>
+            </ScrollView>
+        </StackLayout>
+        </AbsoluteLayout>
 
 </ContentPage>
