@@ -88,6 +88,7 @@
   <ItemGroup>
     <GoogleServicesJson Include="google-services.json" />
     <AndroidAsset Include="Assets\MROC.pdf" />
+    <AndroidAsset Include="Assets\avionLoader.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />

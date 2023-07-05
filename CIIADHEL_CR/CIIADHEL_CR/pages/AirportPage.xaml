@@ -1,15 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              x:Class="CIIADHEL_CR.AirportPage"
              xmlns:controls="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit">
 
     <StackLayout BackgroundColor="#424242">
         <ScrollView>
-            <StackLayout >
+            <StackLayout>
+                <Grid x:Name="gridContainer"
+                      Margin="110,200,110,0"
+                      HeightRequest="300">
+                    <StackLayout>
+                        <lottie:AnimationView x:Name="lottie"
+                                              Animation="avionLoader.json"
+                                              AutoPlay="True"
+                                              WidthRequest="300"
+                                              HeightRequest="300"
+                                              VerticalOptions="FillAndExpand"
+                                              HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                </Grid>
                 <controls:Expander>
                     <controls:Expander.Header>
-                        <Frame Margin="0,0.5" CornerRadius="0" BackgroundColor="#4159b7">
+                        <Frame Margin="0,0.5"
+                               CornerRadius="0"
+                               BackgroundColor="#4159b7"
+                               x:Name="frameDetalleAeropuerto">
                             <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Detalle de aeropuerto"></Label>
                         </Frame>
                     </controls:Expander.Header>
@@ -46,7 +63,10 @@
 
                 <controls:Expander>
                     <controls:Expander.Header>
-                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
+                        <Frame Margin="0,0.1"
+                               CornerRadius="0"
+                               BackgroundColor="#4159b7"
+                               x:Name="frameDetallePista">
                             <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Detalle de pista"></Label>
                         </Frame>
                     </controls:Expander.Header>
@@ -81,7 +101,10 @@
                 
                 <controls:Expander>
                     <controls:Expander.Header>
-                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
+                        <Frame Margin="0,0.1"
+                               CornerRadius="0"
+                               BackgroundColor="#4159b7"
+                               x:Name="frameDistanciaPista">
                             <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Distancia de pista"></Label>
                         </Frame>
                     </controls:Expander.Header>
@@ -141,7 +164,10 @@
 
                 <controls:Expander>
                     <controls:Expander.Header>
-                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
+                        <Frame Margin="0,0.1"
+                               CornerRadius="0"
+                               BackgroundColor="#4159b7"
+                               x:Name="frameFrecuencias">
                             <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Frecuencias"></Label>
                         </Frame>
                     </controls:Expander.Header>
@@ -173,8 +199,10 @@
 
                 <controls:Expander>
                     <controls:Expander.Header>
-                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
-                         
+                        <Frame Margin="0,0.1"
+                               CornerRadius="0"
+                               BackgroundColor="#4159b7"
+                               x:Name="frameAvisoNavegantes">
                             <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Aviso a navegantes"></Label>
                         </Frame>
                     </controls:Expander.Header>
@@ -200,7 +228,10 @@
 
                 <controls:Expander>
                     <controls:Expander.Header>
-                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
+                        <Frame Margin="0,0.1"
+                               CornerRadius="0"
+                               BackgroundColor="#4159b7"
+                               x:Name="frameContacto">
                             <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Contacto"></Label>
                         </Frame>
                     </controls:Expander.Header>
@@ -237,7 +268,10 @@
 
                 <controls:Expander>
                     <controls:Expander.Header>
-                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
+                        <Frame Margin="0,0.1"
+                               CornerRadius="0"
+                               BackgroundColor="#4159b7"
+                               x:Name="frameCaracteristicasEspeciales">
                             <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Características especiales"></Label>
                         </Frame>
                     </controls:Expander.Header>
@@ -283,7 +317,10 @@
 
                 <controls:Expander>
                     <controls:Expander.Header>
-                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
+                        <Frame Margin="0,0.1"
+                               CornerRadius="0"
+                               BackgroundColor="#4159b7"
+                               x:Name="frameMeteorologia">
                             <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Meteorología"></Label>
                         </Frame>
                     </controls:Expander.Header>
@@ -309,7 +346,10 @@
                 <controls:Expander>
                     <controls:Expander.Header>
                         <!-- Changes made by Olman-->
-                        <Frame Margin="0,0.1" CornerRadius="0" BackgroundColor="#4159b7">
+                        <Frame Margin="0,0.1"
+                               CornerRadius="0"
+                               BackgroundColor="#4159b7"
+                               x:Name="frameDocumento">
                             <Label TextColor="White" FontSize="18" FontFamily="LatoB" Text="Documento"></Label>
                         </Frame>
                     </controls:Expander.Header>

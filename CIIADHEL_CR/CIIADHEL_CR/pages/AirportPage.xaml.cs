@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.IO;
 using Plugin.XamarinFormsSaveOpenPDFPackage;
 using System.Net.Http;
-
+using Lottie.Forms;
 
 namespace CIIADHEL_CR
 {
@@ -32,6 +32,18 @@ namespace CIIADHEL_CR
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+            lottie.PlayAnimation();
+            lottie.RepeatMode = RepeatMode.Infinite;
+            lottie.Speed = 2.0f;
+            frameDetalleAeropuerto.IsVisible = false;
+            frameDetallePista.IsVisible = false;
+            frameDistanciaPista.IsVisible = false;
+            frameFrecuencias.IsVisible = false;
+            frameAvisoNavegantes.IsVisible = false;
+            frameContacto.IsVisible = false;
+            frameCaracteristicasEspeciales.IsVisible = false;
+            frameMeteorologia.IsVisible = false;
+            frameDocumento.IsVisible = false;
             //made by andreyszcr@gmail.com
             try
             {
@@ -69,9 +81,9 @@ namespace CIIADHEL_CR
                 || string.IsNullOrEmpty(lblRuleGeneral.Text) || lblRuleGeneral.Text == ""
                 || string.IsNullOrEmpty(lblRuleParticular.Text) || lblRuleParticular.Text == "")
                 {
-                    using (UserDialogs.Instance.Loading("Cargando", null, null, true, MaskType.Black))
-                    {
-                        await Task.Delay(4000);
+                    //using (UserDialogs.Instance.Loading("Cargando", null, null, true, MaskType.Black))
+                    //{
+                        await Task.Delay(2000);
                         AirportsController airportsController = new AirportsController();
                         Airport_Detail airportId = await airportsController.verificationAirport(this.airport_Principal.ID_Aeropuerto);
                         airport_Principal.Descargado = true;
@@ -95,9 +107,18 @@ namespace CIIADHEL_CR
                         lblLdaRwy2.Text = airportId.Pistas.LdaRwy2.ToString();
                         NetworkAccess currentNetwork = Connectivity.NetworkAccess;
                         if (currentNetwork == NetworkAccess.Internet)//if you have internet
-                        {
-                           
-                            var metar = new HtmlWebViewSource();
+                    {
+                        gridContainer.IsVisible = false;
+                        frameDetalleAeropuerto.IsVisible = true;
+                        frameDetallePista.IsVisible = true;
+                        frameDistanciaPista.IsVisible = true;
+                        frameFrecuencias.IsVisible = true;
+                        frameAvisoNavegantes.IsVisible = true;
+                        frameContacto.IsVisible = true;
+                        frameCaracteristicasEspeciales.IsVisible = true;
+                        frameMeteorologia.IsVisible = true;
+                        frameDocumento.IsVisible = true;
+                        var metar = new HtmlWebViewSource();
                             var ruta = "'https://metar-taf.com/es/embed-js/" + airportId.Aeropuerto.NombreOaci + "?target=TItlKBUP'";
                             metar.Html = @"<html><head></head><body><div class='row justify-content-center align-items-center'><a id='metartaf-TItlKBUP' style='font-size:18px; font-weight:500; color:#000; width:300px; height:435px; display:block'>METAR </a></div>
                                   <script async defer crossorigin='anonymous' src=" + ruta + "></script></body></html>";
@@ -154,7 +175,7 @@ namespace CIIADHEL_CR
                         lblRuleGeneral.Text = airportId.Caracteristicas_Especiales.NormaGeneral;
                         lblRuleParticular.Text = airportId.Caracteristicas_Especiales.NormaParticular;
                         #endregion
-                    }
+                   //}
                 }
                 else
                 {

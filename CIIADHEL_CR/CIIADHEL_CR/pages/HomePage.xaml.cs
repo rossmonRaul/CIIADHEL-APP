@@ -12,12 +12,15 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using CIIADHEL_CR.interfaces;
+using Lottie.Forms;
 
 namespace CIIADHEL_CR.pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
+        private bool isLoading = true;
+
         public HomePage()
         {
             InitializeComponent();
@@ -30,33 +33,41 @@ namespace CIIADHEL_CR.pages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-
+            lottie.PlayAnimation();
+            lottie.RepeatMode = RepeatMode.Infinite;
+            lottie.Speed = 2.0f;
             try //validations 
             {
                 NetworkAccess currentNetwork = Connectivity.NetworkAccess;
                 if (currentNetwork == NetworkAccess.Internet)//if you have internet
                 {
-                    using (UserDialogs.Instance.Loading("Cargando", null, null, true, MaskType.Black))
-                    {
-                        //changes made by Olman Sanchez Zuniga
-                        if (await updateAirports() != false)
+                    //StartAnimation();
+
+                    //await Task.Delay(4000);
+
+                    
+                                                     //using (UserDialogs.Instance.Loading("Cargando", null, null, true, MaskType.Black))
+                                                     //{
+                                                     //changes made by Olman Sanchez Zuniga
+                    if (await updateAirports() != false)
                     {
                         lstAirposts.ItemsSource = null;
                     }
                     AirportServices airportServices = new AirportServices();
                     List<Airport_Principal> airport_Principals = await App.SQLiteDB.GetAllAirportAsync();//method to get whole airports
-                    //List<Identifier> identifiers = await App.SQLiteDBIdentifier.getIdentifier();// mehtod to get Identifier code
-                    //string id = identifiers[0].Telephone_Number;
-                    //List<Airport_Favorite> Recuperados = await AirportServices.getFavoritebyIdentificador(id);
-                    //foreach (var airport in Recuperados)
-                    //{
-                    //    Airport_Principal aux = airport_Principals.Where(a => a.ID_Aeropuerto == airport.ID_Aeropuerto).FirstOrDefault();
-                    //    if (aux != null)
-                    //    {
-                    //        aux.Favorito = true;
-                    //        await App.SQLiteDB.UpdateAirportAsync(aux);
-                    //    }
-                    //}
+                                                                                                         //List<Identifier> identifiers = await App.SQLiteDBIdentifier.getIdentifier();// mehtod to get Identifier code
+                                                                                                         //string id = identifiers[0].Telephone_Number;
+                                                                                                         //List<Airport_Favorite> Recuperados = await AirportServices.getFavoritebyIdentificador(id);
+                                                                                                         //foreach (var airport in Recuperados)
+                                                                                                         //{
+                                                                                                         //    Airport_Principal aux = airport_Principals.Where(a => a.ID_Aeropuerto == airport.ID_Aeropuerto).FirstOrDefault();
+                                                                                                         //    if (aux != null)
+                                                                                                         //    {
+                                                                                                         //        aux.Favorito = true;
+                                                                                                         //        await App.SQLiteDB.UpdateAirportAsync(aux);
+                                                                                                         //    }
+                                                                                                         //}
+                    gridContainer.IsVisible = false;
                     if (airport_Principals.Count == 0)
                     {
                         // Show message error in screen
@@ -69,7 +80,7 @@ namespace CIIADHEL_CR.pages
                         GNotifications.isOpenNotification = false;
                         await Application.Current.MainPage.Navigation.PushModalAsync(new AirportPage(GNotifications.airportNotification));
                     }
-                    }
+                    //}
                 }
                 else
                 {
@@ -88,8 +99,24 @@ namespace CIIADHEL_CR.pages
             }
         }
         //*******************************************************************************************************
+        //private async void StartAnimation()
+        //{
+        //    double initialY = avionImage.TranslationY;
+
+        //    while (true)
+        //    {
+        //        await avionImage.TranslateTo(avionImage.TranslationX, initialY - 50, 1000);
+
+        //        await avionImage.RotateTo(avionImage.Rotation - 180, 1500);
+
+        //        await avionImage.TranslateTo(avionImage.TranslationX, initialY, 1000);
+
+        //        await avionImage.RotateTo(avionImage.Rotation - 180, 1500);
+        //    }
+        //}
+        //*******************************************************************************************************
         private async void lstAirposts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {   
+        {
             Airport_Principal airports = e.SelectedItem as Airport_Principal;//loading list
             await Navigation.PushAsync(new AirportPage(airports));
         }
@@ -127,7 +154,7 @@ namespace CIIADHEL_CR.pages
                 NetworkAccess currentNetwork = Connectivity.NetworkAccess;
                 var b = sender as ImageButton;// Get the data of the selected airport in the button
                 var ob = b.CommandParameter as Airport_Principal;
-                int id = ob.ID_Aeropuerto;      
+                int id = ob.ID_Aeropuerto;
                 if (currentNetwork == NetworkAccess.Internet)// Validation Network Access  
                 {
                     AirportsController airportsController = new AirportsController();
