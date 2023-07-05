@@ -5,7 +5,6 @@
              x:Class="CIIADHEL_CR.pages.PhonePage"      
              xmlns:control="clr-namespace:Xamarin.Forms.MaskedEntry;assembly=Xamarin.Forms.MaskedEntry" 
              xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
-             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
              NavigationPage.HasNavigationBar="False">
 
     <!--<ContentPage.Background>
