@@ -13,6 +13,7 @@ using System.Windows.Input;
 using CIIADHEL_CR.Popups;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using Lottie.Forms;
 
 namespace CIIADHEL_CR.pages
 {
@@ -82,10 +83,13 @@ namespace CIIADHEL_CR.pages
 
                 if (identifier == null || identifier.Length == 0)
                 {
-                    btn.Source = "loadingPhoneCancel.png";
+                    btn.IsVisible = false;
+                    lottie.IsVisible = true;
                     lblError.Text = "No puede existir espacios vacíos";
-                    await Task.Delay(500);
-                    btn.Source = "log.png";
+                    //await Task.Delay(6000);
+                    //lottie.IsVisible = false;
+                    //btn.IsVisible = true;
+                    
 
                 }
                 else
@@ -173,6 +177,42 @@ namespace CIIADHEL_CR.pages
                 throw ex;
             }
         }
-        
+
+
+        private void txtPhone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+            string identifier = txtPhone.Text;
+
+            if (string.IsNullOrEmpty(identifier))
+            {
+                lottie.IsVisible = true;
+               Phone.IsVisible = false;
+            }
+            else
+            {
+                lottie.IsVisible = false;
+                Phone.IsVisible = true;
+            }
+        }
+
+
+
+        protected override void OnAppearing()
+    {
+        base.OnAppearing();
+            lottie.IsVisible = false;
+            lottie.PlayAnimation();
+            lottie.RepeatMode = RepeatMode.Infinite;
+        }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        lottie.PauseAnimation();
+        lottie = null; // Liberar la referencia al objeto
     }
+
+}
+
 }
