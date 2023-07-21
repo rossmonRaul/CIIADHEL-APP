@@ -45,5 +45,20 @@
         public string Horario { get; set; }
         public string Usario { get; set; }
 
+
+
+       public long IdEspacioAereo{ get; set; }
+       public string NameEspacioAereo { get; set; }
+
+        public long IdCombustibles { get; set; }
+        public string NameCombustibles { get; set; }
+
+        public long IdSuperficie { get; set; }
+        public string NameSuperficie { get; set; }
+
+        public long IdEstado { get; set; }
+        public string Nameestado { get; set; }
+
+       
     }
 }

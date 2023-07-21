@@ -2,19 +2,28 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:CIIADHEL_CR.CustomRenderer"
-             x:Class="CIIADHEL_CR.pages.UpdateAirportPage" BackgroundColor="White">
+             x:Class="CIIADHEL_CR.pages.UpdateAirportPage" BackgroundColor="White" 
+             xmlns:local1="http://xamarin.com/schemas/2020/toolkit" xmlns:controls1="http://xamarin.com/schemas/2014/forms/design">
+
     <ScrollView>
-        <StackLayout BackgroundColor="#e6e6e6">
+        <StackLayout BackgroundColor="#e6e6e6" >
             <Grid>
-                <StackLayout Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
+                <!--<StackLayout Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
                     <Frame HeightRequest="200" BackgroundColor="#4486FF" Padding="0" Margin="0">
                         <Image Source="avion_img.png" Aspect="AspectFill" Margin="0"/>
                     </Frame>
-                </StackLayout>
+                </StackLayout>-->
 
-                <StackLayout Padding="0" Margin="10,180,10,0" HorizontalOptions="FillAndExpand">
+                <StackLayout Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
+                    <Frame HeightRequest="200" BackgroundColor="#4486FF" Padding="0" Margin="0">
+                        <Image Source="AvionFondo3.jpg" Aspect="AspectFill" Margin="0"/>
+                    </Frame>
+                </StackLayout>
+                <StackLayout Padding="0" Margin="15,180,15,15" HorizontalOptions="FillAndExpand">
+
                     <!--AQUI INICIA EL RECUADRO AEROPUERTO-->
-                    <Frame  BackgroundColor="White" HeightRequest="300" HasShadow="True" Padding="0" Margin="0">
+                    <Frame  BackgroundColor="Gray" HeightRequest="305" CornerRadius="25" Opacity=".4"></Frame>
+                    <Frame BackgroundColor="White" HeightRequest="300"  CornerRadius="20" Margin="0,-350,4, 4">
 
                         <StackLayout>
 
@@ -74,6 +83,8 @@
                                             ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
                                                 </StackLayout>
                                             </Frame>
+
+
                                         </StackLayout>
                                     </Grid>
                                 </StackLayout>
@@ -87,9 +98,12 @@
 
                 </StackLayout>
 
-                <StackLayout Padding="0" Margin="10,500,10,0" HorizontalOptions="FillAndExpand">
+
+
+                <StackLayout Padding="0" Margin="15,540,15,0" HorizontalOptions="FillAndExpand">
                     <!--AQUI INICIA EL RECUADRO ACTUALIZAR AEROPUERTO-->
-                    <Frame  BackgroundColor="White" HeightRequest="560" HasShadow="True" Padding="0" Margin="0">
+                    <Frame  BackgroundColor="Gray" HeightRequest="526" CornerRadius="25" Opacity=".4"></Frame>
+                    <Frame  BackgroundColor="White" HeightRequest="560" CornerRadius="20" HasShadow="True" Padding="0" Margin="0,-572,4, 4">
 
                         <StackLayout>
 
@@ -114,12 +128,12 @@
                                         <StackLayout Spacing="8" Grid.Column="0">
                                             <Label Text="Público" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
                                             <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                                                <StackLayout Orientation="Horizontal">
-                                                    <Picker Title="Selecciona" x:Name="pickerPublic" TextColor="Black" FontSize="Subtitle" HorizontalOptions="FillAndExpand" Margin="20,0,0,0"
-                                                        ItemDisplayBinding="{Binding NameP}">
+                                                <StackLayout Orientation="Horizontal" >
+                                                    <Picker Title="Selecciona" x:Name="pickerPublic" BackgroundColor="Transparent" TextColor="Black"  FontSize="Subtitle" HorizontalOptions="FillAndExpand" Margin="20,0,0,0"
+                                                        ItemDisplayBinding="{Binding NameP}" >
                                                     </Picker>
-                                                    <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                                        <Image Source="down_arrow.png" Aspect="AspectFill" Margin="0">
+                                                    <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="0,5,5,5">
+                                                        <Image Source="flechaAbajo" Aspect="AspectFill" Margin="10,10,10,10">
                                                             <Image.GestureRecognizers>
                                                                 <TapGestureRecognizer
                                                                     Tapped="OnTapGestureRecognizerTappedPublic"
@@ -127,7 +141,7 @@
                                                             </Image.GestureRecognizers>
                                                         </Image>
                                                     </Frame>
-                                                    
+
                                                 </StackLayout>
                                             </Frame>
                                         </StackLayout>
@@ -139,8 +153,8 @@
                                                     <Picker Title="Selecciona" x:Name="pickerControl" TextColor="Black" FontSize="Subtitle" HorizontalOptions="FillAndExpand" Margin="20,0,0,0"
                                                         ItemDisplayBinding="{Binding NameC}">
                                                     </Picker>
-                                                    <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                                        <Image Source="down_arrow.png" Aspect="AspectFill" Margin="0">
+                                                    <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="0,5,5,5">
+                                                        <Image Source="flechaAbajo" Aspect="AspectFill" Margin="10,10,10,10">
                                                             <Image.GestureRecognizers>
                                                                 <TapGestureRecognizer
                                                                     Tapped="OnTapGestureRecognizerTappedControl"
@@ -148,7 +162,7 @@
                                                             </Image.GestureRecognizers>
                                                         </Image>
                                                     </Frame>
-                                                    
+
                                                 </StackLayout>
                                             </Frame>
                                         </StackLayout>
@@ -161,12 +175,17 @@
                                 <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                     <StackLayout Orientation="Horizontal">
 
-                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                            <Image Source="Track.png" Aspect="AspectFill" Margin="0"/>
+                                        <Frame BackgroundColor="Transparent" HeightRequest="30" WidthRequest="30" CornerRadius="30" Padding="0" Margin="10,5,5,5" >
+                                            <Image Source="pistaAterrizaje.png" Aspect="AspectFill" Margin="0"/>
                                         </Frame>
-
-                                        <local:CustomEntry x:Name="txtPistas" Placeholder="Pistas" Keyboard="Text" 
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                        
+                                        <Entry x:Name="txtPistas" Text="{Binding Pistas}" Placeholder="00|00"
+                                                        Keyboard="Numeric" ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None"
+                                                        HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
+                                            <Entry.Behaviors>
+                                                <local1:MaskedBehavior Mask="XX|XX" />
+                                            </Entry.Behaviors>
+                                        </Entry>
                                     </StackLayout>
                                 </Frame>
 
@@ -177,7 +196,7 @@
                                     <StackLayout Orientation="Horizontal">
 
                                         <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                            <Image Source="coordinates.png" Aspect="AspectFill" Margin="0"/>
+                                            <Image Source="coordinates.png" Aspect="AspectFit" Margin="5,5,5,5"/>
                                         </Frame>
 
                                         <local:CustomEntry x:Name="txtCoordenadas" Placeholder="Coordenadas" Keyboard="Text" 
@@ -191,30 +210,65 @@
                                 <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                     <StackLayout Orientation="Horizontal">
 
-                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                            <Image Source="Address.png" Aspect="AspectFill" Margin="0"/>
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="10,5,5,5">
+                                            <Image Source="Ubicacion.png" Aspect="AspectFill" Margin="0"/>
                                         </Frame>
 
                                         <local:CustomEntry x:Name="txtUbicacion" Placeholder="Ubicación" Keyboard="Text" 
                                             ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                                     </StackLayout>
                                 </Frame>
-
                                 <StackLayout>
-                                    <Label Text="Elevación" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+
+                                    <Grid ColumnSpacing="16">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Spacing="8" Grid.Column="0">
+                                            <Label Text="Elevación" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal" >
+
+                                                    <Frame BackgroundColor="Transparent" HeightRequest="35" WidthRequest="35" CornerRadius="30" Padding="0" Margin="8">
+                                                        <Image Source="elevation.png"  Margin="2,0,0,0" WidthRequest="10"/>
+                                                    </Frame>
+
+
+                                                    <local:CustomEntry x:Name="txtElevación" Placeholder="Elevación" Keyboard="Text" TextChanged="TxtElevación_TextChanged"
+                                                     ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="-2,0,20,0"/>
+
+                                                    <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="70"  Padding="0" Margin="-70,5,5,5">
+                                                        <Label Text="m" TextColor="Black" FontSize="Subtitle" Margin="0,15,20,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                                    </Frame>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+
+                                        <StackLayout Spacing="8" Grid.Column="1">
+                                            <Label Text=" " TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Frame BackgroundColor="Transparent" HeightRequest="35" WidthRequest="35" CornerRadius="30" Padding="0" Margin="8">
+                                                        <Image Source="elevation.png"  Margin="2,0,0,0" WidthRequest="10"/>
+                                                    </Frame>
+
+                                                    <local:CustomEntry x:Name="txtElevaciónpies" Placeholder="Elevación" Keyboard="Text"  
+                                                     ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+
+                                                    <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="70" Padding="0" Margin="-70,5,5,5">
+                                                        <Label Text="pies" TextColor="Black" FontSize="Subtitle" Margin="0,15,20,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                                    </Frame>
+
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </Grid>
                                 </StackLayout>
-                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                                    <StackLayout Orientation="Horizontal">
-
-                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                            <Image Source="elevation.png" Aspect="AspectFill" Margin="0"/>
-                                        </Frame>
-
-                                        <local:CustomEntry x:Name="txtElevación" Placeholder="Elevación" Keyboard="Text" 
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
-                                    </StackLayout>
-                                </Frame>
-
                             </StackLayout>
 
                         </StackLayout>
@@ -224,9 +278,10 @@
 
                 </StackLayout>
 
-                <StackLayout Padding="0" Margin="10,1080,10,0" HorizontalOptions="FillAndExpand">
+                <StackLayout Padding="0" Margin="15,1120,15,0" HorizontalOptions="FillAndExpand">
                     <!--AQUI INICIA EL RECUADRO RUNWAYS-->
-                    <Frame  BackgroundColor="White" HeightRequest="480" HasShadow="True" Padding="0" Margin="0">
+                    <Frame  BackgroundColor="Gray" HeightRequest="448" CornerRadius="25" Opacity=".4"></Frame>
+                    <Frame  BackgroundColor="White" HeightRequest="480" CornerRadius="20" HasShadow="True" Padding="0" Margin="0,-492,4, 4">
 
                         <StackLayout>
 
@@ -310,7 +365,7 @@
                                             ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
                                                 </StackLayout>
                                             </Frame>
-                                        </StackLayout>
+                                        </StackLayout> 
                                     </Grid>
                                 </StackLayout>
 
@@ -401,9 +456,13 @@
 
                 </StackLayout>
 
-                <StackLayout Padding="0" Margin="10,1580,10,0" HorizontalOptions="FillAndExpand">
+                <StackLayout Padding="0" Margin="10,1620,10,0" HorizontalOptions="FillAndExpand">
                     <!--AQUI INICIA EL RECUADRO INFOS-->
-                    <Frame  BackgroundColor="White" HeightRequest="300" HasShadow="True" Padding="0" Margin="0">
+
+
+                    <Frame  BackgroundColor="Gray" HeightRequest="348" CornerRadius="25" Opacity=".4"></Frame>
+
+                    <Frame  BackgroundColor="White" HeightRequest="380"  CornerRadius="20" HasShadow="True" Padding="0" Margin="0,-392,4,4">
 
                         <StackLayout>
 
@@ -420,12 +479,14 @@
                                 <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                     <StackLayout Orientation="Horizontal">
 
-                                        <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                            <Image Source="control_tower.png" Aspect="AspectFill" Margin="0"/>
+                                        <Frame BackgroundColor="Transparent" HeightRequest="30" WidthRequest="30" CornerRadius="30" Padding="0" Margin="10,8,5,40" >
+                                            <Image Source="torreControl.png" Aspect="AspectFill" Margin="0"/>
                                         </Frame>
 
-                                        <local:CustomEntry x:Name="txtinfo_torre" Placeholder="Información Torre" Keyboard="Text" 
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                        <Editor x:Name="txtinfo_torre" Placeholder="Información Torre" Keyboard="Text" 
+                                                IsSpellCheckEnabled="True" IsTextPredictionEnabled="True"
+                                                TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand"
+                                                Margin="0,0,20,0" HeightRequest="90" />
                                     </StackLayout>
                                 </Frame>
 
@@ -435,12 +496,13 @@
                                 <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                     <StackLayout Orientation="Horizontal">
 
-                                        <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                            <Image Source="document.png" Aspect="AspectFill" Margin="0"/>
+                                        <Frame  BackgroundColor="Transparent" HeightRequest="45" WidthRequest="45" CornerRadius="40" Padding="0" Margin="10,10,5,40" >
+                                            <Image Source="notas.png" Aspect="AspectFit" Margin="10,8,8,8" HeightRequest="35"/>
                                         </Frame>
 
-                                        <local:CustomEntry x:Name="txtinfo_general" Placeholder="Información General" Keyboard="Text"
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                        <Editor x:Name="txtinfo_general" Placeholder="Información General" Keyboard="Text"
+                                                TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"
+                                                HeightRequest="90"/>
                                     </StackLayout>
                                 </Frame>
 
@@ -453,9 +515,12 @@
 
                 </StackLayout>
 
-                <StackLayout Padding="0" Margin="10,1900,10,0" HorizontalOptions="FillAndExpand">
+                <StackLayout Padding="0" Margin="10,2020,10,0" HorizontalOptions="FillAndExpand">
                     <!--AQUI INICIA EL RECUADRO FRECUENCIAS-->
-                    <Frame  BackgroundColor="White" HeightRequest="380" HasShadow="True" Padding="0" Margin="0">
+
+                    <Frame  BackgroundColor="Gray" HeightRequest="348" CornerRadius="25" Opacity=".4"></Frame>
+
+                    <Frame  BackgroundColor="White" HeightRequest="380" CornerRadius="20" HasShadow="True" Padding="0" Margin="0,-392,4, 4">
 
                         <StackLayout>
 
@@ -483,8 +548,13 @@
                                                     <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                                                         <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
                                                     </Frame>-->
-                                                    <local:CustomEntry x:Name="txtfrecuencia_TWR" Placeholder="TWR" Keyboard="Numeric"
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                    <Entry x:Name="txtfrecuencia_TWR" Text="{Binding TWR}" Placeholder="000.00"
+                                                        Keyboard="Numeric" ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None"
+                                                        HorizontalOptions="FillAndExpand"  Margin="20,0,20,0">
+                                                        <Entry.Behaviors>
+                                                            <local1:MaskedBehavior Mask="XXX.XX" />
+                                                        </Entry.Behaviors>
+                                                    </Entry>
                                                 </StackLayout>
                                             </Frame>
                                         </StackLayout>
@@ -496,8 +566,15 @@
                                                     <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                                                         <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
                                                     </Frame>-->
-                                                    <local:CustomEntry x:Name="txtfrecuencia_ATIS" Placeholder="ATIS" Keyboard="Numeric"
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+
+                                                    <Entry x:Name="txtfrecuencia_ATIS" Text="{Binding ATIS}" Placeholder="000.00"
+                                                        Keyboard="Numeric" ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None"
+                                                        HorizontalOptions="FillAndExpand"  Margin="20,0,20,0">
+                                                        <Entry.Behaviors>
+                                                            <local1:MaskedBehavior Mask="XXX.XX" />
+                                                        </Entry.Behaviors>
+                                                    </Entry>
+
                                                 </StackLayout>
                                             </Frame>
                                         </StackLayout>
@@ -522,8 +599,13 @@
                                                     <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                                                         <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
                                                     </Frame>-->
-                                                    <local:CustomEntry x:Name="txtfrecuencia_GRND" Placeholder="GRND" Keyboard="Numeric"
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                    <Entry x:Name="txtfrecuencia_GRND" Text="{Binding GRND}" Placeholder="000.00"
+                                                        Keyboard="Numeric" ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None"
+                                                        HorizontalOptions="FillAndExpand"  Margin="20,0,20,0">
+                                                        <Entry.Behaviors>
+                                                            <local1:MaskedBehavior Mask="XXX.XX" />
+                                                        </Entry.Behaviors>
+                                                    </Entry>
                                                 </StackLayout>
                                             </Frame>
                                         </StackLayout>
@@ -535,8 +617,14 @@
                                                     <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                                                         <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
                                                     </Frame>-->
-                                                    <local:CustomEntry x:Name="txtfrecuencia_EMERGENCY" Placeholder="Emergency" Keyboard="Numeric"
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                                    <Entry x:Name="txtfrecuencia_EMERGENCY" Text="{Binding EMERGENCY}" Placeholder="000.00"
+                                                        Keyboard="Numeric" ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None"
+                                                        HorizontalOptions="FillAndExpand"  Margin="20,0,20,0">
+                                                        <Entry.Behaviors>
+                                                            <local1:MaskedBehavior Mask="XXX.XX" />
+                                                        </Entry.Behaviors>
+                                                    </Entry>
+
                                                 </StackLayout>
                                             </Frame>
                                         </StackLayout>
@@ -553,23 +641,23 @@
                                                         <Image Source="user.png" Aspect="AspectFill" Margin="0"/>
                                                     </Frame>-->
 
-                                        <local:CustomEntry x:Name="txtfrecuencia_Otras" Placeholder="Otras" Keyboard="Numeric"
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                        <Entry x:Name="txtfrecuencia_Otras"  Placeholder="Otras"
+                                                        Keyboard="Text" ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None"
+                                                        HorizontalOptions="FillAndExpand"  Margin="20,0,20,0">
+                                  
+                                        </Entry>
                                     </StackLayout>
                                 </Frame>
-                                
                             </StackLayout>
-
                         </StackLayout>
-
-
                     </Frame>
 
                 </StackLayout>
 
-                <StackLayout Padding="0" Margin="10,2300,10,0" HorizontalOptions="FillAndExpand">
+                <StackLayout Padding="0" Margin="10,2420,10,0" HorizontalOptions="FillAndExpand">
                     <!--AQUI INICIA EL RECUADRO TELEFONOS-->
-                    <Frame  BackgroundColor="White" HeightRequest="295" HasShadow="True" Padding="0" Margin="0">
+                    <Frame  BackgroundColor="Gray" HeightRequest="263" CornerRadius="25" Opacity=".4"></Frame>
+                    <Frame  BackgroundColor="White" HeightRequest="295" CornerRadius="20" HasShadow="True" Padding="0" Margin="0,-307,4, 4">
 
                         <StackLayout>
 
@@ -586,12 +674,17 @@
                                 <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                     <StackLayout Orientation="Horizontal">
 
-                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                            <Image Source="phone.png" Aspect="AspectFill" Margin="0"/>
+                                        <Frame BackgroundColor="White" BorderColor="#22286ff" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="10,5,5,5">
+                                            <Image Source="llamada.png" Aspect="AspectFit" Margin="10,10,10,10"/>
                                         </Frame>
 
-                                        <local:CustomEntry x:Name="txtTelefono1" Placeholder="Telefono 1" Keyboard="Text" 
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                        <Entry x:Name="txtTelefono1" Text="{Binding PhoneNumber}" Placeholder="(000) 000-0000"
+                                            Keyboard="Telephone" ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None"
+                                               HorizontalOptions="FillAndExpand" Margin="0,0,20,0">
+                                            <Entry.Behaviors>
+                                                <local1:MaskedBehavior Mask="(XXX) XXXX-XXXX" />
+                                            </Entry.Behaviors>
+                                        </Entry>
                                     </StackLayout>
                                 </Frame>
 
@@ -601,13 +694,17 @@
                                 <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                     <StackLayout Orientation="Horizontal">
 
-                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                            <Image Source="phone.png" Aspect="AspectFill" Margin="0"/>
+                                        <Frame BackgroundColor="Transparent" BorderColor="#22286ff" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="10,5,5,5">
+                                            <Image Source="llamada.png" Aspect="AspectFit" Margin="10,10,10,10"/>
                                         </Frame>
 
                                         <local:CustomEntry x:Name="txtTelefono2" Placeholder="Telefono 2" Keyboard="Text"
                                             ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                                     </StackLayout>
+
+
+
+
                                 </Frame>
 
                             </StackLayout>
@@ -618,9 +715,13 @@
 
                 </StackLayout>
 
-                <StackLayout Padding="0" Margin="10,2620,10,0" HorizontalOptions="FillAndExpand">
+                <StackLayout Padding="0" Margin="10,2740,10,0" HorizontalOptions="FillAndExpand">
                     <!--AQUI INICIA EL RECUADRO OTROS-->
-                    <Frame  BackgroundColor="White" HeightRequest="870" HasShadow="True" Padding="0" Margin="0">
+                    <Frame  BackgroundColor="Gray" HeightRequest="928" CornerRadius="25" Opacity=".4"></Frame>
+                    <Frame  BackgroundColor="White" HeightRequest="960" CornerRadius="20" HasShadow="True" Padding="0" Margin="0,-972,4, 4">
+
+
+
 
                         <StackLayout>
 
@@ -630,18 +731,40 @@
                             </StackLayout>
 
                             <StackLayout Padding="0" Margin="15,10">
-                                <StackLayout>
+                                <StackLayout Orientation="Horizontal">
                                     <Label Text="Horario" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                                    <Label x:Name="LblHinicio" Text="Hora de Inicio" TextColor="Black" FontSize="Subtitle" Margin="80,0,0,0" VerticalOptions="FillAndExpand" />
+                                    <Label x:Name="LblHfinal" Text="Hora final" TextColor="Black" FontSize="Subtitle" Margin="40,0,0,0" VerticalOptions="FillAndExpand" />
                                 </StackLayout>
-                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+
+                                <Frame BackgroundColor="Transparent"  Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                     <StackLayout Orientation="Horizontal">
 
-                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                            <Image Source="schedule.png" Aspect="AspectFill" Margin="0"/>
+                                        <Frame  BackgroundColor="Transparent" CornerRadius="30" Padding="0" Margin="10,5,5,5" >
+                                            <Image Source="reloj.png" Aspect="AspectFill" Margin="0,0,0,0"/>
                                         </Frame>
+                                        <CheckBox x:Name="chkHorario" CheckedChanged="ChkHorario_CheckedChanged" IsChecked="{Binding IsChecked}" />
 
-                                        <local:CustomEntry x:Name="txtHorario" Placeholder="Horario" Keyboard="Text" 
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                        <Label Text="24 Horas" TextColor="Black" Margin="-2,8,0,0"/>
+
+                                        <Entry x:Name="txtHoraInicio" Text="{Binding HoraInicio}" Placeholder="00:00"
+                                            Keyboard="Telephone" ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None"
+                                               HorizontalOptions="FillAndExpand" Margin="2,-9,0,0">
+                                            <Entry.Behaviors>
+                                                <local1:MaskedBehavior Mask="XX:XX" />
+                                            </Entry.Behaviors>
+                                        </Entry>
+
+
+                                        <Entry x:Name="txtHorafinal" Text="{Binding HoraFinal}" Placeholder="00:00" 
+                                               ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="2,-9,0,0">
+                                            <Entry.Behaviors>
+                                                <local1:MaskedBehavior Mask="XX:XX" />
+                                            </Entry.Behaviors>
+                                        </Entry>
+
+
+
                                     </StackLayout>
                                 </Frame>
 
@@ -651,12 +774,12 @@
                                 <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                     <StackLayout Orientation="Horizontal">
 
-                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                            <Image Source="document.png" Aspect="AspectFill" Margin="0"/>
+                                        <Frame  BackgroundColor="Transparent" HeightRequest="45" WidthRequest="45" CornerRadius="40" Padding="0" Margin="10,10,5,40" >
+                                            <Image Source="notas.png" Aspect="AspectFill" Margin="10,5,5,5" WidthRequest="20"/>
                                         </Frame>
 
-                                        <local:CustomEntry x:Name="txtNormas_Generales" Placeholder="Normas Generales" Keyboard="Text"
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                        <Editor x:Name="txtNormas_Generales" Placeholder="Normas Generales" Keyboard="Text"
+                                         TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" HeightRequest="90"/>
                                     </StackLayout>
                                 </Frame>
 
@@ -666,12 +789,12 @@
                                 <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                     <StackLayout Orientation="Horizontal">
 
-                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                            <Image Source="document.png" Aspect="AspectFill" Margin="0"/>
+                                        <Frame  BackgroundColor="Transparent" HeightRequest="45" WidthRequest="45" CornerRadius="40" Padding="0" Margin="10,10,5,40" >
+                                            <Image Source="notas.png" Aspect="AspectFill" Margin="10,5,5,5" WidthRequest="20"/>
                                         </Frame>
 
-                                        <local:CustomEntry x:Name="txtNormas_Particulares" Placeholder="Normas Particulares" Keyboard="Text" 
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                        <Editor x:Name="txtNormas_Particulares" Placeholder="Normas Particulares" Keyboard="Text" 
+                                             TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" HeightRequest="90"/>
                                     </StackLayout>
                                 </Frame>
 
@@ -681,29 +804,76 @@
                                 <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                     <StackLayout Orientation="Horizontal">
 
-                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                            <Image Source="space.png" Aspect="AspectFill" Margin="0"/>
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="10,5,5,5" >
+                                            <Image Source="viaje.png" Aspect="AspectFit" Margin="2,2,2,2"/>
                                         </Frame>
 
-                                        <local:CustomEntry x:Name="txtEspacio_Aereo" Placeholder="Espacio Aereo" Keyboard="Text" 
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                        <!--<local:CustomEntry x:Name="txtEspacio_Aereo" Placeholder="Espacio Aereo" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>-->
+
+                                        <Picker Title="Selecciona" x:Name="pickerEspacioAereo" BackgroundColor="Transparent" TextColor="Black"  FontSize="Subtitle" HorizontalOptions="FillAndExpand" Margin="0,0,5,0"
+                                                        ItemDisplayBinding="{Binding NameEspacioAereo}">
+                                        </Picker>
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="0,5,5,5">
+                                            <Image Source="flechaAbajo" Aspect="AspectFill" Margin="10,10,10,10">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                                    Tapped="OnTapGestureRecognizerTappedEspacioAereo"
+                                                                    NumberOfTapsRequired="1" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </Frame>
                                     </StackLayout>
                                 </Frame>
 
                                 <StackLayout>
                                     <Label Text="Combustible" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
                                 </StackLayout>
-                                <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                <Frame BackgroundColor="Transparent" BorderColor="Transparent" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30" Margin="15,0,0,0">
                                     <StackLayout Orientation="Horizontal">
 
-                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                        <!--<Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
                                             <Image Source="fuel_pump.png" Aspect="AspectFill" Margin="0"/>
-                                        </Frame>
+                                        </Frame>-->
 
-                                        <local:CustomEntry x:Name="txtCombustible" Placeholder="Combustible" Keyboard="Text" 
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                        <!--<local:CustomEntry x:Name="txtCombustible" Placeholder="Combustible" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>-->
+
+
+
+                                        <CheckBox x:Name="chkCombustible1" IsChecked="{Binding IsChecked}" Margin="15,0,0,0"/>
+                                        <Label Text="Jet Fuel A-1"  TextColor="Black" Margin="0,5,1,5" />
+
+                                        <CheckBox x:Name="chkCombustible2"  IsChecked="{Binding IsChecked}" Margin="40,0,0,0" />
+                                        <Frame  BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="40" Padding="0" Margin="0" >
+                                            <Image Source="CirculoRojo.png" Aspect="AspectFit" Margin="4,4,4,4" WidthRequest="30"/>
+                                        </Frame>
+                                        <Label Text="AVGAS 80" TextColor="Black" Margin="-2,5,1,5" />
                                     </StackLayout>
+
+
                                 </Frame>
+
+                                <Frame BackgroundColor="Transparent" BorderColor="Transparent" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30" Margin="15,0,0,0">
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <CheckBox x:Name="chkCombustible3"  IsChecked="{Binding IsChecked}" Margin="15,0,0,0"/>
+                                        <Frame  BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="40" Padding="0" Margin="0" >
+                                            <Image Source="CirculoVerde.png" Aspect="AspectFit" Margin="4,4,4,4" WidthRequest="30"/>
+                                        </Frame>
+                                        <Label Text="AVGAS 100"  TextColor="Black" Margin="-2,5,1,5"/>
+                                        <CheckBox x:Name="chkCombustible4"  IsChecked="{Binding IsChecked}" />
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="40" Padding="0" Margin="0" >
+                                            <Image Source="CirculoAzul.png" Aspect="AspectFit" Margin="4,4,4,4" WidthRequest="30"/>
+                                        </Frame>
+                                        <Label Text="AVGAS 100 LL" TextColor="Black" Margin="-2,5,1,5" />
+
+                                    </StackLayout>
+
+
+                                </Frame>
+
+
 
                                 <StackLayout>
                                     <Label Text="NOTAMS" TextColor="Black" FontSize="Subtitle" Margin="20,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
@@ -726,12 +896,25 @@
                                 <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                     <StackLayout Orientation="Horizontal">
 
-                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                            <Image Source="Track.png" Aspect="AspectFill" Margin="0"/>
+                                        <Frame BackgroundColor="Transparent" HeightRequest="30" WidthRequest="30" CornerRadius="30" Padding="0" Margin="10,5,5,5" >
+                                            <Image Source="pistaAterrizaje.png" Aspect="AspectFill" Margin="0"/>
                                         </Frame>
 
-                                        <local:CustomEntry x:Name="txtSuperficie_Pista" Placeholder="Superficie Pista" Keyboard="Text" 
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                        <!--<local:CustomEntry x:Name="txtSuperficie_Pista" Placeholder="Superficie Pista" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>-->
+
+                                        <Picker Title="Selecciona" x:Name="pickerSuperficie" BackgroundColor="Transparent" TextColor="Black"  FontSize="Subtitle" HorizontalOptions="FillAndExpand"  Margin="0,0,5,0"
+                                                        ItemDisplayBinding="{Binding NameSuperficie}">
+                                        </Picker>
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="0,5,5,5">
+                                            <Image Source="flechaAbajo.png" Aspect="AspectFill" Margin="10,10,10,10">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                                    Tapped="OnTapGestureRecognizerTappedSuperficie"
+                                                                    NumberOfTapsRequired="1" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </Frame>
                                     </StackLayout>
                                 </Frame>
 
@@ -741,20 +924,45 @@
                                 <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                     <StackLayout Orientation="Horizontal">
 
-                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                                            <Image Source="open_door.png" Aspect="AspectFill" Margin="0"/>
+                                        <Frame BackgroundColor="Transparent" HeightRequest="30" WidthRequest="30" CornerRadius="30" Padding="0" Margin="10,5,5,5" >
+                                            <Image Source="puertaAbierta.png" Aspect="AspectFill" Margin="0"/>
                                         </Frame>
 
-                                        <local:CustomEntry x:Name="txtEstado_Aeropuerto" Placeholder="Estado Aeropuerto" Keyboard="Text" 
-                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                        <!--<local:CustomEntry x:Name="txtEstado_Aeropuerto" Placeholder="Estado Aeropuerto" Keyboard="Text" 
+                                            ClearButtonVisibility="WhileEditing" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>-->
+
+                                        <Picker Title="Selecciona" x:Name="pickerEstado" BackgroundColor="Transparent" TextColor="Black"  FontSize="Subtitle" HorizontalOptions="FillAndExpand" Margin="0,0,5,0"
+                                                      WidthRequest="100"   ItemDisplayBinding="{Binding Nameestado}">
+                                        </Picker>
+                                        <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="0,5,5,5">
+                                            <Image Source="flechaAbajo" Aspect="AspectFill" Margin="10,10,10,10">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                                    Tapped="OnTapGestureRecognizerTappedEstado"
+                                                                    NumberOfTapsRequired="1" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </Frame>
                                     </StackLayout>
                                 </Frame>
+
                                 <StackLayout  Orientation="Horizontal"></StackLayout>
 
-                                <Button x:Name="btnGuardar" Text="Modificar" TextColor="White" FontSize="15" BackgroundColor="#4486FF" HeightRequest="40" WidthRequest="300"
-                                    Margin="20" HorizontalOptions="Center" CornerRadius="30"/>
-                                <Label/>
+                                <!--<Button x:Name="btnGuardar" Text="Modificar" TextColor="White" FontSize="15" BackgroundColor="#4486FF" HeightRequest="40" WidthRequest="300"
+                                    Margin="4,25,4,0" HorizontalOptions="Center" CornerRadius="30"/>
+                                <Label/>-->
+                                <Frame BackgroundColor="#1051A1" CornerRadius="30" HasShadow="True" Padding="1" Margin="4,25,4,25">
+                                    <Frame.Triggers>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference btnGuardar}, Path=IsPressed}" Value="True">
+                                            <Setter Property="BackgroundColor" Value="#7D737F" />
+                                        </DataTrigger>
 
+                                    </Frame.Triggers>
+
+
+                                    <Button Text="Modificar"  x:Name="btnGuardar" Clicked="BtnGuardar_Clicked" TextColor="White" FontSize="15" BackgroundColor="#4486FF" HeightRequest="40" CornerRadius="30"  Opacity=".9"
+                                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                </Frame>
                             </StackLayout>
 
                         </StackLayout>
@@ -764,7 +972,19 @@
                 </StackLayout>
 
             </Grid>
-            <Button x:Name="btnlogout" Text="Cerrar Sesión" TextColor="White" FontSize="15" BackgroundColor="#4486FF" Clicked="btnlogout_Clicked"/>
+
+
+            <Frame BackgroundColor="#1051A1"   Padding="1" Margin="0,-30,0,0">
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference btnlogout}, Path=IsPressed}" Value="True">
+                        <Setter Property="BackgroundColor" Value="#7D737F" />
+                    </DataTrigger>
+
+                </Frame.Triggers>
+                <Button x:Name="btnlogout" Text="Cerrar Sesión" TextColor="White" FontSize="15" BackgroundColor="#4486FF" Clicked="btnlogout_Clicked" />
+
+            </Frame>
+
 
         </StackLayout>
     </ScrollView>

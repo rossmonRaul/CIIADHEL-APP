@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Collections.Generic;
 
+
 namespace CIIADHEL_CR.pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -18,6 +19,8 @@ namespace CIIADHEL_CR.pages
         public static string _password;
         public static string _idAirport;
         private int tapCount;
+        private bool validarMascaraPista = false;
+      
 
         public UpdateAirportPage(string cedula, string contrasena, string idAirport)
         {
@@ -32,15 +35,38 @@ namespace CIIADHEL_CR.pages
             var publics = GetPublic();
             pickerPublic.ItemsSource = publics;
 
+            var espacioAereo = GetEspacioAereo();
+            pickerEspacioAereo.ItemsSource = espacioAereo;
+
             var controls = GetControl();
             pickerControl.ItemsSource = controls;
+            txtfrecuencia_EMERGENCY.Text = "121.50";
+          
 
+            //var combustible = GetCombustibles();
+            //pickerCombustible.ItemsSource = combustible;
+
+            var superficie= GetSuperficie ();
+            pickerSuperficie.ItemsSource = superficie;
+
+            var estado1 = GetEstado();
+            pickerEstado.ItemsSource = estado1;
+
+
+           
             Application.Current.Properties["ultimaPantalla"] = "update";
+
+           
+
+
         }
 
         protected async override void OnAppearing()
         {
+           
             base.OnAppearing();
+            validarMascaraPista = true;
+            txtElevación.TextChanged += TxtElevación_TextChanged;
             try
             {
                 ///validation if textbox are empty
@@ -50,7 +76,7 @@ namespace CIIADHEL_CR.pages
                    || string.IsNullOrEmpty(txtNombre_ICAO.Text) || txtNombre_ICAO.Text == ""
                    || string.IsNullOrEmpty(txtPistas.Text) || txtPistas.Text == ""
                    || string.IsNullOrEmpty(txtElevación.Text) || txtElevación.Text == ""
-                   || string.IsNullOrEmpty(txtSuperficie_Pista.Text) || txtSuperficie_Pista.Text == ""
+                   //|| string.IsNullOrEmpty(txtSuperficie_Pista.Text) || txtSuperficie_Pista.Text == ""
                    || string.IsNullOrEmpty(txtASDA_RWAY_1.Text) || txtASDA_RWAY_1.Text == ""
                    || string.IsNullOrEmpty(txtASDA_RWAY_2.Text) || txtASDA_RWAY_2.Text == ""
                    || string.IsNullOrEmpty(txtTODA_RWAY_1.Text) || txtTODA_RWAY_1.Text == ""
@@ -67,15 +93,15 @@ namespace CIIADHEL_CR.pages
                    || string.IsNullOrEmpty(txtUbicacion.Text) || txtUbicacion.Text == ""
                    || string.IsNullOrEmpty(txtTelefono1.Text) || txtTelefono1.Text == ""
                    || string.IsNullOrEmpty(txtTelefono2.Text) || txtTelefono2.Text == ""
-                   || string.IsNullOrEmpty(txtHorario.Text) || txtHorario.Text == ""
+                   //|| string.IsNullOrEmpty(txtHorario.Text) || txtHorario.Text == ""
                    || string.IsNullOrEmpty(txtCoordenadas.Text) || txtCoordenadas.Text == ""
                    || string.IsNullOrEmpty(txtinfo_torre.Text) || txtinfo_torre.Text == ""
                    || string.IsNullOrEmpty(txtinfo_general.Text) || txtinfo_general.Text == ""
-                   || string.IsNullOrEmpty(txtEspacio_Aereo.Text) || txtEspacio_Aereo.Text == ""
-                   || string.IsNullOrEmpty(txtCombustible.Text) || txtCombustible.Text == ""
+                   //|| string.IsNullOrEmpty(txtEspacio_Aereo.Text) || txtEspacio_Aereo.Text == ""
+                   //|| string.IsNullOrEmpty(txtCombustible.Text) || txtCombustible.Text == ""
                    || string.IsNullOrEmpty(txtNormas_Generales.Text) || txtNormas_Generales.Text == ""
                    || string.IsNullOrEmpty(txtNormas_Particulares.Text) || txtNormas_Particulares.Text == ""
-                   || string.IsNullOrEmpty(txtEstado_Aeropuerto.Text) || txtEstado_Aeropuerto.Text == ""
+                   //|| string.IsNullOrEmpty(txtEstado_Aeropuerto.Text) || txtEstado_Aeropuerto.Text == ""
                    || string.IsNullOrEmpty(txtNOTAMS.Text) || txtNOTAMS.Text == "")
                 {
                     #endregion
@@ -89,7 +115,23 @@ namespace CIIADHEL_CR.pages
                         txtNombre_ICAO.Text = airportId.Aeropuerto.NombreIcao;
                         txtPistas.Text = airportId.Pistas.Pista;
                         txtElevación.Text = airportId.Pistas.Elevacion;
-                        txtSuperficie_Pista.Text = airportId.Pistas.SuperficiePista;
+                        int firstSpaceIndex = airportId.Pistas.Elevacion.IndexOf(" ");
+                        if (firstSpaceIndex >= 0)
+                        {
+                            txtElevación.Text = airportId.Pistas.Elevacion.Substring(0, firstSpaceIndex);
+                        }
+
+
+                        txtElevaciónpies.Text = airportId.Pistas.Elevacion;
+                        int firstSpaceIndex1 = airportId.Pistas.Elevacion.IndexOf(" ");
+                        int lastSpaceIndex = airportId.Pistas.Elevacion.LastIndexOf(" ");
+                        if (firstSpaceIndex1 >= 0 && lastSpaceIndex >= 0 && lastSpaceIndex > firstSpaceIndex1)
+                        {
+                            txtElevaciónpies.Text = airportId.Pistas.Elevacion.Substring(firstSpaceIndex1 + 5, lastSpaceIndex - (firstSpaceIndex1 + 5));
+                        }
+
+
+                        //txtSuperficie_Pista.Text = airportId.Pistas.SuperficiePista;
                         txtASDA_RWAY_1.Text = airportId.Pistas.AsdaRwy1.ToString();
                         txtASDA_RWAY_2.Text = airportId.Pistas.AsdaRwy2.ToString();
                         txtTODA_RWAY_1.Text = airportId.Pistas.TodaRwy1.ToString();
@@ -109,97 +151,208 @@ namespace CIIADHEL_CR.pages
                         pickerControl.SelectedIndex = (int)airportId.Caracteristicas_Especiales.Controlado;
                         pickerPublic.SelectedIndex = (int)airportId.Caracteristicas_Especiales.Publico;
 
+
+
                         #region "validations list frequencies"//Verification with 5 data from the list frequencies
-                        if ((Frec == 5) && (TipFrec == 5)) 
+
+
+                        if (Frec <= 6 && TipFrec <= 9)
                         {
-                            if (Data_Frec2[0] == "TWR")
-                                txtfrecuencia_TWR.Text = Data_Frec[0].ToString();
+                            string[] tiposFrecuencia = { "TWR", "ATIS", "GRND", "EMERGENCY", "Otras" };
+                            for (int i = 0; i < Math.Min(Frec, TipFrec); i++)
+                            {
+                               
+                                int tipoIndex = Array.IndexOf(tiposFrecuencia, Data_Frec2[i]);
 
-                            if (Data_Frec2[0] == "ATIS")
-                                txtfrecuencia_ATIS.Text = Data_Frec[0].ToString();
-
-                            if (Data_Frec2[0] == "GRND")
-                                txtfrecuencia_GRND.Text = Data_Frec[0].ToString();
-
-                            if (Data_Frec2[0] == "EMERGENCY")
-                                txtfrecuencia_EMERGENCY.Text = Data_Frec[0].ToString();
-
-                            if (Data_Frec2[0] == "Otras")
-                                txtfrecuencia_Otras.Text = Data_Frec[0].ToString();
-
-                            if (Data_Frec2[1] == "TWR")
-                                txtfrecuencia_TWR.Text = Data_Frec[1].ToString();
-
-                            if (Data_Frec2[1] == "ATIS")
-                                txtfrecuencia_ATIS.Text = Data_Frec[1].ToString();
-
-                            if (Data_Frec2[1] == "GRND")
-                                txtfrecuencia_GRND.Text = Data_Frec[1].ToString();
-
-                            if (Data_Frec2[1] == "EMERGENCY")
-                                txtfrecuencia_EMERGENCY.Text = Data_Frec[1].ToString();
-
-                            if (Data_Frec2[1] == "Otras")
-                                txtfrecuencia_Otras.Text = Data_Frec[1].ToString();
-
-                            if (Data_Frec2[2] == "TWR")
-                                txtfrecuencia_TWR.Text = Data_Frec[2].ToString();
-
-                            if (Data_Frec2[2] == "ATIS")
-                                txtfrecuencia_ATIS.Text = Data_Frec[2].ToString();
-
-                            if (Data_Frec2[2] == "GRND")
-                                txtfrecuencia_GRND.Text = Data_Frec[2].ToString();
-
-                            if (Data_Frec2[2] == "EMERGENCY")
-                                txtfrecuencia_EMERGENCY.Text = Data_Frec[2].ToString();
-
-                            if (Data_Frec2[2] == "Otras")
-                                txtfrecuencia_Otras.Text = Data_Frec[2].ToString();
-
-                            if (Data_Frec2[3] == "TWR")
-                                txtfrecuencia_TWR.Text = Data_Frec[3].ToString();
-
-                            if (Data_Frec2[3] == "ATIS")
-                                txtfrecuencia_ATIS.Text = Data_Frec[3].ToString();
-
-                            if (Data_Frec2[3] == "GRND")
-                                txtfrecuencia_GRND.Text = Data_Frec[3].ToString();
-
-                            if (Data_Frec2[3] == "EMERGENCY")
-                                txtfrecuencia_EMERGENCY.Text = Data_Frec[3].ToString();
-
-                            if (Data_Frec2[3] == "Otras")
-                                txtfrecuencia_Otras.Text = Data_Frec[3].ToString();
-
-                            if (Data_Frec2[4] == "TWR")
-                                txtfrecuencia_TWR.Text = Data_Frec[4].ToString();
-
-                            if (Data_Frec2[4] == "ATIS")
-                                txtfrecuencia_ATIS.Text = Data_Frec[4].ToString();
-
-                            if (Data_Frec2[4] == "GRND")
-                                txtfrecuencia_GRND.Text = Data_Frec[4].ToString();
-
-                            if (Data_Frec2[4] == "EMERGENCY")
-                                txtfrecuencia_EMERGENCY.Text = Data_Frec[4].ToString();
-
-                            if (Data_Frec2[4] == "Otras")
-                                txtfrecuencia_Otras.Text = Data_Frec[4].ToString();
+                                switch (tipoIndex)
+                                {
+                                    case 0: 
+                                        txtfrecuencia_TWR.Text = Data_Frec[i].ToString();
+                                        break;
+                                    case 1: 
+                                        txtfrecuencia_ATIS.Text = Data_Frec[i].ToString();
+                                        break;
+                                    case 2: 
+                                        txtfrecuencia_GRND.Text = Data_Frec[i].ToString();
+                                        break;
+                                    case 3: 
+                                        txtfrecuencia_EMERGENCY.Text = "121.50";
+                                        break;
+                                    case 4: 
+                                        txtfrecuencia_Otras.Text = Data_Frec[i].ToString();
+                                        break;
+                                    default:
+                                    
+                                        break;
+                                }
+                            }
                         }
+                        //if ((Frec == 5) && (TipFrec == 5))
+                        //{
+                        //    if (Data_Frec2[0] == "TWR")
+                        //        txtfrecuencia_TWR.Text = Data_Frec[0].ToString();
+
+                        //    if (Data_Frec2[0] == "ATIS")
+                        //        txtfrecuencia_ATIS.Text = Data_Frec[0].ToString();
+
+                        //    if (Data_Frec2[0] == "GRND")
+                        //        txtfrecuencia_GRND.Text = Data_Frec[0].ToString();
+
+                        //    if (Data_Frec2[0] == "EMERGENCY")
+                        //        txtfrecuencia_EMERGENCY.Text = Data_Frec[0].ToString();
+
+                        //    if (Data_Frec2[0] == "Otras")
+                        //        txtfrecuencia_Otras.Text = Data_Frec[0].ToString();
+
+                        //    if (Data_Frec2[1] == "TWR")
+                        //        txtfrecuencia_TWR.Text = Data_Frec[1].ToString();
+
+                        //    if (Data_Frec2[1] == "ATIS")
+                        //        txtfrecuencia_ATIS.Text = Data_Frec[1].ToString();
+
+                        //    if (Data_Frec2[1] == "GRND")
+                        //        txtfrecuencia_GRND.Text = Data_Frec[1].ToString();
+
+                        //    if (Data_Frec2[1] == "EMERGENCY")
+                        //        txtfrecuencia_EMERGENCY.Text = Data_Frec[1].ToString();
+
+                        //    if (Data_Frec2[1] == "Otras")
+                        //        txtfrecuencia_Otras.Text = Data_Frec[1].ToString();
+
+                        //    if (Data_Frec2[2] == "TWR")
+                        //        txtfrecuencia_TWR.Text = Data_Frec[2].ToString();
+
+                        //    if (Data_Frec2[2] == "ATIS")
+                        //        txtfrecuencia_ATIS.Text = Data_Frec[2].ToString();
+
+                        //    if (Data_Frec2[2] == "GRND")
+                        //        txtfrecuencia_GRND.Text = Data_Frec[2].ToString();
+
+                        //    if (Data_Frec2[2] == "EMERGENCY")
+                        //        txtfrecuencia_EMERGENCY.Text = Data_Frec[2].ToString();
+
+                        //    if (Data_Frec2[2] == "Otras")
+                        //        txtfrecuencia_Otras.Text = Data_Frec[2].ToString();
+
+                        //    if (Data_Frec2[3] == "TWR")
+                        //        txtfrecuencia_TWR.Text = Data_Frec[3].ToString();
+
+                        //    if (Data_Frec2[3] == "ATIS")
+                        //        txtfrecuencia_ATIS.Text = Data_Frec[3].ToString();
+
+                        //    if (Data_Frec2[3] == "GRND")
+                        //        txtfrecuencia_GRND.Text = Data_Frec[3].ToString();
+
+                        //    if (Data_Frec2[3] == "EMERGENCY")
+                        //        txtfrecuencia_EMERGENCY.Text = Data_Frec[3].ToString();
+
+                        //    if (Data_Frec2[3] == "Otras")
+                        //        txtfrecuencia_Otras.Text = Data_Frec[3].ToString();
+
+                        //    if (Data_Frec2[4] == "TWR")
+                        //        txtfrecuencia_TWR.Text = Data_Frec[4].ToString();
+
+                        //    if (Data_Frec2[4] == "ATIS")
+                        //        txtfrecuencia_ATIS.Text = Data_Frec[4].ToString();
+
+                        //    if (Data_Frec2[4] == "GRND")
+                        //        txtfrecuencia_GRND.Text = Data_Frec[4].ToString();
+
+                        //    if (Data_Frec2[4] == "EMERGENCY")
+                        //        txtfrecuencia_EMERGENCY.Text = Data_Frec[4].ToString();
+
+                        //    if (Data_Frec2[4] == "Otras")
+                        //        txtfrecuencia_Otras.Text = Data_Frec[4].ToString();
+                        //}
+
                         #endregion
                         txtUbicacion.Text = airportId.Contacto.DireccionExacta;
-                        txtTelefono1.Text = airportId.Contacto.NumeroTelefono1;
+                        string telefono1Value = airportId.Contacto.NumeroTelefono1;
+                        if (telefono1Value.ToLower() == "no disponible") 
+                        {
+                            txtTelefono1.Text = ""; 
+                        }
+                        else
+                        {
+                            txtTelefono1.Text = telefono1Value; 
+                        }
                         txtTelefono2.Text = (string)airportId.Contacto.NumeroTelefono2;
-                        txtHorario.Text = airportId.Contacto.Horario;
+
+
+                        //txtHorario.Text = airportId.Contacto.Horario;
+                        string horarioAeropuerto = airportId.Contacto.Horario;
+                        if (horarioAeropuerto == "24 horas")
+                        {
+                            chkHorario.IsChecked = true;
+                            txtHoraInicio.IsVisible = false;
+                            txtHorafinal.IsVisible = false;
+                            LblHinicio.IsVisible = false;
+                            LblHfinal.IsVisible = false;
+                        }
+                        else
+                        {
+                            chkHorario.IsChecked = false;
+                            txtHoraInicio.IsVisible = true;
+                            txtHorafinal.IsVisible = true;
+                            LblHinicio.IsVisible = true;
+                            LblHfinal.IsVisible = true;
+
+                            string[] horas = horarioAeropuerto.Split('-');
+                            if (horas.Length == 2)
+                            {
+                                string primeraHora = horas[0].Trim();
+                                string segundaHora = horas[1].Trim();
+
+                                txtHoraInicio.Text = primeraHora;
+                                txtHorafinal.Text = segundaHora;
+                            }
+                        }
+
+
+
                         txtCoordenadas.Text = airportId.Caracteristicas_Especiales.Coordenada.ToString();
                         txtinfo_torre.Text = airportId.Caracteristicas_Especiales.InfoTorre;
                         txtinfo_general.Text = airportId.Caracteristicas_Especiales.InfoGeneral;
-                        txtEspacio_Aereo.Text = airportId.Caracteristicas_Especiales.EspacioAereo;
-                        txtCombustible.Text = airportId.Caracteristicas_Especiales.Combustible;
+
+                        string espacioAereo = airportId.Caracteristicas_Especiales.EspacioAereo;
+
+                        int ea = pickerEspacioAereo.Items.IndexOf(espacioAereo);
+                        if (ea >= 0)
+                        {
+                            pickerEspacioAereo.SelectedIndex = ea;
+                        }
+
+                        string[] combustible = airportId.Caracteristicas_Especiales.Combustible.Split('/');
+
+                        foreach (string value in combustible)
+                        {
+                            if (value == "Jet Fuel A-1")
+                                chkCombustible1.IsChecked = true;
+                            else if (value == "AVGAS 80")
+                                chkCombustible2.IsChecked = true;
+                            else if (value == "AVGAS 100")
+                                chkCombustible3.IsChecked = true;
+                            else if (value == "AVGAS 100 LL")
+                                chkCombustible4.IsChecked = true;
+                        }
+
+                        string superficies = airportId.Pistas.SuperficiePista;
+                        int s = pickerSuperficie.Items.IndexOf(superficies);
+                        if (s >= 0)
+                        {
+                            pickerSuperficie.SelectedIndex = s;
+                        }
+
+
+                        string estado = airportId.Aeropuerto.EstadoAeropuerto;
+                        int e = pickerEstado.Items.IndexOf(estado);
+                        if (e >= 0)
+                        {
+                            pickerEstado.SelectedIndex = e;
+                        }
                         txtNormas_Generales.Text = airportId.Caracteristicas_Especiales.NormaGeneral;
                         txtNormas_Particulares.Text = airportId.Caracteristicas_Especiales.NormaParticular;
-                        txtEstado_Aeropuerto.Text = airportId.Aeropuerto.EstadoAeropuerto;
+                        //txtEstado_Aeropuerto.Text = airportId.Aeropuerto.EstadoAeropuerto;
                         if ((airportId.NOTAMS != null) && airportId.NOTAMS.Any())
                         {
                             foreach (Airport_Frequencies fre in airportId.Frecuencias)
@@ -224,7 +377,7 @@ namespace CIIADHEL_CR.pages
             }
         }
         private void BtnGuardar_Clicked(object sender, EventArgs e)
-        {
+         {
             Device.BeginInvokeOnMainThread(async () =>
             {
                 var result = await this.DisplayAlert("Notificación", "¿Realmente Desea guardar los datos?", "Si", "No");
@@ -233,6 +386,8 @@ namespace CIIADHEL_CR.pages
                     try
                     {
                         #region "Validations"
+                      
+
                         if (String.IsNullOrWhiteSpace(txtNombre_aeropuerto.Text))
                         {
                             await DisplayAlert("Advertencia", "El campo Nombre Aeropuerto es obligatorio", "OK");
@@ -249,6 +404,12 @@ namespace CIIADHEL_CR.pages
                         {
                             await DisplayAlert("Advertencia", "El campo Pistas es obligatorio", "OK");
                         }
+
+                        else if (String.IsNullOrWhiteSpace(txtPistas.Text))
+                        {
+                            await DisplayAlert("Advertencia", "El campo Pistas es obligatorio", "OK");
+                        }
+
                         else if (String.IsNullOrWhiteSpace(txtCoordenadas.Text))
                         {
                             await DisplayAlert("Advertencia", "El campo Coordenadas es obligatorio", "OK");
@@ -309,10 +470,10 @@ namespace CIIADHEL_CR.pages
                         {
                             await DisplayAlert("Advertencia", "El campo Telefono 2 es obligatorio", "OK");
                         }
-                        else if (String.IsNullOrWhiteSpace(txtHorario.Text))
-                        {
-                            await DisplayAlert("Advertencia", "El campo Horario es obligatorio", "OK");
-                        }
+                        //else if (String.IsNullOrWhiteSpace(txtHorario.Text))
+                        //{
+                        //    await DisplayAlert("Advertencia", "El campo Horario es obligatorio", "OK");
+                        //}
                         else if (String.IsNullOrWhiteSpace(txtNormas_Generales.Text))
                         {
                             await DisplayAlert("Advertencia", "El campo Normas Generales es obligatorio", "OK");
@@ -321,30 +482,37 @@ namespace CIIADHEL_CR.pages
                         {
                             await DisplayAlert("Advertencia", "El campo Normas Particulares es obligatorio", "OK");
                         }
-                        else if (String.IsNullOrWhiteSpace(txtEspacio_Aereo.Text))
-                        {
-                            await DisplayAlert("Advertencia", "El campo Espacio Aéreo es obligatorio", "OK");
-                        }
-                        else if (String.IsNullOrWhiteSpace(txtCombustible.Text))
-                        {
-                            await DisplayAlert("Advertencia", "El campo Combustible es obligatorio", "OK");
-                        }
+                        //else if (String.IsNullOrWhiteSpace(txtEspacio_Aereo.Text))
+                        //{
+                        //    await DisplayAlert("Advertencia", "El campo Espacio Aéreo es obligatorio", "OK");
+                        //}
+                        //else if (String.IsNullOrWhiteSpace(txtCombustible.Text))
+                        //{
+                        //    await DisplayAlert("Advertencia", "El campo Combustible es obligatorio", "OK");
+                        //}
                         else if (String.IsNullOrWhiteSpace(txtNOTAMS.Text))
                         {
                             await DisplayAlert("Advertencia", "El campo NOTAMS es obligatorio", "OK");
                         }
-                        else if (String.IsNullOrWhiteSpace(txtSuperficie_Pista.Text))
-                        {
-                            await DisplayAlert("Advertencia", "El campo Superficie Pista es obligatorio", "OK");
-                        }
-                        else if (String.IsNullOrWhiteSpace(txtEstado_Aeropuerto.Text))
-                        {
-                            await DisplayAlert("Advertencia", "El campo Estado Aeropuerto es obligatorio", "OK");
-                        }
+                        //else if (String.IsNullOrWhiteSpace(txtSuperficie_Pista.Text))
+                        //{
+                        //    await DisplayAlert("Advertencia", "El campo Superficie Pista es obligatorio", "OK");
+                        //}
+                        //else if (String.IsNullOrWhiteSpace(txtEstado_Aeropuerto.Text))
+                        //{
+                        //    await DisplayAlert("Advertencia", "El campo Estado Aeropuerto es obligatorio", "OK");
+                        //}
                         else
                         {
                             #endregion
                             Airport_Detail airportId = await AirportServices.getAnAirportById(Convert.ToInt32(_idAirport));
+                   
+                            var estadoSeleccionado = pickerEstado.SelectedItem as Airport_Update;
+                            var espacioAereoSeleccionado = pickerEspacioAereo.SelectedItem as Airport_Update;
+                            var SuperficieSeleccionado = pickerSuperficie.SelectedItem as Airport_Update;
+
+                            
+                            
                             Airport_Update airportX = new Airport_Update
                             {
                                 ID_Aeropuerto = Convert.ToInt32(_idAirport),
@@ -352,29 +520,34 @@ namespace CIIADHEL_CR.pages
                                 Nombre_OACI = txtNombre_OACI.Text,
                                 NombreICAO = txtNombre_ICAO.Text,
                                 Usario = _cedula,
-                                Espacio_Aereo = txtEspacio_Aereo.Text,
-                                Estado_Aeropuerto = txtEstado_Aeropuerto.Text,
+                                Espacio_Aereo=espacioAereoSeleccionado.NameEspacioAereo,
+                                //Espacio_Aereo = txtEspacio_Aereo.Text,
+                                //Estado_Aeropuerto = txtEstado_Aeropuerto.Text,
+                                Estado_Aeropuerto = estadoSeleccionado != null ? estadoSeleccionado.Nameestado : string.Empty,
                                 Notam = txtNOTAMS.Text,
                                 Publico = pickerPublic.SelectedIndex.ToString(),
                                 Controlado = pickerControl.SelectedIndex.ToString(),
                                 Info_Torre = txtinfo_torre.Text,
                                 Info_General = txtinfo_general.Text,
-                                Combustible = txtCombustible.Text,
+                                //Combustible = txtCombustible.Text,
+                                Combustible = Combustibles(chkCombustible1.IsChecked,chkCombustible2.IsChecked,chkCombustible3.IsChecked,chkCombustible4.IsChecked),
                                 Norma_General = txtNormas_Generales.Text,
                                 Norma_Particular = txtNormas_Particulares.Text,
                                 Coordenada = txtCoordenadas.Text,
                                 Direccion_Exacta = txtUbicacion.Text,
                                 Numero_Telefono1 = txtTelefono1.Text,
                                 Numero_Telefono2 = txtTelefono2.Text,
-                                Horario = txtHorario.Text,
+                                //Horario = txtHorario.Text,
+                                Horario = chkHorario.IsChecked ? "24 horas" : $"{txtHoraInicio.Text} - {txtHorafinal.Text}",
                                 ATIS = txtfrecuencia_ATIS.Text,
                                 TWR = txtfrecuencia_TWR.Text,
                                 GRND = txtfrecuencia_GRND.Text,
                                 EMERGENCY = txtfrecuencia_EMERGENCY.Text,
                                 Otras = txtfrecuencia_Otras.Text,
                                 Pista = txtPistas.Text,
-                                Elevacion = txtElevación.Text,
-                                Superficie_Pista = txtSuperficie_Pista.Text,
+                                Superficie_Pista = SuperficieSeleccionado.NameSuperficie,
+                                Elevacion = txtElevación.Text + " " + "m" + " " + "/" + " " + txtElevaciónpies.Text + " " + "pies",
+                                //Superficie_Pista = txtSuperficie_Pista.Text,
                                 ASDA_Rwy_1 = Convert.ToInt16(txtASDA_RWAY_1.Text),
                                 ASDA_Rwy_2 = Convert.ToInt16(txtASDA_RWAY_2.Text),
                                 TODA_Rwy_1 = Convert.ToInt16(txtTODA_RWAY_1.Text),
@@ -397,6 +570,8 @@ namespace CIIADHEL_CR.pages
                             {
                                 airportX.GRND = "0.00";
                             }
+                            
+                            
                             if (airportX.EMERGENCY == "No disponible" || airportX.EMERGENCY == "")
                             {
                                 airportX.EMERGENCY = "0.00";
@@ -456,158 +631,200 @@ namespace CIIADHEL_CR.pages
                                 Ejecutables[3] = "0";
                             }
 
-                            if ((Data_FrecPut.Length == 5) && (Data_FrecPut2.Length == 5))
+                            //if ((Data_FrecPut.Length == 5) && (Data_FrecPut2.Length == 5))
+                            //{
+                            //    if (Data_FrecPut2[0] == "TWR")
+                            //    {
+                            //        if (airportX.TWR != Data_FrecPut[0])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[0] == "ATIS")
+                            //    {
+                            //        if (airportX.ATIS != Data_FrecPut[0])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[0] == "GRND")
+                            //    {
+                            //        if (airportX.GRND != Data_FrecPut[0])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[0] == "EMERGENCY")
+                            //    {
+                            //        if (airportX.EMERGENCY != Data_FrecPut[0])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[0] == "Otras")
+                            //    {
+                            //        if (airportX.Otras != Data_FrecPut[0])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[1] == "TWR")
+                            //    {
+                            //        if (airportX.TWR != Data_FrecPut[1])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[1] == "ATIS")
+                            //    {
+                            //        if (airportX.ATIS != Data_FrecPut[1])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[1] == "GRND")
+                            //    {
+                            //        if (airportX.GRND != Data_FrecPut[1])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[1] == "EMERGENCY")
+                            //    {
+                            //        if (airportX.EMERGENCY != Data_FrecPut[1])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[1] == "Otras")
+                            //    {
+                            //        if (airportX.Otras != Data_FrecPut[1])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[2] == "TWR")
+                            //    {
+                            //        if (airportX.TWR != Data_FrecPut[2])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[2] == "ATIS")
+                            //    {
+                            //        if (airportX.ATIS != Data_FrecPut[2])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[2] == "GRND")
+                            //    {
+                            //        if (airportX.GRND != Data_FrecPut[2])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[2] == "EMERGENCY")
+                            //    {
+                            //        if (airportX.EMERGENCY != Data_FrecPut[2])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[2] == "Otras")
+                            //    {
+                            //        if (airportX.Otras != Data_FrecPut[2])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[3] == "TWR")
+                            //    {
+                            //        if (airportX.TWR != Data_FrecPut[3])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[3] == "ATIS")
+                            //    {
+                            //        if (airportX.ATIS != Data_FrecPut[3])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[3] == "GRND")
+                            //    {
+                            //        if (airportX.GRND != Data_FrecPut[3])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[3] == "EMERGENCY")
+                            //    {
+                            //        if (airportX.EMERGENCY != Data_FrecPut[3])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[3] == "Otras")
+                            //    {
+                            //        if (airportX.Otras != Data_FrecPut[3])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[4] == "TWR")
+                            //    {
+                            //        if (airportX.TWR != Data_FrecPut[4])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[4] == "ATIS")
+                            //    {
+                            //        if (airportX.ATIS != Data_FrecPut[4])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[4] == "GRND")
+                            //    {
+                            //        if (airportX.GRND != Data_FrecPut[4])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[4] == "EMERGENCY")
+                            //    {
+                            //        if (airportX.EMERGENCY != Data_FrecPut[4])
+                            //            Ejecutables[4] = "5";
+                            //    }
+
+                            //    if (Data_FrecPut2[4] == "Otras")
+                            //    {
+                            //        if (airportX.Otras != Data_FrecPut[4])
+                            //            Ejecutables[4] = "5";
+                            //    }
+                            //}
+
+                            if (Data_FrecPut.Length <= 6 && Data_FrecPut2.Length <= 9)
                             {
-                                if (Data_FrecPut2[0] == "TWR")
-                                {
-                                    if (airportX.TWR != Data_FrecPut[0])
-                                        Ejecutables[4] = "5";
-                                }
+                                string[] tiposFrecuencia = { "TWR", "ATIS", "GRND", "EMERGENCY", "Otras" };
 
-                                if (Data_FrecPut2[0] == "ATIS")
+                                for (int i = 0; i < Data_FrecPut.Length; i++)
                                 {
-                                    if (airportX.ATIS != Data_FrecPut[0])
-                                        Ejecutables[4] = "5";
-                                }
+                                    int tipoIndex = Array.IndexOf(tiposFrecuencia, Data_FrecPut2[i]);
 
-                                if (Data_FrecPut2[0] == "GRND")
-                                {
-                                    if (airportX.GRND != Data_FrecPut[0])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[0] == "EMERGENCY")
-                                {
-                                    if (airportX.EMERGENCY != Data_FrecPut[0])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[0] == "Otras")
-                                {
-                                    if (airportX.Otras != Data_FrecPut[0])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[1] == "TWR")
-                                {
-                                    if (airportX.TWR != Data_FrecPut[1])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[1] == "ATIS")
-                                {
-                                    if (airportX.ATIS != Data_FrecPut[1])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[1] == "GRND")
-                                {
-                                    if (airportX.GRND != Data_FrecPut[1])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[1] == "EMERGENCY")
-                                {
-                                    if (airportX.EMERGENCY != Data_FrecPut[1])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[1] == "Otras")
-                                {
-                                    if (airportX.Otras != Data_FrecPut[1])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[2] == "TWR")
-                                {
-                                    if (airportX.TWR != Data_FrecPut[2])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[2] == "ATIS")
-                                {
-                                    if (airportX.ATIS != Data_FrecPut[2])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[2] == "GRND")
-                                {
-                                    if (airportX.GRND != Data_FrecPut[2])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[2] == "EMERGENCY")
-                                {
-                                    if (airportX.EMERGENCY != Data_FrecPut[2])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[2] == "Otras")
-                                {
-                                    if (airportX.Otras != Data_FrecPut[2])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[3] == "TWR")
-                                {
-                                    if (airportX.TWR != Data_FrecPut[3])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[3] == "ATIS")
-                                {
-                                    if (airportX.ATIS != Data_FrecPut[3])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[3] == "GRND")
-                                {
-                                    if (airportX.GRND != Data_FrecPut[3])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[3] == "EMERGENCY")
-                                {
-                                    if (airportX.EMERGENCY != Data_FrecPut[3])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[3] == "Otras")
-                                {
-                                    if (airportX.Otras != Data_FrecPut[3])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[4] == "TWR")
-                                {
-                                    if (airportX.TWR != Data_FrecPut[4])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[4] == "ATIS")
-                                {
-                                    if (airportX.ATIS != Data_FrecPut[4])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[4] == "GRND")
-                                {
-                                    if (airportX.GRND != Data_FrecPut[4])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[4] == "EMERGENCY")
-                                {
-                                    if (airportX.EMERGENCY != Data_FrecPut[4])
-                                        Ejecutables[4] = "5";
-                                }
-
-                                if (Data_FrecPut2[4] == "Otras")
-                                {
-                                    if (airportX.Otras != Data_FrecPut[4])
-                                        Ejecutables[4] = "5";
+                                    switch (tipoIndex)
+                                    {
+                                        case 0: // TWR
+                                            if (airportX.TWR != Data_FrecPut[i])
+                                                Ejecutables[4] = "5";
+                                            break;
+                                        case 1: // ATIS
+                                            if (airportX.ATIS != Data_FrecPut[i])
+                                                Ejecutables[4] = "5";
+                                            break;
+                                        case 2: // GRND
+                                            if (airportX.GRND != Data_FrecPut[i])
+                                                Ejecutables[4] = "5";
+                                            break;
+                                        case 3: // EMERGENCY
+                                            if (airportX.EMERGENCY != Data_FrecPut[i])
+                                                Ejecutables[4] = "5";
+                                            break;
+                                        case 4: // Otras
+                                            if (airportX.Otras != Data_FrecPut[i])
+                                                Ejecutables[4] = "5";
+                                            break;
+                                        default:
+                                            // No hacer nada si el tipo de frecuencia no coincide con ninguno de los casos anteriores
+                                            break;
+                                    }
                                 }
                             }
+
+
+
+
+
                             else
                             {
                                 Ejecutables[4] = "0";
@@ -680,6 +897,50 @@ namespace CIIADHEL_CR.pages
             }
         }
 
+        void OnTapGestureRecognizerTappedEstado(object sender, EventArgs args)
+        {
+            tapCount++;
+            var imageSender = (Image)sender;
+
+            if (tapCount % 2 == 0)
+            {
+                pickerEstado.Focus();
+            }
+            else
+            {
+                 pickerEstado.Focus();
+            }
+        }
+
+        void OnTapGestureRecognizerTappedSuperficie(object sender, EventArgs args)
+        {
+            tapCount++;
+            var imageSender = (Image)sender;
+
+            if (tapCount % 2 == 0)
+            {
+               pickerSuperficie.Focus();
+            }
+            else
+            {
+                pickerSuperficie.Focus();
+            }
+        }
+
+        void OnTapGestureRecognizerTappedEspacioAereo(object sender, EventArgs args)
+        {
+            tapCount++;
+            var imageSender = (Image)sender;
+
+            if (tapCount % 2 == 0)
+            {
+               pickerEspacioAereo.Focus();
+            }
+            else
+            {
+                pickerEspacioAereo.Focus();
+            }
+        }
         void OnTapGestureRecognizerTappedControl(object sender, EventArgs args)
         {
             tapCount++;
@@ -708,6 +969,48 @@ namespace CIIADHEL_CR.pages
                 new Airport_Update{IdP=1,NameP="SI"},
             };
         }
+
+        private List<Airport_Update> GetSuperficie()
+        {
+            return new List<Airport_Update>
+            {
+                new Airport_Update{IdSuperficie=0,NameSuperficie="No disponible"},
+                new Airport_Update{IdSuperficie=1,NameSuperficie="asfalto"},
+                new Airport_Update{IdSuperficie=2,NameSuperficie="concreto"},
+                new Airport_Update{IdSuperficie=3,NameSuperficie="grama"},
+                new Airport_Update{IdSuperficie=4,NameSuperficie="cesped"},
+
+            };
+        }
+
+        private List<Airport_Update> GetEstado()
+        {
+            return new List<Airport_Update>
+            {
+                new Airport_Update{IdEstado=0,Nameestado ="Abierto"},
+                new Airport_Update{IdEstado=1,Nameestado="Cerrado"},
+               
+
+            };
+        }
+
+
+
+
+        private List<Airport_Update> GetEspacioAereo()
+        {
+            List<Airport_Update> espacioAereo = new List<Airport_Update>();
+            
+            espacioAereo.Add(new Airport_Update { IdEspacioAereo = 0, NameEspacioAereo = "No disponible" });
+
+            for (char c = 'A'; c <= 'Z'; c++)
+            {
+                string nombre = c.ToString();
+                espacioAereo.Add(new Airport_Update { IdEspacioAereo = espacioAereo.Count, NameEspacioAereo = nombre });
+            }
+
+            return espacioAereo;
+        }
         private List<Airport_Update> GetControl()
         {
             return new List<Airport_Update>
@@ -716,5 +1019,130 @@ namespace CIIADHEL_CR.pages
                 new Airport_Update{IdC=1,NameC="SI"},
             };
         }
-    }
+
+        private void txtPistas_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (validarMascaraPista)
+            {
+                var editar = (Entry)sender;
+                var texto = editar.Text;
+
+                if (texto.Length > 2 && !texto.Contains("|"))
+                {
+                    editar.Text = texto.Substring(0, 2) + "|" + texto.Substring(3); 
+                }
+                else if (texto.Length > 6)
+                {
+                    editar.Text = texto.Substring(0, 6); 
+                }
+                else if (texto.Length >= 3)
+                {
+                   
+                    var ultimosDigitos = texto.Substring(3);
+                    int ultimosTresDigitos;
+                    if (!int.TryParse(ultimosDigitos, out ultimosTresDigitos) || ultimosTresDigitos > 359)
+                    {
+                        editar.Text = texto.Substring(0, 3);
+                    }
+                }
+            }
+        }
+
+
+        private void TxtElevación_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(e.NewTextValue) && double.TryParse(e.NewTextValue, out double metros))
+            {
+                double pies = metros * 3.28084;
+                int piesEnteros = (int)Math.Floor(pies);
+                txtElevaciónpies.Text = piesEnteros.ToString();
+            }
+            else
+            {
+                txtElevaciónpies.Text = string.Empty;
+            }
+        }
+
+        #region " Mascaras de frecuencias"
+
+       
+        private void txtfrecuencia_TWR_TextChanged(object sender, TextChangedEventArgs e)
+       {
+            if (!string.IsNullOrWhiteSpace(txtfrecuencia_TWR.Text))
+            {
+                string frecuenciaIngresada = txtfrecuencia_TWR.Text;
+                string frecuenciaFormateada = new string(frecuenciaIngresada.Where(c => char.IsDigit(c)).ToArray());
+                if (frecuenciaFormateada.Length > 3)
+                {
+                    frecuenciaFormateada = frecuenciaFormateada.Insert(3, ".");
+                }
+                if (frecuenciaFormateada.Length >= 4 && frecuenciaFormateada.Substring(3) == ".")
+                {
+                    frecuenciaFormateada += "00";  
+                }
+                else if (frecuenciaFormateada.Length > 6)
+                {
+                    frecuenciaFormateada = frecuenciaFormateada.Remove(6);
+                }
+                txtfrecuencia_TWR.Text = frecuenciaFormateada;
+                
+            }
+
+        }
+
+        #endregion
+        public string Combustibles(bool checkbox1, bool checkbox2, bool checkbox3, bool checkbox4)
+        {
+            string texto = string.Empty;
+
+            if (checkbox1)
+            {
+                texto += "Jet Fuel A-1/";
+            }
+            if (checkbox2)
+            {
+                texto += "AVGAS 80/";
+            }
+            if (checkbox3)
+            {
+                texto += "AVGAS 100/";
+            }
+            if (checkbox4)
+            {
+                texto += "AVGAS 100 LL/";
+            }
+            if (string.IsNullOrEmpty(texto))
+            {
+                texto = "No disponible";
+            }
+            else
+            { 
+                texto = texto.TrimEnd('/');
+            }
+
+            return texto;
+        }
+
+        private void ChkHorario_CheckedChanged(object sender, EventArgs e)
+        {
+             if (chkHorario.IsChecked)
+            {
+                txtHoraInicio.IsVisible = false;
+                txtHorafinal.IsVisible = false;
+                LblHinicio.IsVisible = false;
+                LblHfinal.IsVisible = false;
+            }
+            else
+            {
+                txtHoraInicio.IsVisible = true;
+                txtHorafinal.IsVisible = true;
+                LblHinicio.IsVisible = true;
+                LblHfinal.IsVisible = true;
+            }
+;
+        }
+
+      
+
+}
 }

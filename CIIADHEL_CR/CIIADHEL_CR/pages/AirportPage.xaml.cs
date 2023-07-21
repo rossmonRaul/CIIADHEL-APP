@@ -200,7 +200,7 @@ namespace CIIADHEL_CR
                     {
                         #region Archivos con internet
                         var client = new HttpClient();
-                        var Stream = await client.GetStreamAsync("http://www.uvairlines.com/admin/resources/mroc.pdf");//url with http
+                        var Stream = await client.GetStreamAsync("https://servicios.educacionvial.go.cr/Documentos/Recibos.pdf");//url with http
                         using (var memory = new MemoryStream()){
                             await Stream.CopyToAsync(memory);
                             await CrossXamarinFormsSaveOpenPDFPackage.Current.SaveAndView("MROC.pdf", "application/pdf",

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:CIIADHEL_CR.CustomRenderer"
              x:Class="CIIADHEL_CR.pages.LoginPage">
-    <ContentPage.Background>
+    <!--<ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#2A2A2A" Offset="0"/>
             <GradientStop Color="#1C1C1C" Offset="0.2"/>
@@ -14,54 +14,78 @@
             <GradientStop Color="#A6D6F7" Offset="0.8"/>
             <GradientStop Color="#D7EBF8" Offset="1"/>
         </LinearGradientBrush>
-    </ContentPage.Background>
-    <StackLayout BackgroundColor="Transparent">
-        <ScrollView>
-            <Grid>
-                <StackLayout Padding="0" Margin="10,50,10,0" HorizontalOptions="FillAndExpand">
-                <Frame  BackgroundColor="Transparent" HeightRequest="500" HasShadow="True" Padding="0" Margin="0">
+    </ContentPage.Background>-->
+    <AbsoluteLayout >
+        <Image Source="avionfondo.jpg" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"  />
+        <BoxView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Opacity="0.65">
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
 
-                    <StackLayout>
-                        <Frame BackgroundColor="Transparent" HeightRequest="160" WidthRequest="150" HasShadow="False" Margin="5" HorizontalOptions="Center" Padding="10">
-                                <Image Source="ciiadhel.png" Aspect="AspectFill" Margin="0"/>
+                    <GradientStop Color="#775C8C" Offset="0" />
+                    <GradientStop Color="#53B4E3" Offset="1" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+        <StackLayout >
+            <ScrollView>
+                <Grid>
+                    <StackLayout Padding="0" Margin="10,100,10,0" HorizontalOptions="FillAndExpand">
+                        <Frame  BackgroundColor="Transparent" HeightRequest="500" HasShadow="True" Padding="0" Margin="0">
+
+                            <StackLayout>
+                                <Frame BackgroundColor="Transparent" HeightRequest="160" WidthRequest="150" HasShadow="False" Margin="5" HorizontalOptions="Center" Padding="10">
+                                    <Image Source="ciiadhel.png" Aspect="AspectFill" Margin="0"/>
+                                </Frame>
+                                <StackLayout Margin="15">
+                                    <Label Text="Iniciar Sesión" TextColor="White" HorizontalOptions="CenterAndExpand" FontFamily="GroteskB" FontSize="Large" FontAttributes="Bold"/>
+
+                                </StackLayout>
+
+                                <StackLayout Padding="0" Margin="15,10">
+
+                                    <Frame BackgroundColor="white"  Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="15" Opacity=".7">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="50" Padding="0" Margin="5">
+                                                <Image Source="user2.png" Aspect="AspectFill" Margin="0" Scale="0.6" />
+                                            </Frame>
+
+                                            <local:CustomEntry Placeholder="Identificación" FontFamily="Lato" MaxLength="50" x:Name="txtID" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                        </StackLayout>
+                                    </Frame>
+
+                                    <Frame BackgroundColor="White"  Margin="0,25,0,0" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="15" Opacity=".7">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="7" Padding="0" Margin="5">
+                                                <Image Source="locked2.png" Margin="0" Scale="0.6" />
+                                            </Frame>
+
+                                            <local:CustomEntry Placeholder="Contraseña" FontFamily="Lato" MaxLength="50" x:Name="txtPassword" IsPassword="True" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Label x:Name="lblResultado" Text="" HorizontalTextAlignment="Center" TextColor="Red" />
+                                    <StackLayout  Orientation="Horizontal"></StackLayout>
+
+
+                                    <Frame BackgroundColor="#9F91A3" CornerRadius="15" HasShadow="True" Padding="1" Margin="0,20,0,0">
+                                        <Frame.Triggers>
+                                            <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference btnLogin}, Path=IsPressed}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="#7D737F" />
+                                            </DataTrigger>
+                                           
+                                        </Frame.Triggers>
+
+
+                                        <Button Text="INGRESAR" FontFamily="LatoB" x:Name="btnLogin" Clicked="btnLogin_Clicked" CornerRadius="15" BackgroundColor="#9F91A3" TextColor="White" Opacity=".9"
+            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                    </Frame>
+                                </StackLayout>
+
+                            </StackLayout>
+
                         </Frame>
-                        <StackLayout Margin="15">
-                                <Label Text="Iniciar Sesión" TextColor="White" HorizontalOptions="CenterAndExpand" FontFamily="LatoB" FontSize="Large" FontAttributes="Bold"/>
-
-                        </StackLayout>
-
-                        <StackLayout Padding="0" Margin="15,10">
-
-                            <Frame BackgroundColor="White"  Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="7">
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="7" Padding="0" Margin="5">
-                                        <Image Source="user2.png" Aspect="AspectFill" Margin="0"/>
-                                    </Frame>
-
-                                        <local:CustomEntry Placeholder="Identificación" FontFamily="Lato" MaxLength="50" x:Name="txtID" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
-                                </StackLayout>
-                            </Frame>
-
-                                <Frame BackgroundColor="White"  Margin="0,15,0,0" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="7">
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame BackgroundColor="Transparent" HeightRequest="40" WidthRequest="40" CornerRadius="7" Padding="0" Margin="5">
-                                        <Image Source="locked2.png" Aspect="AspectFill" Margin="0"/>
-                                    </Frame>
-
-                                        <local:CustomEntry Placeholder="Contraseña" FontFamily="Lato" MaxLength="50" x:Name="txtPassword" IsPassword="True" TextColor="black" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
-                                </StackLayout>
-                            </Frame>
-                            <Label x:Name="lblResultado" Text="" HorizontalTextAlignment="Center" TextColor="Red" />
-                            <StackLayout  Orientation="Horizontal"></StackLayout>
-
-                                <Button Text="INGRESAR" FontFamily="LatoB" x:Name="btnLogin" Clicked="btnLogin_Clicked" BackgroundColor="#424242" TextColor="White" CornerRadius="30" />
-                        </StackLayout>
-
                     </StackLayout>
-
-                </Frame>
-            </StackLayout>
-        </Grid>
-        </ScrollView>
-    </StackLayout>
+                </Grid>
+            </ScrollView>
+        </StackLayout>
+    </AbsoluteLayout >
 </ContentPage>
