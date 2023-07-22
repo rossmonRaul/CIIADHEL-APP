@@ -2,9 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:CIIADHEL_CR.CustomRenderer"
-             x:Class="CIIADHEL_CR.pages.UpdateAirportPage" BackgroundColor="White">
+             x:Class="CIIADHEL_CR.pages.UpdateAirportPage" BackgroundColor="White"
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms">
     <ScrollView>
-        <StackLayout BackgroundColor="#e6e6e6">
+        <StackLayout>
+            <Grid x:Name="gridContainer"
+                  Margin="110,300,110,0"
+                  HeightRequest="300">
+                <StackLayout>
+                    <lottie:AnimationView x:Name="lottie"
+                                          Animation="avionLoader.json"
+                                          AutoPlay="True"
+                                          WidthRequest="300"
+                                          HeightRequest="300"
+                                          VerticalOptions="FillAndExpand"
+                                          HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+            </Grid>
+            <StackLayout BackgroundColor="#e6e6e6" x:Name="stckTodo">
             <Grid>
                 <StackLayout Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
                     <Frame HeightRequest="200" BackgroundColor="#4486FF" Padding="0" Margin="0">
@@ -14,9 +29,12 @@
 
                 <StackLayout Padding="0" Margin="10,180,10,0" HorizontalOptions="FillAndExpand">
                     <!--AQUI INICIA EL RECUADRO AEROPUERTO-->
-                    <Frame  BackgroundColor="White" HeightRequest="300" HasShadow="True" Padding="0" Margin="0">
-
-                        <StackLayout>
+                        <Frame  BackgroundColor="White"
+                                HeightRequest="300"
+                                HasShadow="True"
+                                Padding="0"
+                                Margin="0">
+                            <StackLayout>
 
                             <StackLayout Margin="15">
                                 <Label Text="Aeropuerto" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"/>
@@ -92,7 +110,6 @@
                     <Frame  BackgroundColor="White" HeightRequest="560" HasShadow="True" Padding="0" Margin="0">
 
                         <StackLayout>
-
                             <StackLayout Margin="15">
                                 <Label Text="Actualizar Aeropuerto" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"/>
 
@@ -229,7 +246,6 @@
                     <Frame  BackgroundColor="White" HeightRequest="480" HasShadow="True" Padding="0" Margin="0">
 
                         <StackLayout>
-
                             <StackLayout Margin="15">
                                 <Label Text="Runways" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"/>
 
@@ -406,7 +422,6 @@
                     <Frame  BackgroundColor="White" HeightRequest="300" HasShadow="True" Padding="0" Margin="0">
 
                         <StackLayout>
-
                             <StackLayout Margin="15">
                                 <Label Text="Información" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"/>
 
@@ -458,7 +473,6 @@
                     <Frame  BackgroundColor="White" HeightRequest="380" HasShadow="True" Padding="0" Margin="0">
 
                         <StackLayout>
-
                             <StackLayout Margin="15">
                                 <Label Text="Frecuencias" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"/>
 
@@ -572,7 +586,6 @@
                     <Frame  BackgroundColor="White" HeightRequest="295" HasShadow="True" Padding="0" Margin="0">
 
                         <StackLayout>
-
                             <StackLayout Margin="15">
                                 <Label Text="Teléfonos" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"/>
 
@@ -623,7 +636,6 @@
                     <Frame  BackgroundColor="White" HeightRequest="870" HasShadow="True" Padding="0" Margin="0">
 
                         <StackLayout>
-
                             <StackLayout Margin="15">
                                 <Label Text="Otros" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold"/>
 
@@ -766,6 +778,7 @@
             </Grid>
             <Button x:Name="btnlogout" Text="Cerrar Sesión" TextColor="White" FontSize="15" BackgroundColor="#4486FF" Clicked="btnlogout_Clicked"/>
 
+        </StackLayout>
         </StackLayout>
     </ScrollView>
 </ContentPage>

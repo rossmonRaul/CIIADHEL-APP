@@ -13,17 +13,23 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using CIIADHEL_CR.interfaces;
 using Lottie.Forms;
+using System.Linq.Expressions;
+using System.Threading;
+using System.Security.Cryptography;
 
 namespace CIIADHEL_CR.pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
-        private bool isLoading = true;
-
+        private const string TooltipShownKey = "TooltipShown";
+        private const int AnimationDuration = 800;
+        private const int FadeOutDuration = 6000;
+        private const int DelayDuration = 4000;
         public HomePage()
         {
             InitializeComponent();
+            BindingContext = this;
             NavigationPage.SetHasNavigationBar(this, true);
             NavigationPage.SetHasBackButton(this, false);
             txtBuscar.TextChanged += txtBuscar_TextChanged;
@@ -36,51 +42,53 @@ namespace CIIADHEL_CR.pages
             lottie.PlayAnimation();
             lottie.RepeatMode = RepeatMode.Infinite;
             lottie.Speed = 2.0f;
+            gridBuscarAeropuerto.IsVisible = false;
             try //validations 
             {
                 NetworkAccess currentNetwork = Connectivity.NetworkAccess;
                 if (currentNetwork == NetworkAccess.Internet)//if you have internet
                 {
-                    //StartAnimation();
-
-                    //await Task.Delay(4000);
-
                     
-                                                     //using (UserDialogs.Instance.Loading("Cargando", null, null, true, MaskType.Black))
-                                                     //{
-                                                     //changes made by Olman Sanchez Zuniga
                     if (await updateAirports() != false)
                     {
                         lstAirposts.ItemsSource = null;
                     }
                     AirportServices airportServices = new AirportServices();
-                    List<Airport_Principal> airport_Principals = await App.SQLiteDB.GetAllAirportAsync();//method to get whole airports
-                                                                                                         //List<Identifier> identifiers = await App.SQLiteDBIdentifier.getIdentifier();// mehtod to get Identifier code
-                                                                                                         //string id = identifiers[0].Telephone_Number;
-                                                                                                         //List<Airport_Favorite> Recuperados = await AirportServices.getFavoritebyIdentificador(id);
-                                                                                                         //foreach (var airport in Recuperados)
-                                                                                                         //{
-                                                                                                         //    Airport_Principal aux = airport_Principals.Where(a => a.ID_Aeropuerto == airport.ID_Aeropuerto).FirstOrDefault();
-                                                                                                         //    if (aux != null)
-                                                                                                         //    {
-                                                                                                         //        aux.Favorito = true;
-                                                                                                         //        await App.SQLiteDB.UpdateAirportAsync(aux);
-                                                                                                         //    }
-                                                                                                         //}
-                    gridContainer.IsVisible = false;
+                    List<Airport_Principal> airport_Principals = await App.SQLiteDB.GetAllAirportAsync();
+
                     if (airport_Principals.Count == 0)
                     {
                         // Show message error in screen
                         lstAirposts.ItemsSource = null;
+                        return;
                     }
+
+                    gridContainer.IsVisible = false;
                     lstAirposts.ItemsSource = airport_Principals;
+
+                    if (!Application.Current.Properties.ContainsKey(TooltipShownKey))
+                    {
+                        Application.Current.Properties[TooltipShownKey] = true;
+
+                        if (Parent != null)
+                        {
+                            tooltipFrame.Scale = 2;
+                            tooltipFrame.Opacity = 1;
+                            tooltipFrame.IsVisible = true;
+
+                            var animationIn = new Animation(v => tooltipFrame.Scale = v, 0, 1, Easing.SpringOut);
+
+                            animationIn.Commit(this, "TooltipAnimationIn", length: AnimationDuration, finished: (d, b) => tooltipFrame.Scale = 1);
+
+                            var fadeOutTimer = new Timer(FadeOutTimerCallback, null, DelayDuration, Timeout.Infinite);
+                        }
+                    }
 
                     if (GNotifications.isOpenNotification)
                     {
                         GNotifications.isOpenNotification = false;
                         await Application.Current.MainPage.Navigation.PushModalAsync(new AirportPage(GNotifications.airportNotification));
                     }
-                    //}
                 }
                 else
                 {
@@ -94,27 +102,11 @@ namespace CIIADHEL_CR.pages
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);//display error on console
+                throw (ex);//display error on console
                 //await DialogService.ShowErrorAsync("Error", ex.Message, "OK");//show error on screen
             }
         }
-        //*******************************************************************************************************
-        //private async void StartAnimation()
-        //{
-        //    double initialY = avionImage.TranslationY;
-
-        //    while (true)
-        //    {
-        //        await avionImage.TranslateTo(avionImage.TranslationX, initialY - 50, 1000);
-
-        //        await avionImage.RotateTo(avionImage.Rotation - 180, 1500);
-
-        //        await avionImage.TranslateTo(avionImage.TranslationX, initialY, 1000);
-
-        //        await avionImage.RotateTo(avionImage.Rotation - 180, 1500);
-        //    }
-        //}
-        //*******************************************************************************************************
+ 
         private async void lstAirposts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             Airport_Principal airports = e.SelectedItem as Airport_Principal;//loading list
@@ -146,7 +138,7 @@ namespace CIIADHEL_CR.pages
             }
         }
         #endregion
-        //********************************************************************************************************
+        //*******************************************************************************************************
         private async void Button_Clicked(object sender, EventArgs e)
         {
             try
@@ -200,7 +192,7 @@ namespace CIIADHEL_CR.pages
                 await DialogService.ShowErrorAsync("Error al descargar", ex.Message, "OK");
             }
         }
-        //**********************************************************************************************************************
+        //*******************************************************************************************************
         private async void Favorito_Clicked(object sender, EventArgs e)
         {
             try //validation
@@ -302,41 +294,82 @@ namespace CIIADHEL_CR.pages
                 await DialogService.ShowErrorAsync("Error", ex.Message, "OK"); //display error on screen
             }
         }
-        //********************************************************************************************************
+        //*******************************************************************************************************
         private async void txtBuscar_TextChanged(object sender, TextChangedEventArgs e)
         {
             txtBuscar = (SearchBar)sender;
             NetworkAccess currentNetwork = Connectivity.NetworkAccess;
-            try //validation data 
+            try
             {
                 if (currentNetwork == NetworkAccess.Internet)
                 {
-                    if (string.IsNullOrEmpty(txtBuscar.Text) || txtBuscar.Text == "")//if txtbox is empty o clear then 
+                    if (string.IsNullOrEmpty(txtBuscar.Text) || txtBuscar.Text == "")
                     {
-                        lstAirposts.ItemsSource = await App.SQLiteDB.GetAllAirportAsync();// get data on list
+                        lstAirposts.ItemsSource = await App.SQLiteDB.GetAllAirportAsync();
+                        gridBuscarAeropuerto.IsVisible = false;
+                        tooltipFrame.IsVisible = false;
                     }
                     else
                     {
-                        lstAirposts.ItemsSource = await App.SQLiteDB.GetSearchAsync(e.NewTextValue);//get data search name 
+                        var searchResults = await App.SQLiteDB.GetSearchAsync(e.NewTextValue);
+                        lstAirposts.ItemsSource = searchResults;
+
+                        if (searchResults == null || searchResults.Count == 0)
+                        {
+                            gridBuscarAeropuerto.IsVisible = true;
+                        }
+                        else
+                        {
+                            gridBuscarAeropuerto.IsVisible = false;
+                            tooltipFrame.IsVisible = false;
+                        }
                     }
                 }
                 else
                 {
-                    if (string.IsNullOrEmpty(txtBuscar.Text) || txtBuscar.Text == "") //if txtbox is empty o clear then 
+                    if (string.IsNullOrEmpty(txtBuscar.Text) || txtBuscar.Text == "")
                     {
-                        lstAirposts.ItemsSource = await App.SQLiteDB.GetAllAirportAsync();// get data on list
+                        lstAirposts.ItemsSource = await App.SQLiteDB.GetAllAirportAsync();
+                        gridBuscarAeropuerto.IsVisible = false;
                     }
                     else
                     {
-                        lstAirposts.ItemsSource = await App.SQLiteDB.GetSearchAsync(e.NewTextValue);//get data search name 
+                        var searchResults = await App.SQLiteDB.GetSearchAsync(e.NewTextValue);
+                        lstAirposts.ItemsSource = searchResults;
+
+                        if (searchResults == null || searchResults.Count == 0)
+                        {
+                            gridBuscarAeropuerto.IsVisible = true;
+                        }
+                        else
+                        {
+                            gridBuscarAeropuerto.IsVisible = false;
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);//display error on console
-                await DialogService.ShowErrorAsync("Error", "Error en la busqueda de datos", "Ok");
+                Console.WriteLine(ex);
+                await DialogService.ShowErrorAsync("Error", "Error en la búsqueda de datos", "Ok");
             }
         }
+        //*******************************************************************************************************
+        #region metodo para desvanecer el tooltip
+        private void FadeOutTimerCallback(object state)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                var animationOut = new Animation(v => tooltipFrame.Opacity = v, 1, 0, Easing.Linear);
+
+                animationOut.Commit(this, "TooltipAnimationOut", length: FadeOutDuration, finished: (d, b) =>
+                {
+                    tooltipFrame.Opacity = 0;
+                    tooltipFrame.IsVisible = false;
+                });
+            });
+        }
+        #endregion
+        //*******************************************************************************************************
     }
 }

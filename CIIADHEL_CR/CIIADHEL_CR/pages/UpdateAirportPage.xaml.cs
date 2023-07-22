@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Collections.Generic;
+using Lottie.Forms;
 
 namespace CIIADHEL_CR.pages
 {
@@ -41,6 +42,10 @@ namespace CIIADHEL_CR.pages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+            lottie.PlayAnimation();
+            lottie.RepeatMode = RepeatMode.Infinite;
+            lottie.Speed = 2.0f;
+            stckTodo.IsVisible = false;
             try
             {
                 ///validation if textbox are empty
@@ -79,10 +84,11 @@ namespace CIIADHEL_CR.pages
                    || string.IsNullOrEmpty(txtNOTAMS.Text) || txtNOTAMS.Text == "")
                 {
                     #endregion
-                    using (UserDialogs.Instance.Loading("Cargando, espere", null, null, true, MaskType.Black))
-                    {
-                        await Task.Delay(3000);
-                        Airport_Detail airportId = await AirportServices.getAnAirportById(Convert.ToInt32(_idAirport));
+
+                    await Task.Delay(3000);
+                    gridContainer.IsVisible = false;
+                    stckTodo.IsVisible = true;
+                    Airport_Detail airportId = await AirportServices.getAnAirportById(Convert.ToInt32(_idAirport));
 
                         txtNombre_aeropuerto.Text = airportId.Aeropuerto.Nombre;
                         txtNombre_OACI.Text = airportId.Aeropuerto.NombreOaci;
@@ -211,7 +217,6 @@ namespace CIIADHEL_CR.pages
                         {
                             txtNOTAMS.Text = "No disponible";
                         }
-                    }
                 }
                 else
                 {

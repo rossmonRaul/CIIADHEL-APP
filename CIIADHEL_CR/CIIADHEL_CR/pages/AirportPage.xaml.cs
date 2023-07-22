@@ -15,6 +15,7 @@ using System.IO;
 using Plugin.XamarinFormsSaveOpenPDFPackage;
 using System.Net.Http;
 using Lottie.Forms;
+using System.Threading;
 
 namespace CIIADHEL_CR
 {
@@ -22,6 +23,10 @@ namespace CIIADHEL_CR
     public partial class AirportPage : ContentPage
     {
         public Airport_Principal airport_Principal;
+        private const string TooltipShownKey2 = "TooltipShown2";
+        private const int AnimationDuration = 800;
+        private const int FadeOutDuration = 6000;
+        private const int DelayDuration = 4000;
         public AirportPage(Airport_Principal airport_Principal)
         {
             this.airport_Principal = airport_Principal;
@@ -37,13 +42,12 @@ namespace CIIADHEL_CR
             lottie.Speed = 2.0f;
             frameDetalleAeropuerto.IsVisible = false;
             frameDetallePista.IsVisible = false;
-            frameDistanciaPista.IsVisible = false;
             frameFrecuencias.IsVisible = false;
             frameAvisoNavegantes.IsVisible = false;
-            frameContacto.IsVisible = false;
             frameCaracteristicasEspeciales.IsVisible = false;
             frameMeteorologia.IsVisible = false;
             frameDocumento.IsVisible = false;
+            stckFondo.IsVisible = false;
             //made by andreyszcr@gmail.com
             try
             {
@@ -81,101 +85,116 @@ namespace CIIADHEL_CR
                 || string.IsNullOrEmpty(lblRuleGeneral.Text) || lblRuleGeneral.Text == ""
                 || string.IsNullOrEmpty(lblRuleParticular.Text) || lblRuleParticular.Text == "")
                 {
-                    //using (UserDialogs.Instance.Loading("Cargando", null, null, true, MaskType.Black))
-                    //{
-                        await Task.Delay(2000);
-                        AirportsController airportsController = new AirportsController();
-                        Airport_Detail airportId = await airportsController.verificationAirport(this.airport_Principal.ID_Aeropuerto);
-                        airport_Principal.Descargado = true;
-                        await App.SQLiteDB.UpdateAirportAsync(airport_Principal);
-                        #region Detalle del aeropuerto ->Airport
-                        lblName.Text = airportId.Aeropuerto.Nombre;
-                        lblName_OACI.Text = airportId.Aeropuerto.NombreOaci;
-                        lblName_ICAO.Text = airportId.Aeropuerto.NombreIcao;
-                        lblState_Airport.Text = airportId.Aeropuerto.EstadoAeropuerto;
-                        lblLanding.Text = airportId.Pistas.Pista.Replace("|", "\n");
-                        lblLandingLanding.Text = airportId.Pistas.Pista;
-                        lblElevation.Text = airportId.Pistas.Elevacion;
-                        lblSurface.Text = airportId.Pistas.SuperficiePista;
-                        lblAsdaRwy1.Text = airportId.Pistas.AsdaRwy1.ToString();
-                        lblAsdaRwy2.Text = airportId.Pistas.AsdaRwy2.ToString();
-                        lblTodaRwy1.Text = airportId.Pistas.TodaRwy1.ToString();
-                        lblTodaRwy2.Text = airportId.Pistas.TodaRwy2.ToString();
-                        lblToraRwy1.Text = airportId.Pistas.ToraRwy1.ToString();
-                        lblToraRwy2.Text = airportId.Pistas.ToraRwy2.ToString();
-                        lblLdaRwy1.Text = airportId.Pistas.LdaRwy1.ToString();
-                        lblLdaRwy2.Text = airportId.Pistas.LdaRwy2.ToString();
-                        NetworkAccess currentNetwork = Connectivity.NetworkAccess;
-                        if (currentNetwork == NetworkAccess.Internet)//if you have internet
+                    await Task.Delay(2000);
+                    AirportsController airportsController = new AirportsController();
+                    Airport_Detail airportId = await airportsController.verificationAirport(this.airport_Principal.ID_Aeropuerto);
+                    airport_Principal.Descargado = true;
+                    await App.SQLiteDB.UpdateAirportAsync(airport_Principal);
+                    #region Detalle del aeropuerto ->Airport
+                    lblName.Text = airportId.Aeropuerto.Nombre;
+                    lblName_OACI.Text = airportId.Aeropuerto.NombreOaci;
+                    lblName_ICAO.Text = airportId.Aeropuerto.NombreIcao;
+                    lblState_Airport.Text = airportId.Aeropuerto.EstadoAeropuerto;
+                    lblLanding.Text = airportId.Pistas.Pista.Replace("|", "\n");
+                    lblLandingLanding.Text = airportId.Pistas.Pista;
+                    lblElevation.Text = airportId.Pistas.Elevacion;
+                    lblSurface.Text = airportId.Pistas.SuperficiePista;
+                    lblAsdaRwy1.Text = airportId.Pistas.AsdaRwy1.ToString();
+                    lblAsdaRwy2.Text = airportId.Pistas.AsdaRwy2.ToString();
+                    lblTodaRwy1.Text = airportId.Pistas.TodaRwy1.ToString();
+                    lblTodaRwy2.Text = airportId.Pistas.TodaRwy2.ToString();
+                    lblToraRwy1.Text = airportId.Pistas.ToraRwy1.ToString();
+                    lblToraRwy2.Text = airportId.Pistas.ToraRwy2.ToString();
+                    lblLdaRwy1.Text = airportId.Pistas.LdaRwy1.ToString();
+                    lblLdaRwy2.Text = airportId.Pistas.LdaRwy2.ToString();
+                    NetworkAccess currentNetwork = Connectivity.NetworkAccess;
+                    if (currentNetwork == NetworkAccess.Internet)//if you have internet
                     {
                         gridContainer.IsVisible = false;
+                        if (!Application.Current.Properties.ContainsKey(TooltipShownKey2))
+                        {
+                            Application.Current.Properties[TooltipShownKey2] = true;
+
+                            if (Parent != null)
+                            {
+                                tooltipFrame.Scale = 2;
+                                tooltipFrame.Opacity = 1;
+                                tooltipFrame.IsVisible = true;
+
+                                var animationIn = new Animation(v => tooltipFrame.Scale = v, 0, 1, Easing.SpringOut);
+
+                                animationIn.Commit(this, "TooltipAnimationIn2", length: AnimationDuration, finished: (d, b) => tooltipFrame.Scale = 1);
+
+                                var fadeOutTimer = new Timer(FadeOutTimerCallback, null, DelayDuration, Timeout.Infinite);
+                            }
+                        }
                         frameDetalleAeropuerto.IsVisible = true;
+                        stckFondo.IsVisible = true;
                         frameDetallePista.IsVisible = true;
-                        frameDistanciaPista.IsVisible = true;
                         frameFrecuencias.IsVisible = true;
                         frameAvisoNavegantes.IsVisible = true;
-                        frameContacto.IsVisible = true;
                         frameCaracteristicasEspeciales.IsVisible = true;
                         frameMeteorologia.IsVisible = true;
                         frameDocumento.IsVisible = true;
+                        
                         var metar = new HtmlWebViewSource();
-                            var ruta = "'https://metar-taf.com/es/embed-js/" + airportId.Aeropuerto.NombreOaci + "?target=TItlKBUP'";
-                            metar.Html = @"<html><head></head><body><div class='row justify-content-center align-items-center'><a id='metartaf-TItlKBUP' style='font-size:18px; font-weight:500; color:#000; width:300px; height:435px; display:block'>METAR </a></div>
+                        var ruta = "'https://metar-taf.com/es/embed-js/" + airportId.Aeropuerto.NombreOaci + "?target=TItlKBUP'";
+                        metar.Html = @"<html><head></head><body><div class='row justify-content-center align-items-center'><a id='metartaf-TItlKBUP' style='font-size:18px; font-weight:500; color:#000; width:300px; height:435px; display:block'>METAR </a></div>
                                   <script async defer crossorigin='anonymous' src=" + ruta + "></script></body></html>";
-                            frame.Source = metar;
-                            no_internet.SetValue(IsVisibleProperty, false);
+                        frame.Source = metar;
+                        no_internet.SetValue(IsVisibleProperty, false);
 
-                       
-                        }
-                        else
-                        {
-                            frame.SetValue(IsVisibleProperty, false);
-                        }
-                        #endregion
-                        #region Frecuencias del aeropuerto ->Airport_Frequencie
+
+                    }
+                    else
+                    {
+                        frame.SetValue(IsVisibleProperty, false);
+                    }
+                    #endregion
+                    #region Frecuencias del aeropuerto ->Airport_Frequencie
+                    foreach (Airport_Frequencies fre in airportId.Frecuencias)
+                    {
+                        lblFrequency.Text = string.Join("\n", airportId.Frecuencias.Select(c => c.FrecuenciaFrecuencia));
+                    }
+                    foreach (Airport_Frequencies fre in airportId.Frecuencias)
+                    {
+                        lblFrequencyFrequency.Text = string.Join("\n", airportId.Frecuencias.Select(c => c.TipoFrecuencia));
+                    }
+                    #endregion
+                    // Valid if the value is empty
+                    #region Notams del aeropuerto -> Notams
+                    if ((airportId.NOTAMS != null) && airportId.NOTAMS.Any())
+                    {
+                        // Same Method Join to concatenates the elements
                         foreach (Airport_Frequencies fre in airportId.Frecuencias)
                         {
-                            lblFrequency.Text = string.Join("\n", airportId.Frecuencias.Select(c => c.FrecuenciaFrecuencia));
+                            lblNotam.Text = string.Join("\n", airportId.NOTAMS.Select(c => c.NotamNotam + "\nFecha Creacion: " + c.FechaCreacion
+                             + "\nFecha Vencimiento: " + c.FechaVencimiento + "\nUltima Actualizacion: " + c.UltimaActualizacion + "\nUsuario Creacion: " + c.UsuarioCreacion + "\nUsuario Actualizacion: " + c.UsuarioActualizacion + "\n"));
                         }
-                        foreach (Airport_Frequencies fre in airportId.Frecuencias)
-                        {
-                            lblFrequencyFrequency.Text = string.Join("\n", airportId.Frecuencias.Select(c => c.TipoFrecuencia));
-                        }
-                        #endregion
-                        // Valid if the value is empty
-                        #region Notams del aeropuerto -> Notams
-                        if ((airportId.NOTAMS != null) && airportId.NOTAMS.Any())
-                        {
-                            // Same Method Join to concatenates the elements
-                            foreach (Airport_Frequencies fre in airportId.Frecuencias)
-                            {
-                                lblNotam.Text = string.Join("\n", airportId.NOTAMS.Select(c => c.NotamNotam + "\nFecha Creacion: " + c.FechaCreacion
-                                 + "\nFecha Vencimiento: " + c.FechaVencimiento + "\nUltima Actualizacion: " + c.UltimaActualizacion + "\nUsuario Creacion: " + c.UsuarioCreacion + "\nUsuario Actualizacion: " + c.UsuarioActualizacion + "\n"));
-                            }
-                        }
-                        else
-                        {
-                            lblNotam.Text = "No disponible";
-                        }
-                        #endregion
-                        #region Contacto ->Contact
-                        lblAddress.Text = airportId.Contacto.DireccionExacta;
-                        lblPhoneF.Text = airportId.Contacto.NumeroTelefono1;
-                        lblPhoneS.Text = (string)airportId.Contacto.NumeroTelefono2;
-                        lblSchedule.Text = airportId.Contacto.Horario;
-                        #endregion
-                        #region Carcateristicas ->Features
-                        lblPublic.Text = airportId.Caracteristicas_Especiales.Publico.ToString() == "1" ? "Si" : "No";
-                        lblControl.Text = airportId.Caracteristicas_Especiales.Controlado.ToString() == "1" ? "Si" : "No";
-                        lblGeoCoordinates.Text = airportId.Caracteristicas_Especiales.Coordenada;
-                        lblInfoTower.Text = airportId.Caracteristicas_Especiales.InfoTorre;
-                        lblInfoGeneral.Text = airportId.Caracteristicas_Especiales.InfoGeneral;
-                        lblAirSpace.Text = airportId.Caracteristicas_Especiales.EspacioAereo;
-                        lblFuel.Text = airportId.Caracteristicas_Especiales.Combustible;
-                        lblRuleGeneral.Text = airportId.Caracteristicas_Especiales.NormaGeneral;
-                        lblRuleParticular.Text = airportId.Caracteristicas_Especiales.NormaParticular;
-                        #endregion
-                   //}
+                    }
+                    else
+                    {
+                        lblNotam.Text = "No disponible";
+                    }
+                    #endregion
+                    #region Contacto ->Contact
+                    lblAddress.Text = airportId.Contacto.DireccionExacta;
+                    lblPhoneF.Text = airportId.Contacto.NumeroTelefono1;
+                    lblPhoneS.Text = (string)airportId.Contacto.NumeroTelefono2;
+                    lblSchedule.Text = airportId.Contacto.Horario;
+                    #endregion
+                    #region Carcateristicas ->Features
+                    lblPublic.Text = airportId.Caracteristicas_Especiales.Publico.ToString() == "1" ? "Si" : "No";
+                    lblControl.Text = airportId.Caracteristicas_Especiales.Controlado.ToString() == "1" ? "Si" : "No";
+                    lblGeoCoordinates.Text = airportId.Caracteristicas_Especiales.Coordenada;
+                    lblInfoTower.Text = airportId.Caracteristicas_Especiales.InfoTorre;
+                    lblInfoGeneral.Text = airportId.Caracteristicas_Especiales.InfoGeneral;
+                    lblAirSpace.Text = airportId.Caracteristicas_Especiales.EspacioAereo;
+                    lblFuel.Text = airportId.Caracteristicas_Especiales.Combustible;
+                    lblRuleGeneral.Text = airportId.Caracteristicas_Especiales.NormaGeneral;
+                    lblRuleParticular.Text = airportId.Caracteristicas_Especiales.NormaParticular;
+                    #endregion
+                    
                 }
                 else
                 {
@@ -201,14 +220,15 @@ namespace CIIADHEL_CR
                         #region Archivos con internet
                         var client = new HttpClient();
                         var Stream = await client.GetStreamAsync("http://www.uvairlines.com/admin/resources/mroc.pdf");//url with http
-                        using (var memory = new MemoryStream()){
+                        using (var memory = new MemoryStream())
+                        {
                             await Stream.CopyToAsync(memory);
                             await CrossXamarinFormsSaveOpenPDFPackage.Current.SaveAndView("MROC.pdf", "application/pdf",
                             memory, PDFOpenContext.InApp);// use to open files
                         }
                         #endregion
                     }
-                    else 
+                    else
                     {
                         //recordatorio 
                         // pruebe el archivo con internet y lo descarga pior favor y luego usar sin internet!!!
@@ -238,7 +258,7 @@ namespace CIIADHEL_CR
                                 await stream.CopyToAsync(memorysteam);
                                 await CrossXamarinFormsSaveOpenPDFPackage.Current.SaveAndView("MROC.pdf", "application/pdf", memorysteam,
                                 PDFOpenContext.InApp);//use a nugget to open pdf files
-                            } 
+                            }
                         }
                         else
                         {
@@ -247,7 +267,7 @@ namespace CIIADHEL_CR
                         #endregion
                     }
                 }// if airport is not Juan SantaMaria
-                else if (this.airport_Principal.ID_Aeropuerto!= 23)
+                else if (this.airport_Principal.ID_Aeropuerto != 23)
                 {
                     await DialogService.ShowErrorAsync("Error", "No se encuentra el archivo", "OK");//display error
                 }
@@ -259,8 +279,25 @@ namespace CIIADHEL_CR
             catch (Exception ex)
             {
                 Console.WriteLine(ex);//error on console
-                await DialogService.ShowErrorAsync("Error","Error en los archivos","Ok");
+                await DialogService.ShowErrorAsync("Error", "Error en los archivos", "Ok");
             }
         }
+        //*******************************************************************************************************
+        #region metodo para desvanecer el tooltip
+        private void FadeOutTimerCallback(object state)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                var animationOut = new Animation(v => tooltipFrame.Opacity = v, 1, 0, Easing.Linear);
+
+                animationOut.Commit(this, "TooltipAnimationOut2", length: FadeOutDuration, finished: (d, b) =>
+                {
+                    tooltipFrame.Opacity = 0;
+                    tooltipFrame.IsVisible = false;
+                });
+            });
+        }
+        #endregion
+        //*******************************************************************************************************
     }
 }

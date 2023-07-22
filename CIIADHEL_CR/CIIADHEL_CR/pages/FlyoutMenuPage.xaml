@@ -5,11 +5,28 @@
              xmlns:models="clr-namespace:CIIADHEL_CR.models"
              xmlns:pages="clr-namespace:CIIADHEL_CR.pages"
              Title="FlyoutMenu" 
-             BackgroundColor="#424242">
-
+             >
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,1">
+            <GradientStop Color="#a19bde"
+                          Offset="0" />
+            <GradientStop Color="#818181"
+                          Offset="0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
     <StackLayout Margin="10,0" BackgroundColor="Transparent">
-
-        <ListView Margin="0,25,0,0" x:Name="listview" x:FieldModifier="public">
+        <Frame BackgroundColor="Transparent"
+               Margin="0,50,0,0"
+               >
+            <Label Text="Menú Principal"
+                   TextColor="White"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   />
+        </Frame>
+        <ListView Margin="5,15,0,0" x:Name="listview" x:FieldModifier="public">
             <ListView.ItemsSource>
                 <x:Array Type="{x:Type models:FlyoutItem}">
                     <models:FlyoutItem Title="Inicio" IconSource="home3.png" TargetPage="{x:Type pages:HomePage}" />
@@ -29,14 +46,13 @@
                             <Image Source="{Binding IconSource}" />
                             <Label Grid.Column="1" Text="{Binding Title}"
                                    VerticalOptions="Center"
-                                   TextColor="White" Margin="10,0,0,0" FontSize="Large"/>
+                                   TextColor="White" Margin="20,0,0,0" FontSize="Large"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-        <Frame BackgroundColor="#424242" HeightRequest="350" WidthRequest="170" HasShadow="False"  HorizontalOptions="Center" Padding="10">
+        <Frame BackgroundColor="Transparent" HeightRequest="600" WidthRequest="200" HasShadow="True"  HorizontalOptions="Center" Padding="10" Margin="0,0,0,180" CornerRadius="10">
             <Image Source="ciiadhel.png" Aspect="AspectFit" />
         </Frame>
 

@@ -2,6 +2,7 @@
 using CIIADHEL_CR.services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 namespace CIIADHEL_CR.controllers
@@ -23,7 +24,7 @@ namespace CIIADHEL_CR.controllers
                             throw new Exception("Error en el sqlLite");//display error on screen
                         }
                         // Get new airport data
-                        return await getAnAirport(id);
+                        return await getAnAirportOnline(id);
                     }
                     else
                     {
@@ -37,7 +38,7 @@ namespace CIIADHEL_CR.controllers
                                 throw new Exception("Error en el sqlLite");//display error on screen
                             }
                         }
-                        return await getAnAirport(id); // Get new airport data
+                        return await getAnAirportOnline(id); // Get new airport data
                     }
                 }
                 else
@@ -46,7 +47,7 @@ namespace CIIADHEL_CR.controllers
                     {
                         throw new Exception("Aeropuerto no existe");//show error on screen
                     }
-                    return await getAnAirport(id);// Get new airport data
+                    return await getAnAirportOnline(id);// Get new airport data
                 }
             }
             catch (Exception ex)
@@ -125,6 +126,22 @@ namespace CIIADHEL_CR.controllers
 
                 // Desearialize data
                 return desealizeAirportSQLite(airportLite);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+        //*************************************************************************
+        #region Obtiene aeropuerto -->getAnAirportOnline(int id)
+        public async Task<Airport_Detail> getAnAirportOnline(int id)
+        {
+            try
+            {
+                Airport_Detail airport_Detail = await AirportServices.getAnAirportById(id);
+
+                return airport_Detail;
             }
             catch (Exception ex)
             {
@@ -245,12 +262,12 @@ namespace CIIADHEL_CR.controllers
 
                 for (int i = 0; i <= frequencies.Length - 2; i++)
                 {
-                    _Frequencies.Add(new Airport_Frequencies()
-                    {
+                        _Frequencies.Add(new Airport_Frequencies()
+                        {
                         FrecuenciaFrecuencia = frequencies[i],
                         TipoFrecuencia = typeFrequencies[i]
-                    });
-                }
+                        });
+                    }
 
                 List<Airport_NOTAMS> _Notams = new List<Airport_NOTAMS>();
                 string[] notam = airportLite.Notam.Split(',');

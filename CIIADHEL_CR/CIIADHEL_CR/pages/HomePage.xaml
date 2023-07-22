@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CIIADHEL_CR.pages.HomePage"
              xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
-             x:Class="CIIADHEL_CR.pages.HomePage">
+             >
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0"
                              EndPoint="1,1">
@@ -35,6 +36,64 @@
                 <!-- Use keyup-->
             </SearchBar>
         </Frame>
+        <Frame BackgroundColor="Gray"
+               BorderColor="White"
+               CornerRadius="5"
+               Padding="0,8,0,8"
+               Margin="10,10,10,10"
+               x:Name="tooltipFrame"
+               IsVisible="false">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Image Source="download.png"
+                       WidthRequest="30"
+                       HeightRequest="30"
+                       Grid.Column="3" />
+                <Label Grid.Column="0"
+                       Text="      Descarga información sobre aeropuertos y&#10;       añádelos a tus favoritos&#10;"
+                       TextColor="White"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+                <Image Source="favorite_ok.png"
+                       WidthRequest="40"
+                       HeightRequest="40"
+                       Margin="0,0,0,0"
+                       Grid.Column="4" />
+            </Grid>
+        </Frame>
+        <Grid x:Name="gridBuscarAeropuerto"
+              Margin="110,150,110,0"
+              HeightRequest="300">
+            <StackLayout>
+                <Frame VerticalOptions="Center"
+                       Margin="-80,-30,-80,30"
+                       BackgroundColor="#424242"
+                       CornerRadius="8"
+                       Padding="30,30,30,180"
+                       BorderColor="White"
+                       Opacity="0.75">
+                    <Label Text="No se encontraron resultados&#10;Busca por nombre ICAO/OACI o nombre aeropuerto."
+                           VerticalOptions="Center"
+                           TextColor="White"
+                           FontSize="24"
+                           FontFamily="Lato"
+                           FontAttributes="Bold"/>
+                </Frame>
+                <lottie:AnimationView x:Name="buscandoAeropuerto"
+                                      Animation="buscandoAeropuerto.lottie"
+                                      AutoPlay="True"
+                                      RepeatMode="Infinite"
+                                      WidthRequest="100"
+                                      HeightRequest="130"
+                                      VerticalOptions="FillAndExpand"
+                                      HorizontalOptions="FillAndExpand"
+                                      Margin="0,-170,0,0" />
+            </StackLayout>
+        </Grid>
         <Grid x:Name="gridContainer"
               Margin="110,200,110,0"
               HeightRequest="300">
@@ -71,17 +130,17 @@
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="75"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="0"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0"
                                        Grid.Row="2"
-                                       Text="{ Binding Nombre_OACI }"
+                                       Text="{Binding Nombre_OACI}"
                                        FontSize="16"
                                        FontFamily="LatoB"
                                        HorizontalTextAlignment="Center"
@@ -89,51 +148,97 @@
                                 <Label Grid.Column="1"
                                        Grid.ColumnSpan="6"
                                        Grid.Row="0"
-                                       Text="{ Binding Nombre }"
+                                       Text="{Binding Nombre}"
                                        FontSize="15"
                                        FontFamily="LatoB"
                                        TextColor="White"
                                        HorizontalTextAlignment="End" />
-                                <Label Grid.Column="2"
+                                <Label Grid.Column="1"
                                        Grid.Row="1"
                                        FontSize="13"
                                        FontFamily="LatoB"
                                        TextColor="Gray"
-                                       Text="DIRECCIÓN" />
-                                <Label Grid.Column="2"
+                                       Text="DIRECCIÓN"
+                                       />
+                                <Label Grid.Column="1"
                                        Grid.Row="2"
                                        FontSize="12"
                                        FontFamily="Lato"
                                        TextColor="White"
-                                       Text="{Binding Direccion_Exacta }" />
-                                <Label Grid.Column="2"
+                                       Text="{Binding Direccion_Exacta}"
+                                      />
+                                <Label Grid.Column="1"
                                        Grid.Row="3"
                                        FontSize="13"
                                        FontFamily="LatoB"
                                        TextColor="Gray"
-                                       Text="ESTADO" />
-                                <Label Grid.Column="2"
+                                       Text="ESTADO"
+                                       />
+                                <Label Grid.Column="1"
                                        Grid.Row="4"
                                        FontSize="12"
                                        FontFamily="Lato"
                                        TextColor="White"
-                                       Text="{ Binding Estado_Aeropuerto}" />
+                                       Text="{Binding Estado_Aeropuerto}"
+                                       />
+                                <Label Grid.Column="1"
+                                       Grid.Row="5"
+                                       FontSize="13"
+                                       FontFamily="LatoB"
+                                       TextColor="Gray"
+                                       Text="COORDENADAS"
+                                       />
+                                <Label x:Name="lblFrecuency"
+                                       Grid.Column="1"
+                                       Grid.Row="6"
+                                       FontSize="12"
+                                       FontFamily="Lato"
+                                       TextColor="White"
+                                       Text="{Binding Coordenada}"
+                                       />
+                                <Label Grid.Column="1"
+                                       Grid.Row="7"
+                                       FontSize="13"
+                                       FontFamily="LatoB"
+                                       TextColor="Gray"
+                                       Text="PISTA" />
+                                <StackLayout Orientation="Horizontal"
+                                             Grid.Column="1"
+                                             Grid.Row="8">
+                                    <Label
+                                           Grid.Row="8"
+                                           FontSize="12"
+                                           FontFamily="Lato"
+                                           TextColor="White"
+                                           Text="{Binding Valor1}" />
+                                    <Image Grid.Row="10"
+                                           Source="{Binding PistaImagen}"
+                                           WidthRequest="80"
+                                           HeightRequest="20" />
+                                    <Label
+                                           Grid.Row="9"
+                                           FontSize="12"
+                                           FontFamily="Lato"
+                                           TextColor="White"
+                                           Text="{Binding Valor2}" />
+                                    
+                                </StackLayout>
                                 <ImageButton x:Name="BtnDescarga"
                                              WidthRequest="20"
                                              HeightRequest="20"
                                              BackgroundColor="Transparent"
-                                             Source="{ Binding Imagen } "
+                                             Source="{Binding Imagen}"
                                              Grid.Column="5"
-                                             Grid.Row="4"
+                                             Grid.Row="3"
                                              CommandParameter="{Binding}"
                                              Clicked="Button_Clicked" />
                                 <ImageButton x:Name="Favorito"
                                              WidthRequest="20"
                                              HeightRequest="20"
                                              BackgroundColor="Transparent"
-                                             Source="{ Binding ImagenFavorito } "
+                                             Source="{Binding ImagenFavorito}"
                                              Grid.Column="6"
-                                             Grid.Row="4"
+                                             Grid.Row="3"
                                              CommandParameter="{Binding}"
                                              Clicked="Favorito_Clicked" />
                             </Grid>
