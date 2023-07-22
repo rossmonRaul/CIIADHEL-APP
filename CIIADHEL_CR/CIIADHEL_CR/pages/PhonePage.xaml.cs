@@ -70,7 +70,7 @@ namespace CIIADHEL_CR.pages
             return Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(popup);
         }
 
-        private async void Phone_Clicked(object sender, EventArgs e)
+        private void Phone_Clicked(object sender, EventArgs e)
         {
             try
             {
@@ -103,11 +103,16 @@ namespace CIIADHEL_CR.pages
 
                     if (!Regex.IsMatch(identifier, pattern))
                     {
-                        btn.Source = "loadingPhoneCancel.png";
+                        //btn.Source = "loadingPhoneCancel.png";
+                        //lblError.Text = "El número proporcionado no es válido";
+                        //await Task.Delay(500);
+                        //btn.Source = "log.png";
+                        btn.IsVisible = false;
+                        lottie.IsVisible = true;
                         lblError.Text = "El número proporcionado no es válido";
-                        await Task.Delay(500);
-                        btn.Source = "log.png";
-                    }                
+
+
+                    }
                     //else if (!identifier.ToCharArray().All(Char.IsDigit))
                     //{
 
@@ -187,13 +192,17 @@ namespace CIIADHEL_CR.pages
             if (string.IsNullOrEmpty(identifier))
             {
                 lottie.IsVisible = true;
-               Phone.IsVisible = false;
+             
+                Phone.IsVisible = false;
             }
             else
             {
                 lottie.IsVisible = false;
+               
                 Phone.IsVisible = true;
+                
             }
+
         }
 
 

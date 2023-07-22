@@ -11,6 +11,11 @@
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
                 <Setter Property="Opacity" Value="0.1"/>
             </Style>
+           
         </ResourceDictionary>
+
+        <x:String x:Key="formatpista">{00|000}</x:String>
+                
+        
     </Application.Resources>
 </Application>

@@ -5,4 +5,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 	<color name="splash_background">#FFFFFF</color>
+	<color name="custom_green">#00FF00</color>
+	<color name="my_custom_background_color">#FF0000</color>
+	<color name="my_custom_text_color">#FFFFFF</color>
 </resources>
