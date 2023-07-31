@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                 xmlns:popups="http://rotorgames.com"
+                 x:Class="CIIADHEL_CR.Notams">
+    <popups:PopupPage.Animation>
+        <popups:MoveAnimation PositionIn="Bottom"
+                              PositionOut="Bottom"
+                              DurationIn="400"
+                              DurationOut="250"
+                              HasBackgroundAnimation="False" />
+    </popups:PopupPage.Animation>
+    <pancakeView:PancakeView CornerRadius="0"
+                             VerticalOptions="FillAndExpand"
+                             HorizontalOptions="FillAndExpand"
+                             Margin="0,0,0,0"
+                             Padding="0"
+                             IsClippedToBounds="True">
+        <pancakeView:PancakeView.Background>
+            <LinearGradientBrush StartPoint="0,0"
+                                 EndPoint="1,1">
+                <GradientStop Color="Transparent"
+                              Offset="0" />
+                <GradientStop Color="Transparent"
+                              Offset="1" 
+                              />
+            </LinearGradientBrush>
+        </pancakeView:PancakeView.Background>
+        <Frame BackgroundColor="#424242"
+               HasShadow="True">
+            <StackLayout Spacing="8">
+                <Frame BackgroundColor="#A8A8A8"
+                       Margin="0,20,0,0"
+                       HeightRequest="300"
+                       CornerRadius="20"
+                       VerticalOptions="FillAndExpand">
+                    <WebView x:Name="frameNotams"
+                             />
+                </Frame>
+                <Frame x:Name="frameNo_internet">
+                    <Image x:Name="no_internet"
+                           Source="nointernet.png"/>
+                </Frame>
+                <StackLayout Orientation="Horizontal"
+                             BackgroundColor="Transparent"
+                             HorizontalOptions="FillAndExpand">
+                    <Button Text="Salir"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            BackgroundColor="Transparent"
+                            Margin="30,0,0,0"
+                            Padding="30,0,0,0"
+                            WidthRequest="250"
+                            FontSize="18"
+                            Clicked="Button_Clicked" 
+                            BorderColor="White"/>
+                    <ImageButton Source="salir.png"
+                                 WidthRequest="35"
+                                 HeightRequest="10"
+                                 Margin="-80,0,0,0"
+                                 BackgroundColor="Transparent"
+                                 Clicked="Button_Clicked" />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+        
+    </pancakeView:PancakeView>
+</pages:PopupPage>

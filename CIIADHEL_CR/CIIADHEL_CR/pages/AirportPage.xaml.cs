@@ -16,6 +16,7 @@ using Plugin.XamarinFormsSaveOpenPDFPackage;
 using System.Net.Http;
 using Lottie.Forms;
 using System.Threading;
+using Rg.Plugins.Popup.Services;
 
 namespace CIIADHEL_CR
 {
@@ -70,7 +71,7 @@ namespace CIIADHEL_CR
                 || string.IsNullOrEmpty(lblLdaRwy2.Text) || lblLdaRwy2.Text == ""
                 || string.IsNullOrEmpty(lblFrequency.Text) || lblFrequency.Text == ""
                 || string.IsNullOrEmpty(lblFrequencyFrequency.Text) || lblFrequencyFrequency.Text == ""
-                || string.IsNullOrEmpty(lblNotam.Text) || lblNotam.Text == ""
+                //|| string.IsNullOrEmpty(lblNotam.Text) || lblNotam.Text == ""
                 || string.IsNullOrEmpty(lblAddress.Text) || lblAddress.Text == ""
                 || string.IsNullOrEmpty(lblPhoneF.Text) || lblPhoneF.Text == ""
                 || string.IsNullOrEmpty(lblPhoneS.Text) || lblPhoneS.Text == ""
@@ -136,7 +137,7 @@ namespace CIIADHEL_CR
                         frameCaracteristicasEspeciales.IsVisible = true;
                         frameMeteorologia.IsVisible = true;
                         frameDocumento.IsVisible = true;
-                        
+
                         var metar = new HtmlWebViewSource();
                         var ruta = "'https://metar-taf.com/es/embed-js/" + airportId.Aeropuerto.NombreOaci + "?target=TItlKBUP'";
                         metar.Html = @"<html><head></head><body><div class='row justify-content-center align-items-center'><a id='metartaf-TItlKBUP' style='font-size:18px; font-weight:500; color:#000; width:300px; height:435px; display:block'>METAR </a></div>
@@ -144,7 +145,10 @@ namespace CIIADHEL_CR
                         frame.Source = metar;
                         no_internet.SetValue(IsVisibleProperty, false);
 
-
+                        #region Notams del aeropuerto -> Notams
+                        var rutaNotam = string.Join("", airportId.NOTAMS.Select(c => c.NotamNotam));
+                        #endregion
+                        
                     }
                     else
                     {
@@ -163,19 +167,19 @@ namespace CIIADHEL_CR
                     #endregion
                     // Valid if the value is empty
                     #region Notams del aeropuerto -> Notams
-                    if ((airportId.NOTAMS != null) && airportId.NOTAMS.Any())
-                    {
-                        // Same Method Join to concatenates the elements
-                        foreach (Airport_Frequencies fre in airportId.Frecuencias)
-                        {
-                            lblNotam.Text = string.Join("\n", airportId.NOTAMS.Select(c => c.NotamNotam + "\nFecha Creacion: " + c.FechaCreacion
-                             + "\nFecha Vencimiento: " + c.FechaVencimiento + "\nUltima Actualizacion: " + c.UltimaActualizacion + "\nUsuario Creacion: " + c.UsuarioCreacion + "\nUsuario Actualizacion: " + c.UsuarioActualizacion + "\n"));
-                        }
-                    }
-                    else
-                    {
-                        lblNotam.Text = "No disponible";
-                    }
+                    //if ((airportId.NOTAMS != null) && airportId.NOTAMS.Any())
+                    //{
+                    //    // Same Method Join to concatenates the elements
+                    //    foreach (Airport_Frequencies fre in airportId.Frecuencias)
+                    //    {
+                    //        lblNotam.Text = string.Join("\n", airportId.NOTAMS.Select(c => c.NotamNotam + "\nFecha Creacion: " + c.FechaCreacion
+                    //         + "\nFecha Vencimiento: " + c.FechaVencimiento + "\nUltima Actualizacion: " + c.UltimaActualizacion + "\nUsuario Creacion: " + c.UsuarioCreacion + "\nUsuario Actualizacion: " + c.UsuarioActualizacion + "\n"));
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    lblNotam.Text = "No disponible";
+                    //}
                     #endregion
                     #region Contacto ->Contact
                     lblAddress.Text = airportId.Contacto.DireccionExacta;
@@ -194,7 +198,7 @@ namespace CIIADHEL_CR
                     lblRuleGeneral.Text = airportId.Caracteristicas_Especiales.NormaGeneral;
                     lblRuleParticular.Text = airportId.Caracteristicas_Especiales.NormaParticular;
                     #endregion
-                    
+
                 }
                 else
                 {
@@ -299,5 +303,15 @@ namespace CIIADHEL_CR
         }
         #endregion
         //*******************************************************************************************************
+        private async void OnShowPopupButtonClicked(object sender, EventArgs e)
+        {
+            AirportsController airportsController = new AirportsController();
+            Airport_Detail airportId = await airportsController.verificationAirport(this.airport_Principal.ID_Aeropuerto);
+            var rutaNotam = string.Join("", airportId.NOTAMS.Select(c => c.NotamNotam));
+
+            var notamsPage = new Notams(rutaNotam);
+            await PopupNavigation.Instance.PushAsync(notamsPage);
+        }
+
     }
 }

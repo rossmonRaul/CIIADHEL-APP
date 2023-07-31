@@ -5,14 +5,13 @@
              x:Class="CIIADHEL_CR.AirportPage"
              xmlns:controls="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit">
     <StackLayout BackgroundColor="#A8A8A8">
-        
         <ScrollView>
             <StackLayout>
                 <StackLayout Padding="0"
                              Margin="0"
                              HorizontalOptions="FillAndExpand"
                              x:Name="stckFondo">
-                    <Frame HeightRequest="224"
+                    <Frame HeightRequest="220"
                            BackgroundColor="#4486FF"
                            Padding="0"
                            Margin="0">
@@ -21,19 +20,6 @@
                                Margin="0" />
                     </Frame>
                 </StackLayout>
-                <Grid x:Name="gridContainer"
-                      Margin="110,200,110,0"
-                      HeightRequest="300">
-                    <StackLayout>
-                        <lottie:AnimationView x:Name="lottie"
-                                              Animation="avionLoader.json"
-                                              AutoPlay="True"
-                                              WidthRequest="300"
-                                              HeightRequest="300"
-                                              VerticalOptions="FillAndExpand"
-                                              HorizontalOptions="FillAndExpand" />
-                    </StackLayout>
-                </Grid>
                 <Frame BackgroundColor="Gray"
                        BorderColor="White"
                        CornerRadius="5"
@@ -47,14 +33,13 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="40" />
                         </Grid.ColumnDefinitions>
-                        
                         <Label Grid.Column="1"
                                Text="Visualiza aquí todos los detalles sobre el aeropuerto"
                                TextColor="White"
                                HorizontalOptions="Center"
-                               VerticalOptions="Center" 
+                               VerticalOptions="Center"
                                FontSize="15"
-                               FontFamily="LatoB"/>
+                               FontFamily="LatoB" />
                         <Image Source="about.png"
                                WidthRequest="40"
                                HeightRequest="30"
@@ -62,6 +47,20 @@
                                Grid.Column="2" />
                     </Grid>
                 </Frame>
+                <Grid x:Name="gridContainer"
+                      Margin="110,200,110,0"
+                      HeightRequest="300">
+                    <StackLayout>
+                        <lottie:AnimationView x:Name="lottie"
+                                              Animation="avionLoader.json"
+                                              AutoPlay="True"
+                                              WidthRequest="300"
+                                              HeightRequest="300"
+                                              VerticalOptions="FillAndExpand"
+                                              HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                </Grid>
+                
                 <controls:Expander>
                     <controls:Expander.Header>
                         <Frame Margin="0,0.1"
@@ -78,7 +77,7 @@
                                        FontSize="18"
                                        FontFamily="LatoB"
                                        Text="Detalle de aeropuerto"
-                                       Margin="20,0,0,0" />
+                                       Margin="40,0,0,0" />
                             </StackLayout>
                             
                         </Frame>
@@ -104,15 +103,8 @@
                                     <Label  TextColor="#F2F2F2"
                                             FontSize="15"
                                             x:Name="lblName_ICAO" />
-                                    
-                                    
-                                    
-                                    
-                                   
-                                    
                                 </StackLayout>
                             </Frame>
-
 
                             <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
                                 <StackLayout>
@@ -128,10 +120,6 @@
                                     <Label TextColor="#F2F2F2"
                                            FontSize="15"
                                            x:Name="lblName_OACI" />
-                                    
-                                    
-                                    
-                                    
                                 </StackLayout>
                             </Frame>
                             <Frame  Grid.Row="2"
@@ -239,7 +227,7 @@
                                        FontSize="18"
                                        FontFamily="LatoB"
                                        Text="Detalle de pista" 
-                                       Margin="10,0,0,0"/>
+                                       Margin="30,0,0,0"/>
                             </StackLayout>
                             
                         </Frame>
@@ -414,63 +402,15 @@
                                        FontSize="18"
                                        FontFamily="LatoB"
                                        Text="Frecuencias"
-                                       Margin="20,0,0,0" />
-                                
+                                       Margin="40,0,0,0" />
                             </StackLayout>
-                            
                         </Frame>
                     </controls:Expander.Header>
                     <controls:Expander.Content>
-                        <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
-                            <Grid.RowDefinitions>
-                                <RowDefinition  Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                                <StackLayout>
-                                    <Label TextColor="white" FontSize="18" FontAttributes="Bold">Frecuencia</Label>
-                                    <Label TextColor="white" FontSize="15" x:Name="lblFrequency"/>
-                                </StackLayout>
-                            </Frame>
-                            
-                            <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
-                                <StackLayout>
-                                    <Label TextColor="white" FontSize="18" FontAttributes="Bold">Tipo Frecuencia</Label>
-                                    <Label TextColor="white" FontSize="15" x:Name="lblFrequencyFrequency"/>
-                                </StackLayout>
-                            </Frame>
-                        </Grid>
-                    </controls:Expander.Content>
-                </controls:Expander>
-                <controls:Expander>
-                    <controls:Expander.Header>
-                        <Frame Margin="0,0.1"
-                               CornerRadius="0"
-                               BackgroundColor="#5a5a5a"
-                               x:Name="frameAvisoNavegantes">
-                            <StackLayout Orientation="Horizontal">
-                                <Image Source="notams.png"
-                                       WidthRequest="50"
-                                       HeightRequest="30"
-                                       Margin="0,0,3,0"
-                                       Grid.Column="1" />
-                                <Label TextColor="White"
-                                       FontSize="18"
-                                       FontFamily="LatoB"
-                                       Text="Notams"
-                                       Margin="10,0,0,0" />
-                            </StackLayout>
-                            
-                        </Frame>
-                    </controls:Expander.Header>
-                    <controls:Expander.Content>
-                        <Grid  BackgroundColor="Transparent"
-                               HorizontalOptions="FillAndExpand"
-                               ColumnSpacing="0"
-                               RowSpacing="0">
+                        <Grid BackgroundColor="Transparent"
+                              HorizontalOptions="FillAndExpand"
+                              ColumnSpacing="0"
+                              RowSpacing="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition  Height="Auto" />
                             </Grid.RowDefinitions>
@@ -485,10 +425,24 @@
                                 <StackLayout>
                                     <Label TextColor="white"
                                            FontSize="18"
-                                           FontAttributes="Bold">Notam</Label>
+                                           FontAttributes="Bold">Frecuencia</Label>
                                     <Label TextColor="white"
                                            FontSize="15"
-                                           x:Name="lblNotam" />
+                                           x:Name="lblFrequency" />
+                                </StackLayout>
+                            </Frame>
+                            <Frame Grid.Row="0"
+                                   Grid.Column="1"
+                                   BackgroundColor="Transparent"
+                                   BorderColor="Transparent"
+                                   VerticalOptions="FillAndExpand">
+                                <StackLayout>
+                                    <Label TextColor="white"
+                                           FontSize="18"
+                                           FontAttributes="Bold">Tipo Frecuencia</Label>
+                                    <Label TextColor="white"
+                                           FontSize="15"
+                                           x:Name="lblFrequencyFrequency" />
                                 </StackLayout>
                             </Frame>
                         </Grid>
@@ -510,7 +464,7 @@
                                        FontSize="18"
                                        FontFamily="LatoB"
                                        Text="Características especiales"
-                                       Margin="20,0,0,0" />
+                                       Margin="40,0,0,0" />
                             </StackLayout>
                             
                         </Frame>
@@ -546,7 +500,6 @@
                         </Grid>
                     </controls:Expander.Content>
                 </controls:Expander>
-
                 <controls:Expander>
                     <controls:Expander.Header>
                         <Frame Margin="0,0.1"
@@ -563,30 +516,70 @@
                                        FontSize="18"
                                        FontFamily="LatoB"
                                        Text="Meteorología"
-                                       Margin="20,0,0,0" />
+                                       Margin="40,0,0,0" />
                             </StackLayout>
-                            
                         </Frame>
                     </controls:Expander.Header>
                     <controls:Expander.Content>
-                        <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" >
+                        <Grid HorizontalOptions="FillAndExpand"
+                              ColumnSpacing="0"
+                              RowSpacing="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition  Height="*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-
-                            <Frame Grid.Row="0" Grid.Column="0" Margin="10" Padding="0" CornerRadius="10" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                            <StackLayout Padding="0" >
-                                    <WebView x:Name="frame" HeightRequest="460" WidthRequest="315"></WebView>
-                                    <Image x:Name="no_internet" Source="nointernet.png" />
+                            <Frame Grid.Row="0"
+                                   Grid.Column="0"
+                                   Margin="10"
+                                   Padding="0"
+                                   CornerRadius="10"
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalOptions="CenterAndExpand">
+                                <StackLayout Padding="0">
+                                    <WebView x:Name="frame"
+                                             HeightRequest="460"
+                                             WidthRequest="315"></WebView>
+                                    <Image x:Name="no_internet"
+                                           Source="nointernet.png" />
                                 </StackLayout>
                             </Frame>
                         </Grid>
                     </controls:Expander.Content>
                 </controls:Expander>
-
+                <controls:Expander>
+                    <controls:Expander.Header>
+                        <Frame Margin="0,0.1"
+                               CornerRadius="0"
+                               BackgroundColor="#5a5a5a"
+                               Padding="25,10,0,0"
+                               x:Name="frameAvisoNavegantes">
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="notams.png"
+                                           WidthRequest="32"
+                                           HeightRequest="10"/>
+                                    <Button Text="Notams"
+                                            FontSize="16"
+                                            FontFamily="LatoB"
+                                            TextColor="White"
+                                            Margin="-70,-10,0,0"
+                                            BackgroundColor="Transparent"
+                                            Padding="0,0,110,0"
+                                            HeightRequest="68"
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="FillAndExpand"
+                                            Clicked="OnShowPopupButtonClicked" />
+                                </StackLayout>
+                                
+                            </StackLayout>
+                        </Frame>
+                    </controls:Expander.Header>
+                    <controls:Expander.Content>
+                        <Label BackgroundColor="Transparent"></Label>
+                    </controls:Expander.Content>
+                </controls:Expander>
                 <controls:Expander>
                     <controls:Expander.Header>
                         <!-- Changes made by Olman-->
@@ -604,7 +597,7 @@
                                        FontSize="18"
                                        FontFamily="LatoB"
                                        Text="Documento"
-                                       Margin="10,0,0,0" />
+                                       Margin="30,0,0,0" />
                             </StackLayout>
                             
                         </Frame>
@@ -625,10 +618,10 @@
                             </Frame>
                         </Grid>
                     </controls:Expander.Content>
-                </controls:Expander>                       
+                </controls:Expander>
                 
-
             </StackLayout>
         </ScrollView>
+        
     </StackLayout>
 </ContentPage>
