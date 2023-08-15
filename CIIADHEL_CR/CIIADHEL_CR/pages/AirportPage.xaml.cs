@@ -28,16 +28,18 @@ namespace CIIADHEL_CR
         private const int AnimationDuration = 800;
         private const int FadeOutDuration = 6000;
         private const int DelayDuration = 4000;
+        private string base64file;
         public AirportPage(Airport_Principal airport_Principal)
         {
             this.airport_Principal = airport_Principal;
             InitializeComponent();
             Application.Current.Properties["ultimaPantalla"] = "airport";
             Application.Current.Properties["ultimoIDAirport"] = airport_Principal.ID_Aeropuerto.ToString();
+            
         }
         protected async override void OnAppearing()
         {
-            base.OnAppearing();
+            //base.OnAppearing();
             lottie.PlayAnimation();
             lottie.RepeatMode = RepeatMode.Infinite;
             lottie.Speed = 2.0f;
@@ -108,6 +110,23 @@ namespace CIIADHEL_CR
                     lblToraRwy2.Text = airportId.Pistas.ToraRwy2.ToString();
                     lblLdaRwy1.Text = airportId.Pistas.LdaRwy1.ToString();
                     lblLdaRwy2.Text = airportId.Pistas.LdaRwy2.ToString();
+                    if (airportId.Documento != null)
+                    
+                        {
+                            txtDocumento.IsVisible = true;
+
+                            await Task.Run(() =>
+                            {
+                                base64file = airportId.Documento.Contenido ?? "";
+                            });
+                        }
+                            else
+                        {
+                            txtDocumento.IsVisible = false;
+                            base64file = "";
+                         
+                    }
+                   
                     NetworkAccess currentNetwork = Connectivity.NetworkAccess;
                     if (currentNetwork == NetworkAccess.Internet)//if you have internet
                     {
@@ -211,79 +230,24 @@ namespace CIIADHEL_CR
             }
         }
         //**********************************************************************************************************************
-        // made by andreyszcr@gmail.com
+  
         private async void txtDocumento_Clicked(object sender, EventArgs e)
         {
-            try //validation 
+            try
             {
-                if (this.airport_Principal.ID_Aeropuerto == 23)//if aiport is sjo/Juan SantaMaria
+               
+                byte[] fileBytes = Convert.FromBase64String(base64file);
+
+                string tempFilePath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "temp.pdf");
+                File.WriteAllBytes(tempFilePath, fileBytes);
+                await Launcher.OpenAsync(new OpenFileRequest
                 {
-                    NetworkAccess currentNetwork = Connectivity.NetworkAccess;
-                    if (currentNetwork == NetworkAccess.Internet) //if you have internet
-                    {
-                        #region Archivos con internet
-                        var client = new HttpClient();
-                        var Stream = await client.GetStreamAsync("http://www.uvairlines.com/admin/resources/mroc.pdf");//url with http
-                        using (var memory = new MemoryStream())
-                        {
-                            await Stream.CopyToAsync(memory);
-                            await CrossXamarinFormsSaveOpenPDFPackage.Current.SaveAndView("MROC.pdf", "application/pdf",
-                            memory, PDFOpenContext.InApp);// use to open files
-                        }
-                        #endregion
-                    }
-                    else
-                    {
-                        //recordatorio 
-                        // pruebe el archivo con internet y lo descarga pior favor y luego usar sin internet!!!
-                        #region Abrir archivos sin conexion a Internet
-                        var costumeFileType = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>{
-                            //format on iphone 
-                            {DevicePlatform.iOS, new[] {"com.adobe.pdf"}},
-                            //format on android
-                            {DevicePlatform.Android, new[] {"application/pdf"}},
-                            // format on windows
-                            {DevicePlatform.UWP, new[] {".pdf"}},
-                            //format on tizen
-                            {DevicePlatform.Tizen, new[] {"*/*"}},
-                            //format on macbook 
-                            {DevicePlatform.macOS, new[] {"pdf"}}
-                        });
-                        var pickfile = await FilePicker.PickAsync(new PickOptions()// use to open files
-                        {
-                            FileTypes = costumeFileType,
-                            PickerTitle = "Pick an PDF"
-                        });
-                        if (pickfile != null)
-                        {
-                            var stream = await pickfile.OpenReadAsync();
-                            using (var memorysteam = new MemoryStream())
-                            {
-                                await stream.CopyToAsync(memorysteam);
-                                await CrossXamarinFormsSaveOpenPDFPackage.Current.SaveAndView("MROC.pdf", "application/pdf", memorysteam,
-                                PDFOpenContext.InApp);//use a nugget to open pdf files
-                            }
-                        }
-                        else
-                        {
-                            await DialogService.ShowErrorAsync("Error", "No se encuentra el archivo correspondiente", "Ok");//display error
-                        }
-                        #endregion
-                    }
-                }// if airport is not Juan SantaMaria
-                else if (this.airport_Principal.ID_Aeropuerto != 23)
-                {
-                    await DialogService.ShowErrorAsync("Error", "No se encuentra el archivo", "OK");//display error
-                }
-                else
-                {
-                    await DialogService.ShowErrorAsync("Error", "No se encuentra los archivos", "OK");//display error
-                }
+                    File = new ReadOnlyFile(tempFilePath)
+                });
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);//error on console
-                await DialogService.ShowErrorAsync("Error", "Error en los archivos", "Ok");
+                await DisplayAlert("Error", $"Error al abrir el PDF: {ex.Message}", "Aceptar");
             }
         }
         //*******************************************************************************************************

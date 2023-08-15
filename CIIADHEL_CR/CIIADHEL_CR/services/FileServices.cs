@@ -13,16 +13,17 @@ namespace CIIADHEL_CR.services
     public class FileServices
     {
         public static string url = "https://site--nuvian-api--lzg9n5zsl8j8.code.run/api/files";//url on heroku
+        public static string urlLocal = "http://localhost:3033/api/files";
         #region Get File Service
-        public string[] GetFileAsync(string Airportname)
+        public string[] GetFileAsync(int id)
         {
-            //validation made by Olman Sanchez zuniga
+          
             try
             {
                 using (var client = new System.Net.Http.HttpClient())
                 {
                     var task = Task.Run(async () => {
-                        return await client.GetAsync(url + "/file/" + Airportname);
+                        return await client.GetAsync(url + "/id/" + id);
                     });
                     HttpResponseMessage msj = task.Result;
                     if (msj.StatusCode == System.Net.HttpStatusCode.OK)
@@ -48,11 +49,11 @@ namespace CIIADHEL_CR.services
                     }
                     else if (msj.StatusCode == HttpStatusCode.NotFound)
                     {
-                        throw new Exception("No se encuentra el archivo en el aeropuerto" + Airportname);// Manage the error
+                        throw new Exception("No se encuentra el archivo en el aeropuerto" + id);
                     }
                     else
                     {
-                        throw new Exception("No se encuentra el archivo que estas buscando");// Manage the error
+                        throw new Exception("No se encuentra el archivo que estas buscando");
                     }
                 }
             }

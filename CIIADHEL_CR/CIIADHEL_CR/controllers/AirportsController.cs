@@ -220,6 +220,12 @@ namespace CIIADHEL_CR.controllers
                     Numero_Telefono1 = airport_Detail.Contacto.NumeroTelefono1,
                     Numero_Telefono2 = (string)airport_Detail.Contacto.NumeroTelefono2,
                     Horario = airport_Detail.Contacto.Horario,
+
+                    //*********************************************************************************
+                    nombre_pdf = airport_Detail.Documento.nombre_pdf,
+                    Extension= airport_Detail.Documento.Extension,
+                    Contenido = airport_Detail.Documento.Contenido
+
                 };
                 return await App.SQLiteDBAirports.SaveAirportAsync(airportLite, isNewData);
             }
@@ -315,6 +321,13 @@ namespace CIIADHEL_CR.controllers
                     Horario = airportLite.Horario
                 };
 
+                Airport_Documento doc = new Airport_Documento()
+                {
+                    nombre_pdf= airportLite.nombre_pdf,
+                    Extension=airportLite.Extension,
+                    Contenido=airportLite.Contenido
+                };
+
                 return new Airport_Detail()
                 {
                     Aeropuerto = airport,
@@ -322,7 +335,8 @@ namespace CIIADHEL_CR.controllers
                     Frecuencias = _Frequencies,
                     NOTAMS = _Notams,
                     Pistas = runways,
-                    Contacto = contact
+                    Contacto = contact,
+                    Documento=doc
                 };
             }
             catch (Exception ex)
@@ -331,5 +345,8 @@ namespace CIIADHEL_CR.controllers
             }
         }
         #endregion
+
+
+
     }
 }

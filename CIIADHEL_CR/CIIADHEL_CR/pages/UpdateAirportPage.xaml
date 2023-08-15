@@ -1215,15 +1215,15 @@
                                  HorizontalOptions="FillAndExpand">
                         <!--AQUI INICIA EL RECUADRO OTROS-->
                         <Frame  BackgroundColor="Gray"
-                                HeightRequest="928"
+                                HeightRequest="900"
                                 CornerRadius="25"
                                 Opacity=".4"></Frame>
                         <Frame  BackgroundColor="White"
-                                HeightRequest="960"
+                                HeightRequest="932"
                                 CornerRadius="20"
                                 HasShadow="True"
                                 Padding="0"
-                                Margin="0,-972,4, 4">
+                                Margin="0,-944,4, 4">
                             <StackLayout>
                                 <StackLayout Margin="15">
                                     <Label Text="Otros"
@@ -1649,20 +1649,89 @@
                                     <!--<Button x:Name="btnGuardar" Text="Modificar" TextColor="White" FontSize="15" BackgroundColor="#4486FF" HeightRequest="40" WidthRequest="300"
                                     Margin="4,25,4,0" HorizontalOptions="Center" CornerRadius="30"/>
                                 <Label/>-->
-                                    <Frame BackgroundColor="#1051A1"
+                                  
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </Grid>
+                <!--AQUI INICIA Documentos-->
+            <StackLayout
+                 Padding="0"
+                                 Margin="10,10,10,0"
+                                 HorizontalOptions="FillAndExpand">
+                
+                <Frame  BackgroundColor="Gray"
+                                HeightRequest="263"
+                                CornerRadius="25"
+                                Opacity=".4"></Frame>
+                <Frame  BackgroundColor="White"
+                                HeightRequest="295"
+                                CornerRadius="20"
+                                HasShadow="True"
+                                Padding="0"
+                                Margin="0,-307,4, 4">
+                    <StackLayout>
+
+
+                            <StackLayout Margin="15">
+
+                                <Label Text="Documentos"
+                                           TextColor="Black"
+                                           HorizontalOptions="CenterAndExpand"
+                                           FontSize="Large"
+                                           FontAttributes="Bold" />
+                        </StackLayout>
+                        <StackLayout Padding="0"
+                                             Margin="15,10">
+                            <StackLayout>
+                                <Label Text="Documentos"
+                                               TextColor="Black"
+                                               FontSize="Subtitle"
+                                               Margin="20,0,0,0"
+                                               VerticalOptions="FillAndExpand"
+                                               HorizontalOptions="Start" />
+                            </StackLayout>
+                            <Frame BackgroundColor="Transparent"
+                                           BorderColor="DarkGray"
+                                           Padding="0"
+                                           HorizontalOptions="FillAndExpand"
+                                           CornerRadius="30">
+
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Button Clicked="VerPdf_Clicked" BackgroundColor="Transparent" HorizontalOptions="End">
+                                        <Button.ImageSource>
+                                            <FileImageSource File="pdf.png" />
+                                        </Button.ImageSource>
+                                    </Button>
+
+                                    <Label x:Name="lblPDF" Text=""  TextColor="black"
+                                                               FontAttributes="None"
+                                          
+                                           VerticalOptions="CenterAndExpand"/>
+                                    <Button Clicked="CargarPDF_Clicked" BackgroundColor="transparent" VerticalOptions="End" HorizontalOptions="EndAndExpand" >
+                                              <Button.ImageSource>
+                                        <FileImageSource File="buscar.png" />
+                                        </Button.ImageSource>
+                                    </Button>
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame BackgroundColor="#1051A1"
                                            CornerRadius="30"
                                            HasShadow="True"
                                            Padding="1"
                                            Margin="4,25,4,25">
-                                        <Frame.Triggers>
-                                            <DataTrigger TargetType="Frame"
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame"
                                                          Binding="{Binding Source={x:Reference btnGuardar}, Path=IsPressed}"
                                                          Value="True">
-                                                <Setter Property="BackgroundColor"
+                                        <Setter Property="BackgroundColor"
                                                         Value="#7D737F" />
-                                            </DataTrigger>
-                                        </Frame.Triggers>
-                                        <Button Text="Modificar"
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                                <Button Text="Modificar"
                                                 x:Name="btnGuardar"
                                                 Clicked="BtnGuardar_Clicked"
                                                 TextColor="White"
@@ -1673,13 +1742,13 @@
                                                 Opacity=".9"
                                                 HorizontalOptions="FillAndExpand"
                                                 VerticalOptions="FillAndExpand" />
-                                    </Frame>
-                                </StackLayout>
-                            </StackLayout>
-                        </Frame>
+                            </Frame>
+
+                        </StackLayout>
                     </StackLayout>
-                </Grid>
-                <Frame BackgroundColor="#1051A1"
+                </Frame>
+            </StackLayout>
+            <Frame BackgroundColor="#1051A1"
                        Padding="1"
                        Margin="0,-30,0,0">
                     <Frame.Triggers>

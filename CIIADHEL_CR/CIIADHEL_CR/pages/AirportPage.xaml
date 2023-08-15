@@ -61,7 +61,7 @@
                     </StackLayout>
                 </Grid>
                 
-                <controls:Expander>
+                <controls:Expander x:Name="Expander1">
                     <controls:Expander.Header>
                         <Frame Margin="0,0.1"
                                CornerRadius="0"
@@ -81,7 +81,7 @@
                             </StackLayout>
                             
                         </Frame>
-                    </controls:Expander.Header>
+                    </controls:Expander.Header >
                     <controls:Expander.Content>
                         <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0">
                             <Grid.RowDefinitions>
@@ -212,7 +212,7 @@
                     </controls:Expander.Content>
                 </controls:Expander>
                 <controls:Expander>
-                    <controls:Expander.Header>
+                    <controls:Expander.Header >
                         <Frame Margin="0,0.1"
                                CornerRadius="0"
                                BackgroundColor="#5a5a5a"
@@ -613,6 +613,7 @@
 
                             <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"  BorderColor="Transparent" VerticalOptions="FillAndExpand">
                                 <StackLayout>
+                                    
                                     <Button x:Name="txtDocumento" Text="Descargar"  Clicked="txtDocumento_Clicked" BackgroundColor="#blue" TextColor="White" FontFamily="LatoB" CornerRadius="30"></Button>
                                 </StackLayout>
                             </Frame>
