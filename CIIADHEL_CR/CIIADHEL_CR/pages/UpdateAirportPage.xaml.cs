@@ -9,7 +9,11 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Collections.Generic;
 using Lottie.Forms;
-
+using Xamarin.Forms.Shapes;
+using Xamarin.Essentials;
+using System.IO;
+using System.Reflection;
+using System.Text;
 
 namespace CIIADHEL_CR.pages
 {
@@ -50,6 +54,8 @@ namespace CIIADHEL_CR.pages
             pickerEstado.ItemsSource = estado1;
 
             Application.Current.Properties["ultimaPantalla"] = "update";
+
+            //txtcontenido.IsVisible= true;
         }
 
         protected async override void OnAppearing()
@@ -263,6 +269,22 @@ namespace CIIADHEL_CR.pages
                     txtNormas_Generales.Text = airportId.Caracteristicas_Especiales.NormaGeneral;
                     txtNormas_Particulares.Text = airportId.Caracteristicas_Especiales.NormaParticular;
                     txtNOTAMS.Text = string.Join("\n", airportId.NOTAMS.Select(c => c.NotamNotam));
+                    if (airportId.Documento != null)
+                    {
+                        await Task.Run(() =>
+                        {
+                            base64File = airportId.Documento.Contenido ?? "";
+                            lblPDF.Text = airportId.Documento.nombre_pdf ?? ""; 
+                        });
+                       
+                    }
+                    else
+                    {
+                       
+                        base64File = "";
+                        lblPDF.Text = "";
+
+                    }
                 }
 
                 else
@@ -279,7 +301,7 @@ namespace CIIADHEL_CR.pages
         private bool isProcessing = false;
         private void BtnGuardar_Clicked(object sender, EventArgs e)
 
-        {
+          {
             if (isProcessing)
                 return;
 
@@ -369,10 +391,10 @@ namespace CIIADHEL_CR.pages
                         {
                             await DisplayAlert("Advertencia", "El campo Información General es obligatorio", "OK");
                         }
-                        else if (String.IsNullOrWhiteSpace(txtTelefono1.Text))
-                        {
-                            await DisplayAlert("Advertencia", "El campo Telefono 1 es obligatorio", "OK");
-                        }
+                        //else if (String.IsNullOrWhiteSpace(txtTelefono1.Text))
+                        //{
+                        //    await DisplayAlert("Advertencia", "El campo Telefono 1 es obligatorio", "OK");
+                        //}
                         else if (String.IsNullOrWhiteSpace(txtTelefono2.Text))
                         {
                             await DisplayAlert("Advertencia", "El campo Telefono 2 es obligatorio", "OK");
@@ -397,8 +419,18 @@ namespace CIIADHEL_CR.pages
                             var estadoSeleccionado = pickerEstado.SelectedItem as Airport_Update;
                             var espacioAereoSeleccionado = pickerEspacioAereo.SelectedItem as Airport_Update;
                             var SuperficieSeleccionado = pickerSuperficie.SelectedItem as Airport_Update;
-
-
+                            string nombreCompleto = lblPDF.Text;
+                            if (string.IsNullOrEmpty(base64File))
+                            {
+                                byte[] noDisponibleBytes = Encoding.UTF8.GetBytes("No disponible");
+                                base64File = Convert.ToBase64String(noDisponibleBytes);
+                            }
+                            if (string.IsNullOrEmpty(nombreCompleto))
+                            {
+                                nombreCompleto = "No disponible";
+                            }
+                            var Punto = nombreCompleto.IndexOf('.');
+                            int PuntoUltimo = nombreCompleto.LastIndexOf('.');
 
                             Airport_Update airportX = new Airport_Update
                             {
@@ -437,9 +469,28 @@ namespace CIIADHEL_CR.pages
                                 TORA_Rwy_1 = Convert.ToInt16(txtTORA_RWAY_1.Text),
                                 TORA_Rwy_2 = Convert.ToInt16(txtTORA_RWAY_2.Text),
                                 LDA_Rwy_1 = Convert.ToInt16(txtLDA_RWAY_1.Text),
-                                LDA_Rwy_2 = Convert.ToInt16(txtLDA_RWAY_2.Text)
+                                LDA_Rwy_2 = Convert.ToInt16(txtLDA_RWAY_2.Text),
+                                nombre_pdf = nombreCompleto,
+                                Extension = "pdf",
+                               Contenido = base64File
+
                             };
                             #region "validations"
+
+                            if (string.IsNullOrEmpty(airportX.nombre_pdf))
+                            {
+                                airportX.nombre_pdf = "No disponible";
+                            }
+
+                            // Validación de Extension
+                            if (string.IsNullOrEmpty(airportX.Extension))
+                            {
+                                airportX.Extension = "No disponible";
+                            }
+
+
+
+
                             if (airportX.ATIS == "No disponible" || airportX.ATIS == "")
                             {
                                 airportX.ATIS = "0.00";
@@ -466,7 +517,7 @@ namespace CIIADHEL_CR.pages
                             //storage the list of frequencies and the list of type_frequencies in two array
                             string[] Data_FrecPut = string.Join("\n", airportId.Frecuencias.Select(c => c.FrecuenciaFrecuencia)).Split(Convert.ToChar("\n"));
                             string[] Data_FrecPut2 = string.Join("\n", airportId.Frecuencias.Select(c => c.TipoFrecuencia)).Split(Convert.ToChar("\n"));
-                            string[] Ejecutables = new string[6];
+                            string[] Ejecutables = new string[7];
                             #region "Data validation"
 
                             if ((airportX.Nombre_OACI) != (airportId.Aeropuerto.NombreOaci) || (airportX.NombreICAO) != (airportId.Aeropuerto.NombreIcao) ||
@@ -566,6 +617,20 @@ namespace CIIADHEL_CR.pages
                             else
                             {
                                 Ejecutables[5] = "0";
+                            }
+
+
+                            if (airportId.Documento == null ||
+                            !string.Equals(airportX.Contenido, airportId.Documento.Contenido) ||
+                            !string.Equals(airportX.nombre_pdf, airportId.Documento.nombre_pdf) ||
+                            !string.Equals(airportX.Extension, airportId.Documento.Extension))
+                            {
+                                Ejecutables[6] = "7";
+                            }
+
+                            else
+                            {
+                                Ejecutables[6] = "0";
                             }
                             #endregion
                             if (await AirportServices.PutAirportAsync(string.Join("", Ejecutables), airportX.ID_Aeropuerto, airportX) == 1)
@@ -868,6 +933,77 @@ namespace CIIADHEL_CR.pages
                 LblHfinal.IsVisible = true;
             }
 ;
+        }
+        private string base64File;
+        private async void CargarPDF_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                //txtcontenido.Text = string.Empty;
+                lblPDF.Text = string.Empty;
+               
+             
+                FileResult fileResult = await FilePicker.PickAsync(new PickOptions
+                {
+                    FileTypes = FilePickerFileType.Pdf,
+                    PickerTitle = "Selecciona un archivo PDF"
+                });
+
+                if (fileResult != null)
+                {
+                    try
+                    {
+                        string nombreArchivo = System.IO.Path.GetFileName(fileResult.FileName);
+                        string extensionArchivo = System.IO.Path.GetExtension(nombreArchivo);
+
+
+                        using (Stream stream = await fileResult.OpenReadAsync())
+                        using (MemoryStream memoryStream = new MemoryStream())
+                        {
+                            await stream.CopyToAsync(memoryStream);
+                            byte[] fileBytes = memoryStream.ToArray();
+                            base64File = Convert.ToBase64String(fileBytes);
+
+                           
+                            lblPDF.Text = nombreArchivo;
+                         
+
+                        }
+
+                        await DisplayAlert("Éxito", $"Nombre: {nombreArchivo}\nExtensión: {extensionArchivo}", "Aceptar");
+                    }
+                    catch (Exception ex)
+                    {
+                        await DisplayAlert("Error", $"Error: {ex.Message}", "Aceptar");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Error: {ex.Message}", "Aceptar");
+            }
+        }
+
+
+
+        private async void VerPdf_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                byte[] fileBytes = Convert.FromBase64String(base64File);
+
+                string tempFilePath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "temp.pdf");
+                File.WriteAllBytes(tempFilePath, fileBytes);
+                await Launcher.OpenAsync(new OpenFileRequest
+                {
+                    File = new ReadOnlyFile(tempFilePath)
+                });
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Error al abrir el PDF: {ex.Message}", "Aceptar");
+            }
         }
 
 

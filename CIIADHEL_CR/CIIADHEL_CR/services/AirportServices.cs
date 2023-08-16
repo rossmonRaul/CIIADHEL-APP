@@ -19,6 +19,10 @@ namespace CIIADHEL_CR.services
         private static string _url = @"https://site--nuvian-api--lzg9n5zsl8j8.code.run/api/airports";
         // changes made by andreyszcr@gmail.com
         private static string urlfind = "https://site--nuvian-api--lzg9n5zsl8j8.code.run/api/airports/search";
+
+        private static string _urlLocal = "http://localhost:3033/api/airports";
+
+
         #region obtiene el identificador -->getFavoritebyIdentificador(string Identificador)
         public async static Task<List<Airport_Favorite>> getFavoritebyIdentificador(string Identificador)
         {
@@ -282,7 +286,7 @@ namespace CIIADHEL_CR.services
             {
                 // Call a end-point for get all airports
                 HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.GetAsync(_url + "/id/" + id);
+                HttpResponseMessage response = await client.GetAsync(_urlLocal + "/id/" + id);
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     // Get data and create airports lists.
@@ -373,7 +377,7 @@ namespace CIIADHEL_CR.services
         {
             try
             {
-                Uri RequestUri = new Uri(_url + "/update/" + Ejecutables + "/" + ID_Aeropuerto);
+                Uri RequestUri = new Uri(_urlLocal + "/update/" + Ejecutables + "/" + ID_Aeropuerto);
                 var client = new HttpClient();
                 var json = JsonConvert.SerializeObject(airport_Data);
                 var contentJson = new StringContent(json, Encoding.UTF8, "application/json");
@@ -394,7 +398,8 @@ namespace CIIADHEL_CR.services
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                throw new Exception("Error updating Airports");
+                //throw new Exception("Error updating Airports");
+                throw new Exception("Error updating Airports: " + ex.Message);
             }
         }
         #endregion

@@ -43,6 +43,9 @@ namespace CIIADHEL_CR.models
         public string Numero_Telefono1 { get; set; }
         public string Numero_Telefono2 { get; set; }
         public string Horario { get; set; }
+        public string nombre_pdf { get; set; }
+        public string Extension { get; set; }
+        public string Contenido { get; set; }
 
     }
 

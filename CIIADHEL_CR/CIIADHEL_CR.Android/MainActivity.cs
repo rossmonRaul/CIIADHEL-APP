@@ -29,5 +29,7 @@ namespace CIIADHEL_CR.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
+
     }
 }

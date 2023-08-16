@@ -45,9 +45,13 @@
         public string Horario { get; set; }
         public string Usario { get; set; }
 
+        public string nombre_pdf { get; set; }
+        public string Extension { get; set; }
+        public string Contenido { get; set; }
 
 
-       public long IdEspacioAereo{ get; set; }
+
+        public long IdEspacioAereo{ get; set; }
        public string NameEspacioAereo { get; set; }
 
         public long IdCombustibles { get; set; }

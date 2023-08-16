@@ -26,6 +26,9 @@ namespace CIIADHEL_CR.models
         [JsonProperty("Contacto")]
         public Airport_Contact Contacto { get; set; }
 
+        [JsonProperty("Documentos_pdf")]
+        public Airport_Documento Documento { get; set; }
+
     }
 
     public partial class Airport_Detail
