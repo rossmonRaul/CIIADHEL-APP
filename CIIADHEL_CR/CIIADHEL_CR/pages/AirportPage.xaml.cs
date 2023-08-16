@@ -38,79 +38,80 @@ namespace CIIADHEL_CR
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            lottie.PlayAnimation();
-            lottie.RepeatMode = RepeatMode.Infinite;
-            lottie.Speed = 2.0f;
-            frameDetalleAeropuerto.IsVisible = false;
-            frameDetallePista.IsVisible = false;
-            frameFrecuencias.IsVisible = false;
-            frameAvisoNavegantes.IsVisible = false;
-            frameCaracteristicasEspeciales.IsVisible = false;
-            frameMeteorologia.IsVisible = false;
-            frameDocumento.IsVisible = false;
-            stckFondo.IsVisible = false;
             //made by andreyszcr@gmail.com
             try
             {
-                //if texbox are empty or clean so 
-                if (string.IsNullOrEmpty(lblName.Text) || lblName.Text == ""
-                || string.IsNullOrEmpty(lblName_OACI.Text) || lblName_OACI.Text == ""
-                || string.IsNullOrEmpty(lblName_ICAO.Text) || lblName_ICAO.Text == ""
-                || string.IsNullOrEmpty(lblState_Airport.Text) || lblState_Airport.Text == ""
-                || string.IsNullOrEmpty(lblLanding.Text) || lblLanding.Text == ""
-                || string.IsNullOrEmpty(lblLandingLanding.Text) || lblLandingLanding.Text == ""
-                || string.IsNullOrEmpty(lblElevation.Text) || lblElevation.Text == ""
-                || string.IsNullOrEmpty(lblSurface.Text) || lblSurface.Text == ""
-                || string.IsNullOrEmpty(lblAsdaRwy1.Text) || lblAsdaRwy1.Text == ""
-                || string.IsNullOrEmpty(lblAsdaRwy2.Text) || lblAsdaRwy2.Text == ""
-                || string.IsNullOrEmpty(lblTodaRwy1.Text) || lblTodaRwy1.Text == ""
-                || string.IsNullOrEmpty(lblTodaRwy2.Text) || lblTodaRwy2.Text == ""
-                || string.IsNullOrEmpty(lblToraRwy1.Text) || lblToraRwy1.Text == ""
-                || string.IsNullOrEmpty(lblToraRwy2.Text) || lblToraRwy2.Text == ""
-                || string.IsNullOrEmpty(lblLdaRwy1.Text) || lblLdaRwy1.Text == ""
-                || string.IsNullOrEmpty(lblLdaRwy2.Text) || lblLdaRwy2.Text == ""
-                || string.IsNullOrEmpty(lblFrequency.Text) || lblFrequency.Text == ""
-                || string.IsNullOrEmpty(lblFrequencyFrequency.Text) || lblFrequencyFrequency.Text == ""
-                //|| string.IsNullOrEmpty(lblNotam.Text) || lblNotam.Text == ""
-                || string.IsNullOrEmpty(lblAddress.Text) || lblAddress.Text == ""
-                || string.IsNullOrEmpty(lblPhoneF.Text) || lblPhoneF.Text == ""
-                || string.IsNullOrEmpty(lblPhoneS.Text) || lblPhoneS.Text == ""
-                || string.IsNullOrEmpty(lblSchedule.Text) || lblSchedule.Text == ""
-                || string.IsNullOrEmpty(lblPublic.Text) || lblPublic.Text == ""
-                || string.IsNullOrEmpty(lblControl.Text) || lblControl.Text == ""
-                || string.IsNullOrEmpty(lblGeoCoordinates.Text) || lblGeoCoordinates.Text == ""
-                || string.IsNullOrEmpty(lblInfoTower.Text) || lblInfoTower.Text == ""
-                || string.IsNullOrEmpty(lblInfoGeneral.Text) || lblInfoGeneral.Text == ""
-                || string.IsNullOrEmpty(lblAirSpace.Text) || lblAirSpace.Text == ""
-                || string.IsNullOrEmpty(lblFuel.Text) || lblFuel.Text == ""
-                || string.IsNullOrEmpty(lblRuleGeneral.Text) || lblRuleGeneral.Text == ""
-                || string.IsNullOrEmpty(lblRuleParticular.Text) || lblRuleParticular.Text == "")
+                lottie.PlayAnimation();
+                lottie.RepeatMode = RepeatMode.Infinite;
+                lottie.Speed = 2.0f;
+                frameDetalleAeropuerto.IsVisible = false;
+                frameDetallePista.IsVisible = false;
+                frameFrecuencias.IsVisible = false;
+                frameAvisoNavegantes.IsVisible = false;
+                frameCaracteristicasEspeciales.IsVisible = false;
+                frameMeteorologia.IsVisible = false;
+                frameDocumento.IsVisible = false;
+                stckFondo.IsVisible = false;
+                NetworkAccess currentNetwork = Connectivity.NetworkAccess;
+                if (currentNetwork == NetworkAccess.Internet)//if you have internet
                 {
-                    await Task.Delay(2000);
-                    AirportsController airportsController = new AirportsController();
-                    Airport_Detail airportId = await airportsController.verificationAirport(this.airport_Principal.ID_Aeropuerto);
-                    airport_Principal.Descargado = true;
-                    await App.SQLiteDB.UpdateAirportAsync(airport_Principal);
-                    #region Detalle del aeropuerto ->Airport
-                    lblName.Text = airportId.Aeropuerto.Nombre;
-                    lblName_OACI.Text = airportId.Aeropuerto.NombreOaci;
-                    lblName_ICAO.Text = airportId.Aeropuerto.NombreIcao;
-                    lblState_Airport.Text = airportId.Aeropuerto.EstadoAeropuerto;
-                    lblLanding.Text = airportId.Pistas.Pista.Replace("|", "\n");
-                    lblLandingLanding.Text = airportId.Pistas.Pista;
-                    lblElevation.Text = airportId.Pistas.Elevacion;
-                    lblSurface.Text = airportId.Pistas.SuperficiePista;
-                    lblAsdaRwy1.Text = airportId.Pistas.AsdaRwy1.ToString();
-                    lblAsdaRwy2.Text = airportId.Pistas.AsdaRwy2.ToString();
-                    lblTodaRwy1.Text = airportId.Pistas.TodaRwy1.ToString();
-                    lblTodaRwy2.Text = airportId.Pistas.TodaRwy2.ToString();
-                    lblToraRwy1.Text = airportId.Pistas.ToraRwy1.ToString();
-                    lblToraRwy2.Text = airportId.Pistas.ToraRwy2.ToString();
-                    lblLdaRwy1.Text = airportId.Pistas.LdaRwy1.ToString();
-                    lblLdaRwy2.Text = airportId.Pistas.LdaRwy2.ToString();
-                    NetworkAccess currentNetwork = Connectivity.NetworkAccess;
-                    if (currentNetwork == NetworkAccess.Internet)//if you have internet
+                    //if texbox are empty or clean so 
+                    if (string.IsNullOrEmpty(lblName.Text) || lblName.Text == ""
+                    || string.IsNullOrEmpty(lblName_OACI.Text) || lblName_OACI.Text == ""
+                    || string.IsNullOrEmpty(lblName_ICAO.Text) || lblName_ICAO.Text == ""
+                    || string.IsNullOrEmpty(lblState_Airport.Text) || lblState_Airport.Text == ""
+                    || string.IsNullOrEmpty(lblLanding.Text) || lblLanding.Text == ""
+                    || string.IsNullOrEmpty(lblLandingLanding.Text) || lblLandingLanding.Text == ""
+                    || string.IsNullOrEmpty(lblElevation.Text) || lblElevation.Text == ""
+                    || string.IsNullOrEmpty(lblSurface.Text) || lblSurface.Text == ""
+                    || string.IsNullOrEmpty(lblAsdaRwy1.Text) || lblAsdaRwy1.Text == ""
+                    || string.IsNullOrEmpty(lblAsdaRwy2.Text) || lblAsdaRwy2.Text == ""
+                    || string.IsNullOrEmpty(lblTodaRwy1.Text) || lblTodaRwy1.Text == ""
+                    || string.IsNullOrEmpty(lblTodaRwy2.Text) || lblTodaRwy2.Text == ""
+                    || string.IsNullOrEmpty(lblToraRwy1.Text) || lblToraRwy1.Text == ""
+                    || string.IsNullOrEmpty(lblToraRwy2.Text) || lblToraRwy2.Text == ""
+                    || string.IsNullOrEmpty(lblLdaRwy1.Text) || lblLdaRwy1.Text == ""
+                    || string.IsNullOrEmpty(lblLdaRwy2.Text) || lblLdaRwy2.Text == ""
+                    || string.IsNullOrEmpty(lblFrequency.Text) || lblFrequency.Text == ""
+                    || string.IsNullOrEmpty(lblFrequencyFrequency.Text) || lblFrequencyFrequency.Text == ""
+                    //|| string.IsNullOrEmpty(lblNotam.Text) || lblNotam.Text == ""
+                    || string.IsNullOrEmpty(lblAddress.Text) || lblAddress.Text == ""
+                    || string.IsNullOrEmpty(lblPhoneF.Text) || lblPhoneF.Text == ""
+                    || string.IsNullOrEmpty(lblPhoneS.Text) || lblPhoneS.Text == ""
+                    || string.IsNullOrEmpty(lblSchedule.Text) || lblSchedule.Text == ""
+                    || string.IsNullOrEmpty(lblPublic.Text) || lblPublic.Text == ""
+                    || string.IsNullOrEmpty(lblControl.Text) || lblControl.Text == ""
+                    || string.IsNullOrEmpty(lblGeoCoordinates.Text) || lblGeoCoordinates.Text == ""
+                    || string.IsNullOrEmpty(lblInfoTower.Text) || lblInfoTower.Text == ""
+                    || string.IsNullOrEmpty(lblInfoGeneral.Text) || lblInfoGeneral.Text == ""
+                    || string.IsNullOrEmpty(lblAirSpace.Text) || lblAirSpace.Text == ""
+                    || string.IsNullOrEmpty(lblFuel.Text) || lblFuel.Text == ""
+                    || string.IsNullOrEmpty(lblRuleGeneral.Text) || lblRuleGeneral.Text == ""
+                    || string.IsNullOrEmpty(lblRuleParticular.Text) || lblRuleParticular.Text == "")
                     {
+                        await Task.Delay(2000);
+                        AirportsController airportsController = new AirportsController();
+                        Airport_Detail airportId = await airportsController.verificationAirport(this.airport_Principal.ID_Aeropuerto);
+                        airport_Principal.Descargado = true;
+                        await App.SQLiteDB.UpdateAirportAsync(airport_Principal);
+                        #region Detalle del aeropuerto ->Airport
+                        lblName.Text = airportId.Aeropuerto.Nombre;
+                        lblName_OACI.Text = airportId.Aeropuerto.NombreOaci;
+                        lblName_ICAO.Text = airportId.Aeropuerto.NombreIcao;
+                        lblState_Airport.Text = airportId.Aeropuerto.EstadoAeropuerto;
+                        lblLanding.Text = airportId.Pistas.Pista.Replace("|", "\n");
+                        lblLandingLanding.Text = airportId.Pistas.Pista;
+                        lblElevation.Text = airportId.Pistas.Elevacion;
+                        lblSurface.Text = airportId.Pistas.SuperficiePista;
+                        lblAsdaRwy1.Text = airportId.Pistas.AsdaRwy1.ToString();
+                        lblAsdaRwy2.Text = airportId.Pistas.AsdaRwy2.ToString();
+                        lblTodaRwy1.Text = airportId.Pistas.TodaRwy1.ToString();
+                        lblTodaRwy2.Text = airportId.Pistas.TodaRwy2.ToString();
+                        lblToraRwy1.Text = airportId.Pistas.ToraRwy1.ToString();
+                        lblToraRwy2.Text = airportId.Pistas.ToraRwy2.ToString();
+                        lblLdaRwy1.Text = airportId.Pistas.LdaRwy1.ToString();
+                        lblLdaRwy2.Text = airportId.Pistas.LdaRwy2.ToString();
+
                         gridContainer.IsVisible = false;
                         if (!Application.Current.Properties.ContainsKey(TooltipShownKey2))
                         {
@@ -144,65 +145,53 @@ namespace CIIADHEL_CR
                                   <script async defer crossorigin='anonymous' src=" + ruta + "></script></body></html>";
                         frame.Source = metar;
                         no_internet.SetValue(IsVisibleProperty, false);
-
-                        #region Notams del aeropuerto -> Notams
-                        var rutaNotam = string.Join("", airportId.NOTAMS.Select(c => c.NotamNotam));
                         #endregion
-                        
-                    }
-                    else
-                    {
-                        frame.SetValue(IsVisibleProperty, false);
-                    }
-                    #endregion
-                    #region Frecuencias del aeropuerto ->Airport_Frequencie
-                    foreach (Airport_Frequencies fre in airportId.Frecuencias)
-                    {
-                        lblFrequency.Text = string.Join("\n", airportId.Frecuencias.Select(c => c.FrecuenciaFrecuencia));
-                    }
-                    foreach (Airport_Frequencies fre in airportId.Frecuencias)
-                    {
-                        lblFrequencyFrequency.Text = string.Join("\n", airportId.Frecuencias.Select(c => c.TipoFrecuencia));
-                    }
-                    #endregion
-                    // Valid if the value is empty
-                    #region Notams del aeropuerto -> Notams
-                    //if ((airportId.NOTAMS != null) && airportId.NOTAMS.Any())
-                    //{
-                    //    // Same Method Join to concatenates the elements
-                    //    foreach (Airport_Frequencies fre in airportId.Frecuencias)
-                    //    {
-                    //        lblNotam.Text = string.Join("\n", airportId.NOTAMS.Select(c => c.NotamNotam + "\nFecha Creacion: " + c.FechaCreacion
-                    //         + "\nFecha Vencimiento: " + c.FechaVencimiento + "\nUltima Actualizacion: " + c.UltimaActualizacion + "\nUsuario Creacion: " + c.UsuarioCreacion + "\nUsuario Actualizacion: " + c.UsuarioActualizacion + "\n"));
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    lblNotam.Text = "No disponible";
-                    //}
-                    #endregion
-                    #region Contacto ->Contact
-                    lblAddress.Text = airportId.Contacto.DireccionExacta;
-                    lblPhoneF.Text = airportId.Contacto.NumeroTelefono1;
-                    lblPhoneS.Text = (string)airportId.Contacto.NumeroTelefono2;
-                    lblSchedule.Text = airportId.Contacto.Horario;
-                    #endregion
-                    #region Carcateristicas ->Features
-                    lblPublic.Text = airportId.Caracteristicas_Especiales.Publico.ToString() == "1" ? "Si" : "No";
-                    lblControl.Text = airportId.Caracteristicas_Especiales.Controlado.ToString() == "1" ? "Si" : "No";
-                    lblGeoCoordinates.Text = airportId.Caracteristicas_Especiales.Coordenada;
-                    lblInfoTower.Text = airportId.Caracteristicas_Especiales.InfoTorre;
-                    lblInfoGeneral.Text = airportId.Caracteristicas_Especiales.InfoGeneral;
-                    lblAirSpace.Text = airportId.Caracteristicas_Especiales.EspacioAereo;
-                    lblFuel.Text = airportId.Caracteristicas_Especiales.Combustible;
-                    lblRuleGeneral.Text = airportId.Caracteristicas_Especiales.NormaGeneral;
-                    lblRuleParticular.Text = airportId.Caracteristicas_Especiales.NormaParticular;
-                    #endregion
+                        #region Frecuencias del aeropuerto ->Airport_Frequencie
+                        foreach (Airport_Frequencies fre in airportId.Frecuencias)
+                        {
+                            lblFrequency.Text = string.Join("\n", airportId.Frecuencias.Select(c => c.FrecuenciaFrecuencia));
+                        }
+                        foreach (Airport_Frequencies fre in airportId.Frecuencias)
+                        {
+                            lblFrequencyFrequency.Text = string.Join("\n", airportId.Frecuencias.Select(c => c.TipoFrecuencia));
+                        }
+                        #endregion
+                        #region Contacto ->Contact
+                        lblAddress.Text = airportId.Contacto.DireccionExacta;
+                        lblPhoneF.Text = airportId.Contacto.NumeroTelefono1;
+                        lblPhoneS.Text = (string)airportId.Contacto.NumeroTelefono2;
+                        lblSchedule.Text = airportId.Contacto.Horario;
+                        #endregion
+                        #region Carcateristicas ->Features
+                        lblPublic.Text = airportId.Caracteristicas_Especiales.Publico.ToString() == "1" ? "Si" : "No";
+                        lblControl.Text = airportId.Caracteristicas_Especiales.Controlado.ToString() == "1" ? "Si" : "No";
+                        lblGeoCoordinates.Text = airportId.Caracteristicas_Especiales.Coordenada;
+                        lblInfoTower.Text = airportId.Caracteristicas_Especiales.InfoTorre;
+                        lblInfoGeneral.Text = airportId.Caracteristicas_Especiales.InfoGeneral;
+                        lblAirSpace.Text = airportId.Caracteristicas_Especiales.EspacioAereo;
+                        lblFuel.Text = airportId.Caracteristicas_Especiales.Combustible;
+                        lblRuleGeneral.Text = airportId.Caracteristicas_Especiales.NormaGeneral;
+                        lblRuleParticular.Text = airportId.Caracteristicas_Especiales.NormaParticular;
+                        #endregion
 
+                    }
                 }
                 else
                 {
-                    UserDialogs.Instance.HideLoading();//hide loader
+                    lottie.PlayAnimation();
+                    lottie.RepeatMode = RepeatMode.Infinite;
+                    lottie.Speed = 2.0f;
+                    await Task.Delay(3000);
+                    gridContainer.IsVisible = false;
+                    frameDetalleAeropuerto.IsVisible = true;
+                    stckFondo.IsVisible = true;
+                    frameDetallePista.IsVisible = true;
+                    frameFrecuencias.IsVisible = true;
+                    frameAvisoNavegantes.IsVisible = true;
+                    frameCaracteristicasEspeciales.IsVisible = true;
+                    frameMeteorologia.IsVisible = true;
+                    frameDocumento.IsVisible = true;
+                    frame.SetValue(IsVisibleProperty, false);
                 }
             }
             catch (Exception ex)
@@ -305,13 +294,32 @@ namespace CIIADHEL_CR
         //*******************************************************************************************************
         private async void OnShowPopupButtonClicked(object sender, EventArgs e)
         {
-            AirportsController airportsController = new AirportsController();
-            Airport_Detail airportId = await airportsController.verificationAirport(this.airport_Principal.ID_Aeropuerto);
-            var rutaNotam = string.Join("", airportId.NOTAMS.Select(c => c.NotamNotam));
+            btnNotams.IsEnabled = false;
+            NetworkAccess currentNetwork = Connectivity.NetworkAccess;
+            if (currentNetwork == NetworkAccess.Internet)//if you have internet
+            {
+                AirportsController airportsController = new AirportsController();
+                Airport_Detail airportId = await airportsController.verificationAirport(this.airport_Principal.ID_Aeropuerto);
+                var rutaNotam = string.Join("", airportId.NOTAMS.Select(c => c.NotamNotam));
 
-            var notamsPage = new Notams(rutaNotam);
-            await PopupNavigation.Instance.PushAsync(notamsPage);
+                var notamsPage = new Notams(rutaNotam);
+                notamsPage.PopupClosed += NotamsPage_PopupClosed;
+                await PopupNavigation.Instance.PushAsync(notamsPage);
+            }
+            else
+            {
+                var rutaNotam = "";
+                var notamsPage = new Notams(rutaNotam);
+                notamsPage.PopupClosed += NotamsPage_PopupClosed;
+                await PopupNavigation.Instance.PushAsync(notamsPage);
+            }  
         }
+
+        private void NotamsPage_PopupClosed(object sender, EventArgs e)
+        {
+            btnNotams.IsEnabled = true;
+        }
+
 
     }
 }

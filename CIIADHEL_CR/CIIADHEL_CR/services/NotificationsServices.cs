@@ -10,12 +10,14 @@ namespace CIIADHEL_CR.services
     public class NotificationsServices
     {
         private static string _url = @"https://site--nuvian-api--lzg9n5zsl8j8.code.run/api/notifications"; //url on heroku
+
         #region Guardar el token -->saveToken(string identifier, string token)
         public async static Task<bool> saveToken(string identifier, string token)
         {
             try
             {
-                var JsonDate = new { identifier = identifier, token = token };//json var
+                var user_creation = 0;
+                var JsonDate = new { identifier, token, user_creation };//json var
                 string json = JsonConvert.SerializeObject(JsonDate);
                 HttpClient client = new HttpClient();  // Call a end-point for get all airports
                 HttpResponseMessage response = await client.PostAsync(_url + "/tokens", new StringContent(

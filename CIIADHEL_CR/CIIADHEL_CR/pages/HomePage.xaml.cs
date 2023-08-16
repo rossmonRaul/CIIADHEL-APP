@@ -39,23 +39,34 @@ namespace CIIADHEL_CR.pages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            lottie.PlayAnimation();
-            lottie.RepeatMode = RepeatMode.Infinite;
-            lottie.Speed = 2.0f;
-            gridBuscarAeropuerto.IsVisible = false;
             try //validations 
             {
                 NetworkAccess currentNetwork = Connectivity.NetworkAccess;
                 if (currentNetwork == NetworkAccess.Internet)//if you have internet
                 {
-                    
+                    lottie.PlayAnimation();
+                    lottie.RepeatMode = RepeatMode.Infinite;
+                    lottie.Speed = 2.0f;
+                    gridBuscarAeropuerto.IsVisible = false;
                     if (await updateAirports() != false)
                     {
                         lstAirposts.ItemsSource = null;
                     }
                     AirportServices airportServices = new AirportServices();
                     List<Airport_Principal> airport_Principals = await App.SQLiteDB.GetAllAirportAsync();
-
+                    //method to get whole airports
+                    List<Identifier> identifiers = await App.SQLiteDBIdentifier.getIdentifier();// mehtod to get Identifier code
+                    string id = identifiers[0].Telephone_Number;
+                    List<Airport_Favorite> Recuperados = await AirportServices.getFavoritebyIdentificador(id);
+                    foreach (var airport in Recuperados)
+                    {
+                        Airport_Principal aux = airport_Principals.Where(a => a.ID_Aeropuerto == airport.ID_Aeropuerto).FirstOrDefault();
+                        if (aux != null)
+                        {
+                            aux.Favorito = true;
+                            await App.SQLiteDB.UpdateAirportAsync(aux);
+                        }
+                    }
                     if (airport_Principals.Count == 0)
                     {
                         // Show message error in screen
@@ -92,6 +103,13 @@ namespace CIIADHEL_CR.pages
                 }
                 else
                 {
+                    lottie.PlayAnimation();
+                    lottie.RepeatMode = RepeatMode.Infinite;
+                    lottie.Speed = 2.0f;
+                    gridBuscarAeropuerto.IsVisible = false;
+                    await Task.Delay(3000);
+                    gridContainer.IsVisible = false;
+                    
                     List<Airport_Principal> airport_Principals = await App.SQLiteDB.GetAllAirportAsync();
                     if (airport_Principals.Count == 0)
                     {
@@ -137,6 +155,7 @@ namespace CIIADHEL_CR.pages
                 throw ex;
             }
         }
+
         #endregion
         //*******************************************************************************************************
         private async void Button_Clicked(object sender, EventArgs e)
@@ -210,7 +229,7 @@ namespace CIIADHEL_CR.pages
                 //******************************************************
                 if (currentNetwork == NetworkAccess.Internet)
                 {
-                    bool Validate = await AirportServices.getValidateExist(ob.ID_Aeropuerto, id);//method to validate if exists 
+                    bool Validate = await AirportServices.getValidateExist(ob.ID_Aeropuerto,id);//method to validate if exists 
                     if (Validate)
                     {
                         ImageButton btn = (ImageButton)sender;
@@ -233,6 +252,8 @@ namespace CIIADHEL_CR.pages
                             Numero_Telefono1 = ob.Numero_Telefono1,
                             Favorito = false,
                             Descargado = ob.Descargado,
+                            Valor1 = ob.Valor1,
+                            Valor2 = ob.Valor2,
                         };
                         #endregion
                         await App.SQLiteDB.UpdateAirportAsync(airport);  // Save status of favorite 
@@ -263,6 +284,8 @@ namespace CIIADHEL_CR.pages
                             Numero_Telefono1 = ob.Numero_Telefono1,
                             Favorito = true,
                             Descargado = ob.Descargado,
+                            Valor1 = ob.Valor1,
+                            Valor2 = ob.Valor2,
                         };
                         #endregion
                         await App.SQLiteDB.UpdateAirportAsync(airports); // Save status of favorite 
@@ -287,7 +310,7 @@ namespace CIIADHEL_CR.pages
                 {
                     await DisplayAlert("Alerta", "No hay conexion a internet", "OK"); //diaplay an error connection
                 }
-            }
+            }       
             catch (Exception ex)
             {
                 Console.WriteLine(ex);//show error on console

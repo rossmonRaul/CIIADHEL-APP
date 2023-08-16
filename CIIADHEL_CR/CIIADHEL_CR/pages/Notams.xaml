@@ -36,7 +36,8 @@
                        Margin="0,20,0,0"
                        HeightRequest="300"
                        CornerRadius="20"
-                       VerticalOptions="FillAndExpand">
+                       VerticalOptions="FillAndExpand"
+                       x:Name="frameNotamsContainer">
                     <WebView x:Name="frameNotams"
                              />
                 </Frame>

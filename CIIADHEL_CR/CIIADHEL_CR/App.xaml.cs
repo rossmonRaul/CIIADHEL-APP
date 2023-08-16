@@ -25,7 +25,7 @@ namespace CIIADHEL_CR
         {
             InitializeComponent();
             Current = this;
-            this.td();
+            //this.td();
             //MainPage = new MainPage();
             #region Notificaciones -->CrossFirebasePushNotification
             // Comentar estas lineas de codigo cuando se ejecuta la aplicacion en un embulador 41-60
@@ -42,27 +42,27 @@ namespace CIIADHEL_CR
                     await DialogService.ShowErrorAsync("Error", ex.Message, "OK");//display error on screen
                 }
             };
-            CrossFirebasePushNotification.Current.OnNotificationOpened += async (s, p) =>
-            {
-                try
-                {
-                    string idAirport = "";
-                    foreach (var data in p.Data)
-                    {
-                        if (data.Key.Equals("idAirport"))
-                        {
-                            idAirport = data.Value.ToString();
-                            break;
-                        }
-                    }
-                    GNotifications.airportNotification = await App.SQLiteDB.GetAirportByIdAsync(Convert.ToInt32(idAirport));
-                    GNotifications.isOpenNotification = true;
-                }
-                catch (Exception ex)
-                {
-                    await DialogService.ShowErrorAsync("Error", ex.Message, "OK");//display error on screen
-                }
-            };
+            //CrossFirebasePushNotification.Current.OnNotificationOpened += async (s, p) =>
+            //{
+            //    try
+            //    {
+            //        string idAirport = "";
+            //        foreach (var data in p.Data)
+            //        {
+            //            if (data.Key.Equals("idAirport"))
+            //            {
+            //                idAirport = data.Value.ToString();
+            //                break;
+            //            }
+            //        }
+            //        GNotifications.airportNotification = await App.SQLiteDB.GetAirportByIdAsync(Convert.ToInt32(idAirport));
+            //        GNotifications.isOpenNotification = true;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        await DialogService.ShowErrorAsync("Error", ex.Message, "OK");//display error on screen
+            //    }
+            //};
             #endregion
         }
         //****************************************************************
@@ -76,7 +76,7 @@ namespace CIIADHEL_CR
                 }
                 else
                 {
-                    Application.Current.MainPage = new MainPage();
+                    MainPage = new NavigationPage(new MainPage());
                 }
             });
             
@@ -156,9 +156,9 @@ namespace CIIADHEL_CR
                 {
                     MainPage = new NavigationPage(new PhonePage());
                 }
-                else if (await SQLiteDBIdentifier.existIdentifier() == true)
+                else
                 {
-                    Application.Current.MainPage = new MainPage();
+                    MainPage = new NavigationPage(new MainPage());
                 }
             }
             catch (Exception ex)
@@ -166,7 +166,7 @@ namespace CIIADHEL_CR
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 throw ex;
             }
-            
+
         }
         //*******************************************************************
         protected override void OnSleep()

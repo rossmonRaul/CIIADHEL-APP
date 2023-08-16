@@ -8,6 +8,7 @@ namespace CIIADHEL_CR
         public MainPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
             flyout.listview.ItemSelected += OnSelectedItem;
         }
 

@@ -10,6 +10,7 @@ namespace CIIADHEL_CR
     public partial class Notams : PopupPage
     {
         private string rutaNotam;
+        public event EventHandler PopupClosed;
         public Notams()
         {
             InitializeComponent();
@@ -53,15 +54,21 @@ namespace CIIADHEL_CR
             }
             else
             {
+                frameNotamsContainer.IsVisible = false;
                 frameNotams.SetValue(IsVisibleProperty, false);
                 frameNo_internet.SetValue(IsVisibleProperty, true);
             }
 
         }
-        
+
         private void Button_Clicked(object sender, EventArgs e)
         {
             Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopAsync();
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            PopupClosed?.Invoke(this, EventArgs.Empty);
         }
     }
 }

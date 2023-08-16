@@ -559,7 +559,7 @@
                                 <StackLayout Orientation="Horizontal">
                                     <Image Source="notams.png"
                                            WidthRequest="32"
-                                           HeightRequest="10"/>
+                                           HeightRequest="10" />
                                     <Button Text="Notams"
                                             FontSize="16"
                                             FontFamily="LatoB"
@@ -570,15 +570,12 @@
                                             HeightRequest="68"
                                             HorizontalOptions="FillAndExpand"
                                             VerticalOptions="FillAndExpand"
+                                            x:Name="btnNotams"
                                             Clicked="OnShowPopupButtonClicked" />
                                 </StackLayout>
-                                
                             </StackLayout>
                         </Frame>
                     </controls:Expander.Header>
-                    <controls:Expander.Content>
-                        <Label BackgroundColor="Transparent"></Label>
-                    </controls:Expander.Content>
                 </controls:Expander>
                 <controls:Expander>
                     <controls:Expander.Header>

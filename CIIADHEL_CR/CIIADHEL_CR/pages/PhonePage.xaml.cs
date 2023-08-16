@@ -14,6 +14,8 @@ using CIIADHEL_CR.Popups;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using Lottie.Forms;
+using Xamarin.Essentials;
+using static Xamarin.Essentials.Permissions;
 
 namespace CIIADHEL_CR.pages
 {
@@ -70,14 +72,13 @@ namespace CIIADHEL_CR.pages
             return Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(popup);
         }
 
-        private void Phone_Clicked(object sender, EventArgs e)
+        private async void Phone_Clicked(object sender, EventArgs e)
         {
             try
             {
                 NotificationsServices notificationServices = new NotificationsServices();
 
                 ImageButton btn = (ImageButton)sender;
-
 
                 string identifier = txtPhone.Text;
 
@@ -86,11 +87,6 @@ namespace CIIADHEL_CR.pages
                     btn.IsVisible = false;
                     lottie.IsVisible = true;
                     lblError.Text = "No puede existir espacios vacíos";
-                    //await Task.Delay(6000);
-                    //lottie.IsVisible = false;
-                    //btn.IsVisible = true;
-                    
-
                 }
                 else
                 {
@@ -103,76 +99,82 @@ namespace CIIADHEL_CR.pages
 
                     if (!Regex.IsMatch(identifier, pattern))
                     {
-                        //btn.Source = "loadingPhoneCancel.png";
-                        //lblError.Text = "El número proporcionado no es válido";
-                        //await Task.Delay(500);
-                        //btn.Source = "log.png";
                         btn.IsVisible = false;
                         lottie.IsVisible = true;
                         lblError.Text = "El número proporcionado no es válido";
-
-
                     }
-                    //else if (!identifier.ToCharArray().All(Char.IsDigit))
-                    //{
-
-                    //    btn.Source = "loadingPhoneCancel.png";
-                    //    lblError.Text = "El teléfono debe ser numérico";
-                    //    await Task.Delay(500);
-                    //    btn.Source = "log.png";
-
-                    //}
                     else
                     {
+                        string maskedNumber = txtPhone.Text;
 
-                        //bool ValidateIdentifier = await NotificationsServices.existsIdentifier(identifier);
+                        string phoneNumber = new string(maskedNumber.Where(char.IsDigit).ToArray());
 
-                        //if (ValidateIdentifier)
-                        //{
-                        //    lblError.Text = "";
-                        //    btn.Source = "loadingPhone.png";
-                        //    btn.IsEnabled = true;
+                        string phoneIdentifier = phoneNumber;
 
-                        //    var action = await DisplayAlert("Alerta", "Este numero de telefono ya ha sido registrado, los favoritos seran cargados automaticamente, ¿desea continuar?", "Si", "No");
+                        NetworkAccess currentNetwork = Connectivity.NetworkAccess;
+                        if (currentNetwork == NetworkAccess.Internet)//if you have internet
+                        {
+                            bool ValidateIdentifier = await NotificationsServices.existsIdentifier(phoneIdentifier);
+                            if (ValidateIdentifier)
+                            {
+                                lblError.Text = "";
+                                btn.Source = "loadingPhone.png";
+                                btn.IsEnabled = true;
 
-                        //    if (action)
-                        //    {
-                        //        Identifier phone = new Identifier
-                        //        {
-                        //            Telephone_Number = txtPhone.Text,
-                        //        };
-                        //        await App.SQLiteDBIdentifier.SaveIdentifierAsync(phone);
+                                var action = await DisplayAlert("Alerta", "Este numero de telefono ya ha sido registrado, los favoritos seran cargados automaticamente, ¿desea continuar?", "Si", "No");
 
-                        //        await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
+                                if (action)
+                                {
+                                    Identifier phone = new Identifier
+                                    {
+                                        Telephone_Number = phoneIdentifier,
+                                    };
+                                    await App.SQLiteDBIdentifier.SaveIdentifierAsync(phone);
 
-                        //        Application.Current.MainPage = new MainPage();
+                                    await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
 
-                        //        btn.IsEnabled = false;
-                        //    }
+                                    Application.Current.MainPage = new MainPage();
 
-                        //    lblError.Text = "";
-                        //    btn.Source = "log.png";
+                                    btn.IsEnabled = false;
+                                }
 
-                        //}
-                        //else
-                        //{
-                        //    btn.Source = "loadingPhone.png";
-                        //    btn.IsEnabled = true;
+                                lblError.Text = "";
+                                btn.Source = "log.png";
 
-                        //    Identifier phone = new Identifier
-                        //    {
-                        //        Telephone_Number = txtPhone.Text,
+                            }
+                            else
+                            {
+                                btn.Source = "loadingPhone.png";
+                                btn.IsEnabled = true;
 
-                        //    };
-                        //    await App.SQLiteDBIdentifier.SaveIdentifierAsync(phone);
+                                Identifier phone = new Identifier
+                                {
+                                    Telephone_Number = phoneIdentifier,
 
-                        //    await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
+                                };
+                                await App.SQLiteDBIdentifier.SaveIdentifierAsync(phone);
 
-                        btn.IsEnabled = false;
+                                await NotificationsServices.saveToken(phone.Telephone_Number, GToken.token);
 
-                        Application.Current.MainPage = new MainPage();
+                                btn.IsEnabled = false;
 
-                        //}
+                                Application.Current.MainPage = new MainPage();
+
+                            }
+                        }
+                        else
+                        {
+                            Identifier phone = new Identifier
+                            {
+                                Telephone_Number = phoneIdentifier,
+
+                            };
+                            await App.SQLiteDBIdentifier.SaveIdentifierAsync(phone);
+
+                            btn.IsEnabled = false;
+
+                            Application.Current.MainPage = new MainPage();
+                        }
                     }
                 }
             }

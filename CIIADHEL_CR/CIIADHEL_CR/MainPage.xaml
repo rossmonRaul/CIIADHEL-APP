@@ -2,8 +2,7 @@
 <FlyoutPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CIIADHEL_CR.MainPage"
-             xmlns:local="clr-namespace:CIIADHEL_CR.pages"
-             Title="CIIADHEL">
+             xmlns:local="clr-namespace:CIIADHEL_CR.pages">
 
     <FlyoutPage.Flyout>
         <local:FlyoutMenuPage x:Name="flyout"/>
