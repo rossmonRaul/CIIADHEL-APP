@@ -140,7 +140,7 @@ namespace CIIADHEL_CR.pages
                 NetworkAccess currentNetwork = Connectivity.NetworkAccess;
                 int airportsLenght = await AirportServices.getSizeAirports();
                 int airportsLenghtSQLite = await App.SQLiteDB.GetLengthAirportsAsync();
-                if (airportsLenghtSQLite == 0 || airportsLenghtSQLite != airportsLenght)//if airport is empty or different of lentgh so
+                if (airportsLenghtSQLite == 0 || airportsLenghtSQLite == airportsLenght)//if airport is empty or different of lentgh so
                 {
                     List<Airport_Principal> airports = await AirportServices.getAllAirports();//get list airports
                     if (await App.SQLiteDB.SaveAllAirports(airports, (airportsLenghtSQLite == 0) ? true : false) == 0)

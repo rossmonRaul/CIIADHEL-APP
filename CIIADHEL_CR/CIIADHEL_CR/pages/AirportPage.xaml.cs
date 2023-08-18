@@ -95,7 +95,7 @@ namespace CIIADHEL_CR
                         AirportsController airportsController = new AirportsController();
                         Airport_Detail airportId = await airportsController.verificationAirport(this.airport_Principal.ID_Aeropuerto);
                         airport_Principal.Descargado = true;
-                        await App.SQLiteDB.UpdateAirportAsync(airport_Principal);
+                        //await App.SQLiteDB.UpdateAirportAsync(airport_Principal);
                         #region Detalle del aeropuerto ->Airport
                         lblName.Text = airportId.Aeropuerto.Nombre;
                         lblName_OACI.Text = airportId.Aeropuerto.NombreOaci;
@@ -134,18 +134,26 @@ namespace CIIADHEL_CR
                         }
                         if (airportId.Documento != null)
 
+
+
                         {
                             txtDocumento.IsVisible = true;
+
+
 
                             await Task.Run(() =>
                             {
                                 base64file = airportId.Documento.Contenido ?? "";
+                                nombre_pdf = airportId.Documento.nombre_pdf ?? "";
                             });
                         }
                         else
                         {
                             txtDocumento.IsVisible = false;
                             base64file = "";
+                            nombre_pdf = "";
+
+
 
                         }
                         frameDetalleAeropuerto.IsVisible = true;
@@ -193,6 +201,7 @@ namespace CIIADHEL_CR
                         #endregion
 
                     }
+                    await App.SQLiteDB.UpdateAirportAsync(airport_Principal);
                 }
                 else
                 {
@@ -225,15 +234,19 @@ namespace CIIADHEL_CR
         {
             try
             {
-                
+
                 NetworkAccess currentNetwork = Connectivity.NetworkAccess;
+
+
 
                 if (currentNetwork == NetworkAccess.Internet)
                 {
 
-                    byte[] fileBytes = Convert.FromBase64String(base64file);
 
-                    string tempFilePath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "temp.pdf");
+
+                    byte[] fileBytes = Convert.FromBase64String(base64file);
+                    string nombreCompleto = nombre_pdf + ".pdf";
+                    string tempFilePath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), nombreCompleto);
                     File.WriteAllBytes(tempFilePath, fileBytes);
                     await Launcher.OpenAsync(new OpenFileRequest
                     {
@@ -243,8 +256,10 @@ namespace CIIADHEL_CR
                 else
                 {
 
+
+
                     Airport_Principal localAirport = await App.SQLiteDB.GetAirportByIdAsync(airport_Principal.ID_Aeropuerto);
-                   
+
                     byte[] fileBytes = Convert.FromBase64String(localAirport.Contenido);
 
                     string tempFilePath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "temp.pdf");
@@ -253,12 +268,14 @@ namespace CIIADHEL_CR
                     {
                         File = new ReadOnlyFile(tempFilePath)
                     });
-                
+
+
+
                 }
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", $"Error al abrir el PDF: {ex.Message}", "Aceptar");
+                await DisplayAlert("Error", $"Intentelo más tarde", "Aceptar");
             }
         }
 

@@ -114,6 +114,7 @@ namespace CIIADHEL_CR.pages
                         NetworkAccess currentNetwork = Connectivity.NetworkAccess;
                         if (currentNetwork == NetworkAccess.Internet)//if you have internet
                         {
+                            btn.IsEnabled = false;
                             bool ValidateIdentifier = await NotificationsServices.existsIdentifier(phoneIdentifier);
                             if (ValidateIdentifier)
                             {

@@ -30,11 +30,15 @@ namespace CIIADHEL_CR.data
             }
         }
         //****
-        public async Task<int> SaveAllAirports(List<Airport_Principal> airports, bool isNewData = false)
+        public async Task<int> SaveAllAirports(List<Airport_Principal> airports, bool isNewData = true)
         {
             try
             {
                 int resulDB;
+
+
+
+
                 if (!isNewData)
                 {
                     resulDB = await db.DeleteAllAsync<Airport_Principal>();
@@ -44,16 +48,24 @@ namespace CIIADHEL_CR.data
                     }
                 }
 
+
+
+
                 resulDB = await db.InsertAllAsync(airports);
                 if (resulDB == 0)
                 {
                     return 0;
                 }
+
+
+
                 return resulDB;
             }
             catch (Exception ex)
             {
-                throw ex;
+
+                Console.WriteLine($"Error en SaveAllAirports: {ex.Message}");
+                return 0;
             }
         }
         #endregion
