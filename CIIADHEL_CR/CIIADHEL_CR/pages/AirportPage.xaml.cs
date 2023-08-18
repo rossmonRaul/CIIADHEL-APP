@@ -132,6 +132,22 @@ namespace CIIADHEL_CR
                                 var fadeOutTimer = new Timer(FadeOutTimerCallback, null, DelayDuration, Timeout.Infinite);
                             }
                         }
+                        if (airportId.Documento != null)
+
+                        {
+                            txtDocumento.IsVisible = true;
+
+                            await Task.Run(() =>
+                            {
+                                base64file = airportId.Documento.Contenido ?? "";
+                            });
+                        }
+                        else
+                        {
+                            txtDocumento.IsVisible = false;
+                            base64file = "";
+
+                        }
                         frameDetalleAeropuerto.IsVisible = true;
                         stckFondo.IsVisible = true;
                         frameDetallePista.IsVisible = true;
@@ -202,26 +218,52 @@ namespace CIIADHEL_CR
             }
         }
         //**********************************************************************************************************************
-  
+        private string nombre_pdf;
+        private string Extension;
+
         private async void txtDocumento_Clicked(object sender, EventArgs e)
         {
             try
             {
-               
-                byte[] fileBytes = Convert.FromBase64String(base64file);
+                
+                NetworkAccess currentNetwork = Connectivity.NetworkAccess;
 
-                string tempFilePath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "temp.pdf");
-                File.WriteAllBytes(tempFilePath, fileBytes);
-                await Launcher.OpenAsync(new OpenFileRequest
+                if (currentNetwork == NetworkAccess.Internet)
                 {
-                    File = new ReadOnlyFile(tempFilePath)
-                });
+
+                    byte[] fileBytes = Convert.FromBase64String(base64file);
+
+                    string tempFilePath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "temp.pdf");
+                    File.WriteAllBytes(tempFilePath, fileBytes);
+                    await Launcher.OpenAsync(new OpenFileRequest
+                    {
+                        File = new ReadOnlyFile(tempFilePath)
+                    });
+                }
+                else
+                {
+
+                    Airport_Principal localAirport = await App.SQLiteDB.GetAirportByIdAsync(airport_Principal.ID_Aeropuerto);
+                   
+                    byte[] fileBytes = Convert.FromBase64String(localAirport.Contenido);
+
+                    string tempFilePath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "temp.pdf");
+                    File.WriteAllBytes(tempFilePath, fileBytes);
+                    await Launcher.OpenAsync(new OpenFileRequest
+                    {
+                        File = new ReadOnlyFile(tempFilePath)
+                    });
+                
+                }
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Error", $"Error al abrir el PDF: {ex.Message}", "Aceptar");
             }
         }
+
+
+
         //*******************************************************************************************************
         #region metodo para desvanecer el tooltip
         private void FadeOutTimerCallback(object state)

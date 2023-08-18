@@ -17,6 +17,8 @@ namespace CIIADHEL_CR.services
         DialogService dialog = new DialogService();
         // Official  Endpoint
         private static string _url = @"https://site--nuvian-api--lzg9n5zsl8j8.code.run/api/airports";
+       // private static string _url = "http://localhost:3033/api/airports";
+
         // changes made by andreyszcr@gmail.com
         private static string urlfind = "https://site--nuvian-api--lzg9n5zsl8j8.code.run/api/airports/search";
 
@@ -203,8 +205,8 @@ namespace CIIADHEL_CR.services
             catch (Exception ex)
             {
                 // changes made by olman Sanchez Zuniga
-                Console.WriteLine(ex);
-                throw new Exception("Error al cargar los aeropuertos");
+                Console.WriteLine("Excepción en getAllAirports: " + ex.ToString());
+                throw new Exception("Error al cargar los aeropuertos", ex);
             }
         }
         #endregion

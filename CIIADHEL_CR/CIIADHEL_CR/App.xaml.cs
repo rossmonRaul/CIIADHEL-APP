@@ -158,7 +158,7 @@ namespace CIIADHEL_CR
                 }
                 else
                 {
-                    MainPage = new NavigationPage(new MainPage());
+                    Application.Current.MainPage = new MainPage();
                 }
             }
             catch (Exception ex)

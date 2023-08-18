@@ -19,6 +19,14 @@ namespace CIIADHEL_CR.models
         public string Horario { get; set; }
         public bool Descargado { get; set; }
 
+        public string nombre_pdf { get; set; }
+        public string Contenido { get; set; }
+        public string Extension { get; set; }
+       
+
+
+
+
         public string Valor1 { get; set; }
         public string Valor2 { get; set; }
         public string _pista;
@@ -66,5 +74,9 @@ namespace CIIADHEL_CR.models
             }
         }
 
-    }
+       
+    
+
+
+}
 }

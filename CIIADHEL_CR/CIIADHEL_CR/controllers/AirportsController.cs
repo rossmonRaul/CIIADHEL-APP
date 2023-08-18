@@ -165,6 +165,7 @@ namespace CIIADHEL_CR.controllers
                 string ultimaActualizacion = "";
                 string usuarioCreacion = "";
                 string usuarioActualizacion = "";
+               
                 Airport_Detail airport_Detail = await AirportServices.getAnAirportById(id);
                 foreach (Airport_Frequencies fre in airport_Detail.Frecuencias)
                 {
@@ -217,16 +218,16 @@ namespace CIIADHEL_CR.controllers
                     LDA_Rwy_1 = airport_Detail.Pistas.LdaRwy1,
                     LDA_Rwy_2 = airport_Detail.Pistas.LdaRwy2,
                     Direccion_Exacta = airport_Detail.Contacto.DireccionExacta,
-                    Numero_Telefono1 = airport_Detail.Contacto.NumeroTelefono1,
+                    Numero_Telefono1 = airport_Detail.Contacto.NumeroTelefono1 ?? "No disponible",
                     Numero_Telefono2 = (string)airport_Detail.Contacto.NumeroTelefono2,
                     Horario = airport_Detail.Contacto.Horario,
 
                     //*********************************************************************************
-                    nombre_pdf = airport_Detail.Documento.nombre_pdf,
-                    Extension= airport_Detail.Documento.Extension,
-                    Contenido = airport_Detail.Documento.Contenido
+                    nombre_pdf = airport_Detail.Documento?.nombre_pdf ?? "No disponible",
+                Extension = airport_Detail.Documento?.Extension ?? "No disponible",
+                Contenido = airport_Detail.Documento?.Contenido ?? "No disponible"
 
-                };
+            };
                 return await App.SQLiteDBAirports.SaveAirportAsync(airportLite, isNewData);
             }
             catch (Exception ex)
